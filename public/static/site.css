@@ -1281,3 +1281,89 @@ slotmark { display: none; }
 
 /* Inline field errors inside the booking flow reuse the site's .field styles. */
 .field .field__hint { display: block; }
+
+/* ── FOUNDER BAND: credential cards ──────────────────────────────────────
+   The handoff's founder band emits `.stat-row` / `.stat`, which the design
+   never styles — no rule for either exists in site.css, so the prototype fell
+   back to plain inline text. They are rebuilt here as bordered cards, which
+   makes the responsive behaviour ours to define.
+
+   Three cards across a ~440px column leave ~126px of text each, but
+   "BOARD CERTIFIED" set at 15px/0.08em needs ~162px — so a 3-up row can never
+   hold these labels on a phone. These rules belong in the stylesheet (they
+   were previously an inline style on the element, which outranks any media
+   query and so pinned the row to 3 columns at problem sizes). */
+.creds--founder {
+  margin-top: var(--sp-5);
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-4);
+}
+.creds--founder .cred {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: var(--sp-5) var(--sp-3);
+}
+
+@media (max-width: 640px) {
+  /* Two readable columns; the third card spans the row so the grid never
+     leaves an orphaned half-width card. */
+  .creds--founder { grid-template-columns: repeat(2, 1fr); gap: var(--sp-3); }
+  .creds--founder .cred { padding: var(--sp-4) var(--sp-3); }
+  .creds--founder .cred:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .creds--founder .cred b { font-size: var(--fs-h5); }
+  .creds--founder .cred span { font-size: var(--fs-eyebrow); letter-spacing: .06em; }
+}
+@media (max-width: 430px) {
+  /* Below ~430px two columns squeeze "OPENED ON MAIN ST" (159px at the
+     caption size) into 145px of text box, so the row collapses to one card per
+     line — set as a compact row (value left, label right) rather than three
+     tall centred blocks, which would push the photo far down the page. */
+  .creds--founder { grid-template-columns: 1fr; }
+  .creds--founder .cred:last-child:nth-child(odd) { grid-column: auto; }
+  .creds--founder .cred {
+    flex-direction: row; align-items: baseline; justify-content: space-between;
+    gap: var(--sp-3); padding: var(--sp-3) var(--sp-4); text-align: left;
+  }
+  .creds--founder .cred b { margin-bottom: 0; }
+  .creds--founder .cred span { white-space: nowrap; }
+}
+
+/* ── FIXED HEADER: opaque, and no ghosting ───────────────────────────────
+   .97 white let the section underneath read through the bar, which is what
+   made body copy appear to bleed behind the mark. Solid, and it fades in on
+   the fast curve instead of the 500ms one. */
+.hdr--solid .hdr__bar {
+  background: var(--white);
+  transition: background var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease);
+}
+.hdr--solid { box-shadow: 0 1px 0 rgba(0, 41, 70, .06); }
+
+@media (max-width: 1000px) {
+  /* Below the nav breakpoint the bar carries only a mark and a burger, so it
+     is always solid. That removes the scroll listener from the equation
+     entirely: the transparent-until-you-scroll state (which is only worth it
+     over the hero photograph) can no longer leave section text showing behind
+     the bar. Desktop keeps the transparent-over-hero behaviour. */
+  .hdr .hdr__bar { background: var(--white); border-bottom-color: var(--clay); }
+  .hdr, .hdr--solid { box-shadow: 0 1px 0 rgba(0, 41, 70, .06); }
+  .hdr .burger { color: var(--navy-600); }
+  .hdr .logo-link .logo-img:first-child { opacity: 0; }
+  .hdr .logo-link .logo-img:last-child  { opacity: 1; }
+
+  /* The 8rem bar exists to clear a full desktop nav plus the Book Now button.
+     Those are hidden here, so shrink the bar — and because .hero and .pbanner
+     pad off --header-h, they follow automatically instead of leaving a dead
+     gap under the fixed header. */
+  :root { --header-h: 6rem; --header-h-scrolled: 5rem; }
+}
+@media (max-width: 640px) {
+  :root { --header-h: 5rem; --header-h-scrolled: 5rem; }
+  .hdr__top-in { padding: .55rem 0; }
+}
+
+/* ── ANCHOR OFFSET ───────────────────────────────────────────────────────
+   The header is fixed, so following #about (or a footer deep link) parked the
+   eyebrow and the h2 underneath the bar. Reserve the bar's height instead. */
+:root { --hdr-anchor: 6rem; }
+@media (max-width: 1000px) { :root { --hdr-anchor: 5rem; } }
+[id] { scroll-margin-top: calc(var(--hdr-anchor) + var(--sp-4)); }

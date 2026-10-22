@@ -204,7 +204,7 @@ export const HomePage: FC = () => (
               husband, Dr. Brian George, and their two daughters. She is proud to serve the Franklin community and
               looks forward to helping your family smile.
             </p>
-            <div class="creds" style="margin-top:2rem;grid-template-columns:repeat(3,1fr);gap:1rem">
+            <div class="creds creds--founder">
               <div class="cred">
                 <b>ABO</b>
                 <span>Board Certified</span>
