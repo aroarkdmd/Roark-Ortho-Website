@@ -10,7 +10,6 @@
   /* ── CONSENT MODE / ANALYTICS STUB ────────────────────────────────────────
      Every event carries page_path, page_title and any utm_* / gclid present.
      No PHI is ever pushed — never a name, email, phone, DOB or clinical note. */
-  var CONSENT_KEY = 'roark-consent-v1';
 
   function urlParams() {
     var out = {};
@@ -38,30 +37,10 @@
   }
   window.roarkTrack = track;
 
-  function grantConsent() {
-    try { localStorage.setItem(CONSENT_KEY, 'granted'); } catch (e) {}
-    if (window.gtag) {
-      window.gtag('consent', 'update', {
-        ad_storage: 'granted',
-        ad_user_data: 'granted',
-        ad_personalization: 'granted',
-        analytics_storage: 'granted',
-      });
-    }
-    track('consent_granted');
-  }
-  function denyConsent() {
-    try { localStorage.setItem(CONSENT_KEY, 'denied'); } catch (e) {}
-    if (window.gtag) {
-      window.gtag('consent', 'update', {
-        ad_storage: 'denied',
-        ad_user_data: 'denied',
-        ad_personalization: 'denied',
-        analytics_storage: 'denied',
-      });
-    }
-    track('consent_denied');
-  }
+  /* Consent Mode, the banner and the container loader all live in
+     /static/tagging.js now — it has to run before any tag and it also serves
+     the booking shell, which never loaded this file. Keeping a second copy
+     here would let the two disagree about the stored choice. */
 
   /* ── HEADER: solid on scroll, mobile nav ───────────────────────────────── */
   function initHeader() {
@@ -177,26 +156,9 @@
     });
   }
 
-  /* ── CONSENT BAR ───────────────────────────────────────────────────────── */
-  function initConsent() {
-    var bar = document.getElementById('consentbar');
-    if (!bar) return;
-    var stored = null;
-    try { stored = localStorage.getItem(CONSENT_KEY); } catch (e) {}
-    if (!stored) bar.style.display = 'block';
-    var grant = bar.querySelector('[data-consent="grant"]');
-    var deny = bar.querySelector('[data-consent="deny"]');
-    if (grant)
-      grant.addEventListener('click', function () {
-        grantConsent();
-        bar.style.display = 'none';
-      });
-    if (deny)
-      deny.addEventListener('click', function () {
-        denyConsent();
-        bar.style.display = 'none';
-      });
-  }
+  /* ── CONSENT BAR ─────────────────────────────────────────────────────────
+     Moved to /static/tagging.js, which must run before any tag loads and also
+     serves the booking shell. See the note above. */
 
   /* ── CONTACT PANEL ───────────────────────────────────────────────────────
      Validation runs on submit only — never per keystroke. Errors are inline
@@ -406,11 +368,13 @@
               h.focus();
             }
           }
-          track('booking_complete', {
-            conversion_value: 1,
-            currency: 'USD',
+          /* This panel says "Request received" — the office still has to
+             confirm the slot, so it is NOT a booked appointment. It used to
+             push booking_complete, which would have inflated Google Ads
+             conversions with requests that were never booked. The converted
+             event is appointment_booked, fired from the /book flow only. */
+          track('appointment_requested', {
             booking_ref: bookingId || '',
-            provider: 'fallback',
           });
         };
 
@@ -468,7 +432,6 @@
     initReveal();
     initMaps();
     initCtaTracking();
-    initConsent();
     initContactForms();
     initSchedulerForms();
     initFaq();

@@ -20,10 +20,25 @@ import {
   BlogArticlePage,
 } from './pages/content'
 import { BIZ, HOME_FAQ, SURG_FAQ, CONTACT_FAQ, FIRST_FAQ, POSTS } from './lib/site-data'
+import { consentRequired, resolveGtmId } from './lib/tagging'
+import type { TagConfig } from './layout'
 
-type Bindings = { DB?: D1Database }
+type Bindings = { DB?: D1Database; GTM_ID?: string }
 
 const app = new Hono<{ Bindings: Bindings }>()
+
+/* Resolve per-request tagging config. `cf.country` is populated by Cloudflare
+   at the edge, so the consent decision costs nothing and never depends on a
+   third-party geo lookup. Locally (no `cf`) it reads as undefined, which
+   consentRequired() treats as "no banner". */
+function tagFor(c: { env?: Bindings; req: { raw?: Request; path: string } }): TagConfig {
+  const cf = (c.req.raw as unknown as { cf?: { country?: string } } | undefined)?.cf
+  return {
+    gtmId: resolveGtmId(c.env),
+    consentRequired: consentRequired(cf?.country),
+    path: c.req.path,
+  }
+}
 
 app.use('/api/*', cors())
 
@@ -34,6 +49,7 @@ app.use('/static/*', serveStatic({ root: './' }))
 app.get('/', (c) =>
   c.html(
     <Layout
+      tag={tagFor(c)}
       seo={{
         title: 'Roark Orthodontics | Braces & Invisalign in Franklin, TN',
         description:
@@ -54,6 +70,7 @@ app.get('/', (c) =>
 app.get('/surgical-orthodontics', (c) =>
   c.html(
     <Layout
+      tag={tagFor(c)}
       seo={{
         title: 'Surgical Orthodontics in Franklin, TN | Braces with Jaw Surgery',
         description:
@@ -83,6 +100,7 @@ app.get('/surgical-orthodontics', (c) =>
 app.get('/contact', (c) =>
   c.html(
     <Layout
+      tag={tagFor(c)}
       seo={{
         title: 'Contact Roark Orthodontics | Downtown Franklin, TN',
         description:
@@ -102,6 +120,7 @@ app.get('/contact', (c) =>
 app.get('/treatments', (c) =>
   c.html(
     <Layout
+      tag={tagFor(c)}
       seo={{
         title: 'Orthodontic Treatments in Franklin, TN | Braces, Invisalign® & More',
         description:
@@ -119,6 +138,7 @@ app.get('/treatments', (c) =>
 app.get('/kids-braces', (c) =>
   c.html(
     <Layout
+      tag={tagFor(c)}
       seo={{
         title: 'Braces & Invisalign First® for Kids in Franklin, TN',
         description:
@@ -137,6 +157,7 @@ app.get('/kids-braces', (c) =>
 app.get('/adults', (c) =>
   c.html(
     <Layout
+      tag={tagFor(c)}
       seo={{
         title: 'Invisalign® & Braces for Adults in Franklin, TN',
         description:
@@ -155,6 +176,7 @@ app.get('/adults', (c) =>
 app.get('/invisalign-first', (c) =>
   c.html(
     <Layout
+      tag={tagFor(c)}
       seo={{
         title: 'Invisalign First® for Kids in Franklin, TN | Children’s Clear Aligners',
         description:
@@ -178,6 +200,7 @@ app.get('/invisalign-first', (c) =>
 app.get('/braces', (c) =>
   c.html(
     <Layout
+      tag={tagFor(c)}
       seo={{
         title: 'Braces in Franklin, TN | Metal & Clear Braces for Every Age',
         description:
@@ -196,6 +219,7 @@ app.get('/braces', (c) =>
 app.get('/invisalign', (c) =>
   c.html(
     <Layout
+      tag={tagFor(c)}
       seo={{
         title: 'Invisalign® Clear Aligners in Franklin, TN',
         description:
@@ -218,6 +242,7 @@ app.get('/invisalign', (c) =>
 app.get('/palatal-expander', (c) =>
   c.html(
     <Layout
+      tag={tagFor(c)}
       seo={{
         title: 'Palatal Expander for Children in Franklin, TN',
         description:
@@ -239,6 +264,7 @@ app.get('/palatal-expander', (c) =>
 app.get('/financing', (c) =>
   c.html(
     <Layout
+      tag={tagFor(c)}
       seo={{
         title: 'Insurance & Payment Plans | Roark Orthodontics Franklin, TN',
         description:
@@ -257,6 +283,7 @@ app.get('/financing', (c) =>
 app.get('/areas-we-serve', (c) =>
   c.html(
     <Layout
+      tag={tagFor(c)}
       seo={{
         title: 'Areas We Serve | Roark Orthodontics, Downtown Franklin TN',
         description:
@@ -273,6 +300,7 @@ app.get('/areas-we-serve', (c) =>
 app.get('/blog', (c) =>
   c.html(
     <Layout
+      tag={tagFor(c)}
       seo={{
         title: 'Smile Journal | Orthodontic Advice from Franklin, TN',
         description:
@@ -369,6 +397,7 @@ app.get('/blog/:slug', (c) => {
   if (!post || !body) return c.notFound()
   return c.html(
     <Layout
+      tag={tagFor(c)}
       seo={{
         title: post.title + ' | Roark Orthodontics',
         description: post.ex,
@@ -390,6 +419,7 @@ app.get('/blog/:slug', (c) => {
 app.get('/book', (c) =>
   c.html(
     <BookingLayout
+      tag={tagFor(c)}
       seo={{
         title: 'Book a Complimentary Exam | Roark Orthodontics',
         description:
@@ -583,6 +613,7 @@ app.get('/health', (c) => c.json({ ok: true, name: BIZ.name }))
 app.notFound((c) =>
   c.html(
     <Layout
+      tag={tagFor(c)}
       seo={{
         title: 'Page not found | Roark Orthodontics',
         description: 'That page has moved or does not exist.',

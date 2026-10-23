@@ -3,6 +3,15 @@ import { BIZ, HOURS } from './lib/site-data'
 import { Header, MobileNav, Footer, StickyCTA, ConsentBar } from './components/chrome'
 import { CONSENT_COPY } from './lib/site-data'
 
+/* Resolved per request by the Worker (see tagFor in index.tsx): the container
+   ID from the environment, whether this visitor's country requires consent,
+   and the current path so the client can detect /thank-you. */
+export type TagConfig = {
+  gtmId: string | null
+  consentRequired: boolean
+  path: string
+}
+
 export type Seo = {
   title: string
   description: string
@@ -109,16 +118,11 @@ function graphFor(seo: Seo) {
   return graph
 }
 
-export const Layout: FC<{ seo: Seo; children: Child }> = ({ seo, children }) => {
-  /* Consent Mode v2 defaults are pushed before any tag loads. */
-  const consentScript = `
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
-    gtag('consent','default',{ ad_storage:'denied', ad_user_data:'denied',
-      ad_personalization:'denied', analytics_storage:'denied',
-      functionality_storage:'granted', security_storage:'granted', wait_for_update: 500 });
-    window.gtag = window.gtag || gtag;
-  `
+export const Layout: FC<{ seo: Seo; tag?: TagConfig; children: Child }> = ({ seo, tag, children }) => {
+  /* The tag runtime reads this blob from the DOM, so the Worker — not the
+     browser — decides whether a container loads and whether this visitor's
+     country requires consent. Default is "no container, no banner". */
+  const tagConfig: TagConfig = tag || { gtmId: null, consentRequired: false, path: seo.canonical }
 
   return (
     <html lang="en-US">
@@ -154,7 +158,13 @@ export const Layout: FC<{ seo: Seo; children: Child }> = ({ seo, children }) => 
         <link rel="icon" href="/static/logos/tooth-mark.png" />
         <link rel="apple-touch-icon" href="/static/logos/roark-logo.png" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(graphFor(seo)) }} />
-        <script dangerouslySetInnerHTML={{ __html: consentScript }} />
+        {/* Server-resolved tag config. Read by /static/tagging.js before any
+            container is injected, so consent defaults always land first. */}
+        <script
+          id="tag-config"
+          type="application/json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(tagConfig) }}
+        />
         <link rel="stylesheet" href="/static/site.css" />
         {seo.plain && <link rel="stylesheet" href="/static/booking.css" />}
       </head>
@@ -168,6 +178,7 @@ export const Layout: FC<{ seo: Seo; children: Child }> = ({ seo, children }) => 
         <Footer />
         <StickyCTA />
         <ConsentBar copy={CONSENT_COPY} />
+        <script src="/static/tagging.js" defer></script>
         <script src="/static/app.js" defer></script>
       </body>
     </html>
@@ -175,29 +186,41 @@ export const Layout: FC<{ seo: Seo; children: Child }> = ({ seo, children }) => 
 }
 
 /* The booking flow uses its own shell — no footer, its own top bar — but the
-   same token layer. */
-export const BookingLayout: FC<{ seo: Seo; children: Child }> = ({ seo, children }) => (
-  <html lang="en-US">
-    <head>
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title>{seo.title}</title>
-      <meta name="description" content={seo.description} />
-      <meta name="robots" content="noindex,follow" />
-      <meta name="theme-color" content="#003d69" />
-      <link rel="preload" href="/static/fonts/playfair-display-latin.woff2" as="font" type="font/woff2" crossorigin />
-      <link rel="preload" href="/static/fonts/lora-latin.woff2" as="font" type="font/woff2" crossorigin />
-      <link rel="icon" href="/static/logos/tooth-mark.png" />
-      <script dangerouslySetInnerHTML={{ __html: "window.dataLayer=window.dataLayer||[];window.gtag=window.gtag||function(){dataLayer.push(arguments)};" }} />
-      <link rel="stylesheet" href="/static/site.css" />
-      <link rel="stylesheet" href="/static/booking.css" />
-    </head>
-    <body>
-      <a class="skip" href="#main">
-        Skip to content
-      </a>
-      {children}
-      <script src="/static/booking.js" defer></script>
-    </body>
-  </html>
-)
+   same token layer, and the same tag/consent contract. The consent bar matters
+   here more than anywhere else: this is the page the conversion happens on, so
+   an EEA/UK visitor must be able to accept before the tag can store anything. */
+export const BookingLayout: FC<{ seo: Seo; tag?: TagConfig; children: Child }> = ({ seo, tag, children }) => {
+  const tagConfig: TagConfig = tag || { gtmId: null, consentRequired: false, path: seo.canonical }
+
+  return (
+    <html lang="en-US">
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{seo.title}</title>
+        <meta name="description" content={seo.description} />
+        <meta name="robots" content="noindex,follow" />
+        <meta name="theme-color" content="#003d69" />
+        <link rel="preload" href="/static/fonts/playfair-display-latin.woff2" as="font" type="font/woff2" crossorigin />
+        <link rel="preload" href="/static/fonts/lora-latin.woff2" as="font" type="font/woff2" crossorigin />
+        <link rel="icon" href="/static/logos/tooth-mark.png" />
+        <script
+          id="tag-config"
+          type="application/json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(tagConfig) }}
+        />
+        <link rel="stylesheet" href="/static/site.css" />
+        <link rel="stylesheet" href="/static/booking.css" />
+      </head>
+      <body>
+        <a class="skip" href="#main">
+          Skip to content
+        </a>
+        {children}
+        <ConsentBar copy={CONSENT_COPY} />
+        <script src="/static/tagging.js" defer></script>
+        <script src="/static/booking.js" defer></script>
+      </body>
+    </html>
+  )
+}

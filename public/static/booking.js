@@ -582,6 +582,12 @@
       source: ($('#bk-from') && $('#bk-from').value) || 'book',
     };
 
+    /* Only a CONFIRMED save shows the confirmation and counts as a conversion.
+       This used to be called from .catch() as well, which meant a dropped
+       connection told the patient they were booked when the row was never
+       written — and would now have fired a conversion for an appointment that
+       does not exist. A failed request stays on the review step with a way to
+       call the office instead. */
     var finish = function () {
       S.done = true;
       if (btn) btn.disabled = false;
@@ -589,12 +595,16 @@
       /* A completed booking is cleared from storage so a genuine second
          booking still counts as its own conversion. */
       try { localStorage.removeItem(STORE); } catch (err) {}
-      track('booking_complete', {
-        conversion_value: 1,
-        currency: 'USD',
-        booking_ref: S.ref,
-      });
+      /* The Google Ads conversion. Fires once, carries no patient data, and
+         is gated by Consent Mode for EEA/UK/CH visitors. */
+      if (window.roarkBookingConversion) window.roarkBookingConversion(S.ref);
       showDone();
+    };
+
+    var bail = function (msg) {
+      toast(msg);
+      if (btn) btn.disabled = false;
+      if (label) label.textContent = original;
     };
 
     track('booking_step', { step: 4, step_name: 'confirm' });
@@ -607,14 +617,21 @@
       .then(function (r) { return r.json().catch(function () { return {}; }); })
       .then(function (data) {
         if (data && data.ok === false) {
-          toast('We could not save that — please call (615) 814-4884.');
-          if (btn) btn.disabled = false;
-          if (label) label.textContent = original;
+          bail('We could not save that — please call (615) 814-4884.');
+          return;
+        }
+        if (data && data.stored === false) {
+          /* The Worker answers ok:true/stored:false when its storage write
+             failed. Treat it as a failure rather than confirming a booking
+             nobody received. */
+          bail('We could not save that — please call (615) 814-4884.');
           return;
         }
         finish();
       })
-      .catch(function () { finish(); });
+      .catch(function () {
+        bail('We could not reach the office just now — please call (615) 814-4884.');
+      });
   }
 
   /* ── wiring ───────────────────────────────────────────────────────────── */
