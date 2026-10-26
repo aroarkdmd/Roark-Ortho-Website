@@ -829,7 +829,7 @@ img { display: block; }
 .ftr a:hover { color: var(--rose-200); }
 .ftr__top { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sp-8); align-items: center;
              padding-bottom: var(--sp-7); margin-bottom: var(--sp-7); border-bottom: 1px solid rgba(255,255,255,.25); }
-.ftr__top p { margin: 0; max-width: 34ch; font-size: var(--fs-body); grid-column: 3; justify-self: end; text-align: right; line-height: 1.6; padding-top: 1.6em; }
+.ftr__top p { margin: 0; max-width: 34ch; font-size: var(--fs-body); grid-column: 3; justify-self: start; text-align: left; line-height: 1.6; padding-top: 1.6em; }
 .ftr__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sp-8); align-items: start; }
 .ftr__logo { display: block; width: 15rem; max-width: 100%; }
 .ftr__logo .logo-img { width: 100%; height: auto; }
