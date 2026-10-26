@@ -214,9 +214,9 @@ export const Footer: FC = () => (
     <div class="wrap wrap-wide">
       <div class="ftr__top">
         <span class="ftr__logo">
-          <Logo variant="rose" width="15rem" />
+          <img class="logo-img" src="/static/logos/roark-logo-on-rose-trimmed.png" width="648" height="195" alt="Roark Orthodontics" />
         </span>
-        <p>Board certified orthodontist in historic downtown Franklin, TN.</p>
+        <p>Board certified orthodontist serving downtown Franklin, TN.</p>
       </div>
 
       <div class="ftr__grid">
