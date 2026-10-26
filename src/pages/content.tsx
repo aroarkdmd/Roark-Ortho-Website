@@ -92,8 +92,8 @@ export const TreatmentsPage: FC = () => (
           system matched to the stage of growth.
         </p>
         <p style="max-width:54rem">
-          Which one you need is a clinical decision, not a preference. That is what the free exam is for: a scan, a
-          straight answer, and a written price.
+          Which one you need is a clinical decision, not a preference. The free exam gives you a scan, a clear
+          recommendation and a written price.
         </p>
         <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:2rem">
           <a class="btn btn--pri" href="/book?from=treatments_hero" data-book="treatments_hero">
