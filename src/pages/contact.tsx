@@ -6,7 +6,7 @@ import { SectionHead, FaqList, InfoRow, SiloCrumbs, ContactPanel } from '../comp
 
 export const ContactPage: FC = () => (
   <main id="main">
-    <section class="pbanner pbanner--hall">
+    <section class="pbanner">
       <Pic
         name="office-hall"
         alt="The hallway at Roark Orthodontics in downtown Franklin, with the treatment room and digital lab"

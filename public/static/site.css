@@ -627,10 +627,6 @@ img { display: block; }
   background: linear-gradient(180deg, rgba(0,41,70,.45) 0%, rgba(0,41,70,.78) 100%);
 }
 .pbanner__in { position: relative; z-index: 2; }
-/* Hallway photo: scale it so both framed pictures on the right stay in view.
-   Only the photo banners that use this modifier are affected. */
-.pbanner--hall { background: #0f2b3f; }
-.pbanner--hall img { object-fit: contain; object-position: 70% 50%; }
 .pbanner h1 { font-family: var(--font-display); font-weight: var(--fw-normal);
               font-size: var(--fs-h1); color: var(--white); margin: 0 0 var(--sp-3);
               line-height: var(--lh-heading); text-wrap: balance; }
