@@ -334,7 +334,7 @@ app.get('/financing', (c) =>
         canonical: '/financing',
         active: 'financing',
         breadcrumb: [{ name: 'Home', href: '/' }, { name: 'Financing' }],
-        preloadImage: '/static/photos/treatment-header',
+        preloadImage: '/static/photos/consult-room',
       }}
     >
       <FinancingPage />

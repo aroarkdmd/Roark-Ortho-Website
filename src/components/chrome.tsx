@@ -43,6 +43,7 @@ export const PHOTO_WIDTHS: Record<string, number[]> = {
   adults: [480, 960],
   'surgical-scan': [480, 960],
   'office-hall': [480, 960],
+  'consult-room': [480, 960],
   braces: [480, 960],
   'dr-roark': [480, 683],
   family: [480, 960],

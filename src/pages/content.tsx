@@ -1145,8 +1145,8 @@ const FIN_FAQ: Faq[] = [
 export const FinancingPage: FC = () => (
   <main id="main">
     <SiloBanner
-      img="treatment-header"
-      imgAlt="Inside the Roark Orthodontics practice"
+      img="consult-room"
+      imgAlt="A consultation room at Roark Orthodontics, with a desk and a set of teeth models"
       crumbs={[{ name: 'Home', href: '/' }, { name: 'Financing' }]}
       h1="Orthodontic Cost, Insurance & Payment Plans in Franklin, TN"
       sub="One fee for every appliance, insurance checked before your first visit, and 0% interest payment plans with a down payment at the start."
