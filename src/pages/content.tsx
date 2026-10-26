@@ -2,7 +2,7 @@ import type { FC } from 'hono/jsx'
 import { BIZ, TREATMENTS, FIRST_FAQ, POSTS, SERVICE_AREAS, type Faq } from '../lib/site-data'
 import { Icon, Ticks } from '../components/icons'
 import { Pic } from '../components/chrome'
-import { SectionHead, FaqList, SiloBanner, FactStrip, Callout, ContactPanel, SchedulerPanel, CredentialsRow, InfoRow } from '../components/blocks'
+import { SectionHead, FaqList, SiloBanner, FactStrip, Callout, ContactPanel, CredentialsRow, InfoRow } from '../components/blocks'
 
 const CLOSING_CTA: FC<{ from: string; title?: string; body?: string }> = ({
   from,
@@ -149,7 +149,6 @@ export const TreatmentsPage: FC = () => (
             ['Clear (ceramic) braces', 'Sometimes', '✓', '✓', '18–24 months'],
             ['Palatal expander', '✓', 'Sometimes', '—', 'Weeks of turns, then holding'],
             ['Surgical orthodontics', '—', 'Sometimes', '✓', '18–30 months + surgery'],
-            ['Retainers & relapse care', '✓', '✓', '✓', '—'],
           ]}
         />
       </div>
@@ -319,7 +318,6 @@ export const KidsPage: FC = () => (
             ['Invisalign First®', 'Clear aligners designed for growing mouths, from about age 7 to 10.'],
             ['Invisalign Teen®', 'Built for teenage mouths and teenage life, with compliance visible at each visit.'],
             ['Palatal expander', 'A fixed appliance that widens a narrow upper jaw while the growth center is open.'],
-            ['Retainers', 'Holding the result for life, and short fix-up plans for teeth that have drifted.'],
           ].map(([t, b]) => (
             <div class="card reveal" style="padding:1.75rem">
               <h3 style="font-family:var(--font-display);font-size:var(--fs-h5);font-weight:var(--fw-medium);color:var(--navy-600);margin:0 0 .5rem">
@@ -574,7 +572,13 @@ export const AdultsPage: FC = () => (
             </div>
           </div>
           <div class="reveal">
-            <SchedulerPanel id="adults-scheduler" location="adults_page" />
+            <ContactPanel
+              id="adults-contact"
+              location="adults_page"
+              bookFrom="adults_page"
+              title="Ask us about adult treatment"
+              lede="A question about your bite, your options or the fee? Send it here and we will reply by email."
+            />
           </div>
         </div>
       </div>
@@ -951,7 +955,13 @@ export const InvisalignPage: FC = () => (
             <Ticks items={['0% interest plans — down payment at the start', 'In-network with most major PPO plans', 'HSA and FSA dollars welcome']} />
           </div>
           <div class="reveal">
-            <SchedulerPanel id="invisalign-scheduler" location="invisalign" />
+            <ContactPanel
+              id="invisalign-contact"
+              location="invisalign"
+              bookFrom="invisalign"
+              title="Ask us about aligners"
+              lede="A question about your case, your options or the fee? Send it here and we will reply by email."
+            />
           </div>
         </div>
       </div>

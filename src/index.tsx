@@ -22,10 +22,20 @@ import {
   BlogArticlePage,
 } from './pages/content'
 import { BIZ, HOME_FAQ, SURG_FAQ, CONTACT_FAQ, FIRST_FAQ, POSTS } from './lib/site-data'
+import { sendEnquiry } from './lib/mail'
 import { consentRequired, resolveGtmId } from './lib/tagging'
 import type { TagConfig } from './layout'
 
-type Bindings = { DB?: D1Database; GTM_ID?: string; ADMIN_TOKEN?: string }
+type Bindings = {
+  DB?: D1Database
+  GTM_ID?: string
+  ADMIN_TOKEN?: string
+  /* Contact-form delivery. See src/lib/mail.ts — without RESEND_API_KEY the
+     enquiry is still stored in D1, just not emailed. */
+  RESEND_API_KEY?: string
+  MAIL_FROM?: string
+  CONTACT_INBOXES?: string
+}
 
 const app = new Hono<{ Bindings: Bindings }>()
 
@@ -530,54 +540,25 @@ app.post('/api/contact', async (c) => {
     )
       .bind(source, page, name, email, phone, message)
       .run()
-    return c.json({ ok: true, received: true })
   } catch (err) {
     /* Never claim receipt of something we did not store. The client turns this
        into a visible "call us" message so the enquiry is not silently lost. */
     console.error('contact insert failed', err)
     return c.json({ ok: false, error: 'not_stored' }, 503)
   }
-})
 
-/* Scheduler panel */
-app.post('/api/scheduler', async (c) => {
-  const body = await c.req.json<Record<string, string>>().catch(() => ({}) as Record<string, string>)
-  const first = (body.first || '').trim()
-  const last = (body.last || '').trim()
-  const email = (body.email || '').trim()
-  const phone = (body.phone || '').trim()
-  const patient = (body.patient || 'self').slice(0, 32)
-  const when = (body.when || 'morning').slice(0, 32)
-  const notes = (body.notes || '').trim()
-  const source = (body.source || 'page').slice(0, 64)
+  /* Deliver to the practice inboxes — info@ and admin@ (see CONTACT_INBOXES).
+     This runs AFTER the row is safely in D1, so a mail outage cannot lose an
+     enquiry: it is still in the database and still visible via
+     GET /api/submissions. `delivered` is returned so a failure to email is
+     visible in the response and in logs rather than being assumed away. */
+  const mail = await sendEnquiry(c.env, {
+    subject: 'Website enquiry — ' + name + ' (' + source + ')',
+    fields: { name, email, phone, message, page, source },
+    replyTo: email,
+  })
 
-  const errors: Record<string, string> = {}
-  if (!first) errors.first = 'Please enter a first name.'
-  if (!last) errors.last = 'Please enter a last name.'
-  if (!EMAIL_RE.test(email)) errors.email = 'Please enter a valid email address.'
-  if (phone.replace(/\D/g, '').length < 10) errors.phone = 'Please enter a 10-digit phone number.'
-  if (Object.keys(errors).length) return c.json({ ok: false, errors }, 400)
-
-  const bookingId =
-    'R-' +
-    Date.now()
-      .toString(36)
-      .toUpperCase()
-
-  try {
-    if (c.env.DB) {
-      await ensureSchema(c.env.DB)
-      await c.env.DB.prepare(
-        `INSERT INTO submissions (kind, source, name, first_name, last_name, email, phone, patient, preferred_time, notes, sms, reference)
-         VALUES ('scheduler', ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?)`,
-      )
-        .bind(source, first + ' ' + last, first, last, email, phone, patient, when, notes, bookingId)
-        .run()
-    }
-    return c.json({ ok: true, bookingId })
-  } catch (err) {
-    return c.json({ ok: true, bookingId, stored: false })
-  }
+  return c.json({ ok: true, received: true, delivered: mail.sent, mailNote: mail.skipped || mail.error || null })
 })
 
 /* Booking flow confirmation */

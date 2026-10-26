@@ -30,6 +30,17 @@ export const BIZ = {
     encodeURIComponent('Roark Orthodontics, 212 E Main St Ste 100, Franklin, TN 37064'),
 }
 
+/* ── WHERE WEBSITE ENQUIRIES GO ────────────────────────────────────────────
+   Every contact form on the site delivers to BOTH addresses. The practice
+   asked for this explicitly: info@ is the front desk, admin@ is the office
+   manager, and an enquiry must never depend on one person's inbox.
+
+   `BIZ.email` is a different thing — it is the address PRINTED on the site
+   for patients to write to. Delivery targets and the published address are
+   deliberately separate so changing one does not silently change the other.
+   Override at runtime with the CONTACT_INBOXES env var (comma separated). */
+export const CONTACT_INBOXES: string[] = ['info@roarkortho.com', 'admin@roarkortho.com']
+
 export type Hour = { day: string; open: string; close: string; closed?: boolean }
 
 export const HOURS: Hour[] = [
@@ -160,15 +171,6 @@ export const TREATMENTS: Treatment[] = [
     img: 'gallery-3',
     blurb:
       'A fixed appliance that gently widens a narrow upper jaw — often the right answer for a crossbite while the growth center is still open.',
-  },
-  {
-    id: 'retainers',
-    name: 'Retainers & Relapse Care',
-    audience: 'All ages',
-    href: '/#patients',
-    img: 'gallery-3',
-    blurb:
-      'Replacement retainers, and short fix-up plans for teeth that have drifted years after treatment elsewhere. Teeth move for life; that is normal and usually easy to correct.',
   },
 ]
 

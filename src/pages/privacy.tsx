@@ -10,13 +10,20 @@ import { BIZ } from '../lib/site-data'
    so section 2 points to it instead.
 
    Every factual claim below is checked against the code that actually runs:
-     · /api/contact, /api/scheduler            → D1 `submissions`
+     · /api/contact   → D1 `submissions`, then emailed to the practice inboxes
+                        (info@ and admin@) via src/lib/mail.ts → Resend
      · /book  → WaveOrtho, browser-to-central.waveortho.com (NOT our database)
      · localStorage roark-consent-v1   (public/static/tagging.js)
      · sessionStorage roark-conv-fired (public/static/tagging.js)
      · no document.cookie anywhere in src/ or public/static
      · fonts self-hosted from /static/fonts — no Google Fonts request
      · the Google map is a facade; no iframe until the visitor taps it
+
+   NOTE ON THE FORMS. The short "scheduler request" panel that used to appear
+   on the treatment pages is gone. Those pages now carry the same contact form
+   as everywhere else, plus a plain link to /book for anyone who would rather
+   pick a time. That means there is exactly ONE way to send us a message, and
+   ONE scheduler (WaveOrtho, at /book). If either changes, this page changes.
 
    NOTE ON THE BOOKING FLOW. /book used to be a form of our own that posted to
    /api/booking and was saved in our D1 database. It is now the practice's real
@@ -155,8 +162,8 @@ export const PrivacyPage: FC = () => (
 
           <h2 id="what-this-covers">3. What this policy covers</h2>
           <p>
-            It covers everything that happens on this website: the pages you read, the three forms you can fill in,
-            the appointment scheduler, and the advertising measurement described in section 7.
+            It covers everything that happens on this website: the pages you read, the contact form, the appointment
+            scheduler, and the advertising measurement described in section 7.
           </p>
           <p>It does not cover:</p>
           <ul>
@@ -177,22 +184,27 @@ export const PrivacyPage: FC = () => (
 
           <h2 id="what-you-give-us">4. What you give us through the forms</h2>
           <p>
-            There are three places to type something into this site. Here is exactly what each one asks for — nothing
+            There are two places to type something into this site. Here is exactly what each one asks for — nothing
             hidden, nothing implied.
           </p>
 
           <h3>The contact form</h3>
           <p>
-            On the <a href="/contact">contact page</a>. We ask for your name, your email address, your phone number
-            and a message. It also records which page you sent it from, so we know what you were reading when you
-            wrote to us.
+            The same short form appears in panels across the site — on the <a href="/contact">contact page</a>, and on
+            the pages about children, adults, aligners, braces, cost and surgical treatment. We ask for your name,
+            your email address, your phone number and a message. It also records which page you sent it from, so we
+            know what you were reading when you wrote to us.
           </p>
-
-          <h3>The scheduler request</h3>
           <p>
-            The short request form that appears in panels around the site. We ask for your first name, last name,
-            email address, phone number, who the visit is for, a preferred time of day, and any notes you choose to
-            add. It records which page you used it from.
+            <b>What happens to it.</b> Your message is saved in our own enquiry database and is also emailed to the
+            practice&rsquo;s two office inboxes, <b>info@roarkortho.com</b> and <b>admin@roarkortho.com</b>, so that it
+            reaches more than one person and does not sit unread. The email is sent by Resend, a delivery service named
+            in section 10. If you would rather not be emailed at all, call the office instead and we will take your
+            details over the phone.
+          </p>
+          <p>
+            The contact form never books an appointment. Where you see it, there is also a plain link to
+            <a href="/book">the scheduler</a> for anyone who would rather pick a time.
           </p>
 
           <h3>The appointment scheduler</h3>
@@ -301,13 +313,13 @@ export const PrivacyPage: FC = () => (
           <p>
             We advertise the practice on Google, and we need to know whether those adverts lead to real appointment
             requests — otherwise we would be spending money blindly. To do that, this site loads a Google Tag Manager
-            container that reports one event: <b>that an appointment was requested</b>, together with a booking
-            reference and a value.
+            container that reports two kinds of event: <b>that the contact form was submitted</b>, and <b>that an
+            appointment was booked</b>, together with which page it came from and a booking reference.
           </p>
           <p>
-            <b>That event carries no patient information.</b> No name, no email, no phone number, no date of birth and
-            no clinical note is passed to Google. It says &ldquo;an appointment happened&rdquo; and nothing about who
-            it was for.
+            <b>Those events carry no patient information.</b> No name, no email, no phone number, no message, no date
+            of birth and no clinical note is passed to Google. They say &ldquo;a form was sent&rdquo; or &ldquo;an
+            appointment was booked&rdquo; and nothing about who it was for.
           </p>
           <p>
             We also do not run a separate analytics product on this site. There is no per-page behavioural profile
@@ -454,9 +466,9 @@ export const PrivacyPage: FC = () => (
           <ul>
             <li>The whole site is served over HTTPS, so what you type is encrypted in transit.</li>
             <li>
-              Enquiries sent through the contact form and the scheduler panel are held in a database that is not
-              publicly readable. Access requires a credential that is held by the practice, not by the website&rsquo;s
-              visitors.
+              Enquiries sent through the contact form are held in a database that is not publicly readable, and are
+              emailed to two office inboxes. Access requires a credential that is held by the practice, not by the
+              website&rsquo;s visitors.
             </li>
             <li>
               Appointments booked through <a href="/book">the scheduler</a> are held by WaveOrtho in the practice&rsquo;s

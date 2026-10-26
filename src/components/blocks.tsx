@@ -138,16 +138,25 @@ export const CredentialsRow: FC = () => {
    A framed card that asks for a message rather than a visit. Field order,
    labels, placeholders, validation messages and the success state mirror the
    handoff exactly. The difference from the prototype: the submit is real —
-   it POSTs JSON to /api/contact (see src/index.tsx), which persists to D1.
-   The success state never depends on the network call succeeding.           */
+   it POSTs JSON to /api/contact (see src/index.tsx), which persists to D1 and
+   emails the practice inboxes (src/lib/mail.ts).
+   The success state never depends on the network call succeeding.
+
+   `bookFrom` — the panel never books an appointment. It collects a message.
+   Where the design previously placed a scheduler panel, the visitor is given
+   a link to /book instead, so the choice ("just ask" vs "pick a time") is
+   explicit rather than implied. Pass the same `from` slug the CTA uses.     */
 export const ContactPanel: FC<{
   id?: string
   location?: string
   title?: string
   lede?: string
-}> = ({ id = 'contact-panel', location = 'page', title, lede }) => {
+  bookFrom?: string
+  bookLabel?: string
+}> = ({ id = 'contact-panel', location = 'page', title, lede, bookFrom, bookLabel }) => {
   const fid = (k: string) => id + '-' + k
   const formId = id + '-form'
+  const bookHref = '/book?from=' + (bookFrom || location)
 
   const bar = (
     <div class="wave__bar">
@@ -237,6 +246,18 @@ export const ContactPanel: FC<{
               discarded. role="alert" so a screen reader announces it. */}
           <p class="form__alert" data-form-alert role="alert" hidden></p>
 
+          {/* This panel only takes a message. Anyone who would rather pick a
+              time is sent to the scheduler, which is where appointments are
+              actually made. Two clear choices instead of one ambiguous one. */}
+          {bookFrom && (
+            <p class="form__book">
+              Would you rather pick a time?{' '}
+              <a href={bookHref} data-book={bookFrom}>
+                {bookLabel || 'Book the free exam online'} <Icon name="arrowRight" size={9} />
+              </a>
+            </p>
+          )}
+
           <p class="form__note">
             We only use this to reply to you. For anything urgent — a broken bracket, a wire poking, or pain you
             cannot manage — please call <a href={BIZ.phoneHref}>{BIZ.phoneDisplay}</a> rather than message.
@@ -253,154 +274,15 @@ export const ContactPanel: FC<{
             We have it, and a reply will come to your email — usually the same or next business day. For anything
             urgent, call <a href={BIZ.phoneHref}>{BIZ.phoneDisplay}</a>.
           </p>
-          <button class="btn btn--out-ink" type="button" data-contact-reset>
-            Send another
-          </button>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-/* ── SCHEDULER PANEL ───────────────────────────────────────────────────────
-   The same framed card as the contact panel, but it asks for a visit. Used on
-   the treatment pages where the design placed WaveHost. Ported from the
-   design's WaveFallback (first/last name, email, mobile, who the exam is for,
-   preferred time) — the fields the approved design shows.                   */
-export const SchedulerPanel: FC<{ id?: string; location?: string }> = ({
-  id = 'scheduler-panel',
-  location = 'page',
-}) => {
-  const fid = (k: string) => id + '-' + k
-  const formId = id + '-form'
-
-  return (
-    <div class="wave" id={id} data-cta-location={location}>
-      <div class="wave__bar">
-        <span class="wave__badge">
-          <i /> New patient exam · 45 min · no charge
-        </span>
-        <a
-          href={BIZ.phoneHref}
-          data-phone={location + '_scheduler'}
-          style="font-size:var(--fs-eyebrow);font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--navy-600);display:inline-flex;align-items:center;gap:.45rem"
-        >
-          <Icon name="phone" size={10} /> Or call {BIZ.phoneDisplay}
-        </a>
-      </div>
-
-      <div class="wave__host">
-        <div class="wave__fallback">
-          <form class="form" id={formId} data-scheduler-form data-source={location} novalidate>
-            <div class="form__row">
-              <div class="field" data-field="first">
-                <label for={fid('first')}>First name</label>
-                <input id={fid('first')} name="first" autocomplete="given-name" aria-describedby={fid('first') + '-err'} />
-                <span class="field__hint" id={fid('first') + '-err'} data-error hidden />
-              </div>
-              <div class="field" data-field="last">
-                <label for={fid('last')}>Last name</label>
-                <input id={fid('last')} name="last" autocomplete="family-name" aria-describedby={fid('last') + '-err'} />
-                <span class="field__hint" id={fid('last') + '-err'} data-error hidden />
-              </div>
-            </div>
-
-            <div class="form__row">
-              <div class="field" data-field="email">
-                <label for={fid('email')}>Email</label>
-                <input
-                  id={fid('email')}
-                  name="email"
-                  type="email"
-                  autocomplete="email"
-                  aria-describedby={fid('email') + '-err'}
-                />
-                <span class="field__hint" id={fid('email') + '-err'} data-error hidden />
-              </div>
-              <div class="field" data-field="phone">
-                <label for={fid('phone')}>Mobile phone</label>
-                <input
-                  id={fid('phone')}
-                  name="phone"
-                  type="tel"
-                  autocomplete="tel"
-                  placeholder="(615) 555-0134"
-                  aria-describedby={fid('phone') + '-err'}
-                />
-                <span class="field__hint" id={fid('phone') + '-err'} data-error hidden />
-              </div>
-            </div>
-
-            <div class="form__row">
-              <div class="field">
-                <label for={fid('patient')}>Who is the exam for?</label>
-                <select id={fid('patient')} name="patient">
-                  <option value="self">Me</option>
-                  <option value="child">My child</option>
-                  <option value="child2">More than one of my children</option>
-                  <option value="other">Someone else</option>
-                </select>
-              </div>
-              <div class="field">
-                <label for={fid('when')}>Preferred time of day</label>
-                <select id={fid('when')} name="when">
-                  <option value="morning">Morning (7:30–11:00)</option>
-                  <option value="afternoon">Afternoon (11:00–4:00)</option>
-                  <option value="either">Either is fine</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="field">
-              <label for={fid('notes')}>
-                Anything we should know? <span class="muted">(optional)</span>
-              </label>
-              <textarea
-                id={fid('notes')}
-                name="notes"
-                style="min-height:4.5rem"
-                placeholder="A concern you would like Dr. Roark to look at."
-              />
-            </div>
-
-            <label class="consent">
-              <input type="checkbox" name="sms" checked />
-              <span>
-                Text me appointment reminders at this number. Message rates may apply — reply STOP to opt out. We
-                never share your information.
-              </span>
-            </label>
-
-            <div style="display:flex;gap:.75rem;flex-wrap:wrap;align-items:center">
-              <button type="submit" class="btn btn--pri">
-                <span data-label>Request the exam</span> <Icon name="arrowRight" size={11} />
-              </button>
-              <span class="speednote">Or call {BIZ.phoneDisplay}</span>
-            </div>
-
-            <p class="form__note">
-              Adjustments, retainer checks and repairs are booked by phone — call{' '}
-              <a href={BIZ.phoneHref}>{BIZ.phoneDisplay}</a>. This form is not for medical emergencies.
-            </p>
-          </form>
-
-          <div class="done" id={formId + '-done'} hidden>
-            <div class="done__ic">
-              <Icon name="check" size={22} />
-            </div>
-            <h3>Request received</h3>
-            <p>
-              A welcome email is on its way with your next steps. Need the time moved? Call us on{' '}
-              <a href={BIZ.phoneHref}>{BIZ.phoneDisplay}</a>.
-            </p>
-            <div style="display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap">
-              <a class="btn btn--pri" href={BIZ.phoneHref} data-phone="scheduler_success">
-                <Icon name="phone" size={11} /> Call the office
+          <div style="display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap">
+            {bookFrom && (
+              <a class="btn btn--pri" href={bookHref} data-book={bookFrom}>
+                <Icon name="calendar" size={11} /> Book online
               </a>
-              <button class="btn btn--out-ink" type="button" data-scheduler-reset>
-                Book another visit
-              </button>
-            </div>
+            )}
+            <button class="btn btn--out-ink" type="button" data-contact-reset>
+              Send another
+            </button>
           </div>
         </div>
       </div>

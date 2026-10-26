@@ -335,120 +335,6 @@
     });
   }
 
-  /* ── SCHEDULER PANEL ─────────────────────────────────────────────────────
-     Mirrors the design's WaveFallback rules exactly: first and last name
-     required, email regex, 10-digit phone. */
-  function initSchedulerForms() {
-    document.querySelectorAll('[data-scheduler-form]').forEach(function (form) {
-      var done = document.getElementById(form.id + '-done');
-      var btn = form.querySelector('button[type="submit"]');
-      var label = btn && btn.querySelector('[data-label]');
-      var labelText = label ? label.textContent : '';
-
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        var errors = {};
-        var first = form.querySelector('[name="first"]');
-        var last = form.querySelector('[name="last"]');
-        var email = form.querySelector('[name="email"]');
-        var phone = form.querySelector('[name="phone"]');
-
-        if (!first.value.trim()) errors.first = 'Please enter a first name.';
-        if (!last.value.trim()) errors.last = 'Please enter a last name.';
-        if (!EMAIL_RE.test(email.value.trim())) errors.email = 'Please enter a valid email address.';
-        if (phone.value.replace(/\D/g, '').length < 10) errors.phone = 'Please enter a 10-digit phone number.';
-
-        ['first', 'last', 'email', 'phone'].forEach(function (k) {
-          var f = fieldOf(form, k);
-          if (f) setError(f, errors[k]);
-        });
-
-        var keys = Object.keys(errors);
-        if (keys.length) {
-          var el = form.querySelector('[name="' + keys[0] + '"]');
-          if (el) el.focus();
-          return;
-        }
-
-        var payload = {
-          first: first.value.trim(),
-          last: last.value.trim(),
-          email: email.value.trim(),
-          phone: phone.value.trim(),
-          patient: form.querySelector('[name="patient"]').value,
-          when: form.querySelector('[name="when"]').value,
-          notes: form.querySelector('[name="notes"]').value.trim(),
-          sms: form.querySelector('[name="sms"]').checked,
-          source: form.getAttribute('data-source') || 'page',
-        };
-
-        if (btn) btn.disabled = true;
-        if (label) label.textContent = 'Sending…';
-
-        track('scheduler_step', { step: 'request', cta_location: payload.source });
-
-        var finish = function (bookingId) {
-          if (btn) btn.disabled = false;
-          if (label) label.textContent = labelText;
-          form.hidden = true;
-          if (done) {
-            done.hidden = false;
-            done.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-            var h = done.querySelector('h3');
-            if (h) {
-              h.setAttribute('tabindex', '-1');
-              h.focus();
-            }
-          }
-          /* This panel says "Request received" — the office still has to
-             confirm the slot, so it is NOT a booked appointment. It used to
-             push booking_complete, which would have inflated Google Ads
-             conversions with requests that were never booked. The converted
-             event is appointment_booked, fired from the /book flow only. */
-          track('appointment_requested', {
-            booking_ref: bookingId || '',
-          });
-        };
-
-        fetch('/api/scheduler', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        })
-          .then(function (r) { return r.json().catch(function () { return {}; }); })
-          .then(function (data) {
-            if (data && data.ok === false && data.errors) {
-              ['first', 'last', 'email', 'phone'].forEach(function (k) {
-                var f = fieldOf(form, k);
-                if (f) setError(f, data.errors[k]);
-              });
-              if (btn) btn.disabled = false;
-              if (label) label.textContent = labelText;
-              return;
-            }
-            finish(data && data.bookingId);
-          })
-          .catch(function () { finish(); });
-      });
-    });
-
-    document.querySelectorAll('[data-scheduler-reset]').forEach(function (b) {
-      b.addEventListener('click', function () {
-        var done = b.closest('.done');
-        if (!done) return;
-        var form = done.parentElement.querySelector('[data-scheduler-form]');
-        if (form) {
-          form.reset();
-          form.hidden = false;
-          form.querySelectorAll('[data-field]').forEach(function (f) { setError(f, null); });
-          done.hidden = true;
-          var first = form.querySelector('input');
-          if (first) first.focus();
-        }
-      });
-    });
-  }
-
   /* ── FAQ ───────────────────────────────────────────────────────────────── */
   function initFaq() {
     document.querySelectorAll('.faq summary').forEach(function (s) {
@@ -465,7 +351,6 @@
     initMaps();
     initCtaTracking();
     initContactForms();
-    initSchedulerForms();
     initFaq();
   }
 
