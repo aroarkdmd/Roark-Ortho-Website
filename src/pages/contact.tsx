@@ -19,7 +19,7 @@ export const ContactPage: FC = () => (
       <div class="wrap wrap-wide">
         <div class="pbanner__in">
           <SiloCrumbs trail={[{ name: 'Home', href: '/' }, { name: 'Contact' }]} />
-          <h1>We can&rsquo;t wait to meet you!</h1>
+          <h1>Contact Roark Orthodontics in downtown Franklin, TN</h1>
           <p>
             We are on East Main Street in historic downtown Franklin, in Suite 100, with one step up from the
             sidewalk to the door and free parking in front of the office and in the 2nd Street garage across the
@@ -150,7 +150,7 @@ export const ContactPage: FC = () => (
     <section class="sec sec--rose on-rose">
       <div class="wrap wrap-narrow center">
         <h2 class="h-section" style="margin-bottom:1rem">
-          The fastest way to a time is the scheduler
+          Book your complimentary exam online
         </h2>
         <p class="lead" style="margin-bottom:2rem">
           The complimentary new patient exam takes about 45 minutes and includes photographs, an x-ray and a
