@@ -158,7 +158,7 @@ export const ContactPage: FC = () => (
         </p>
         <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
           <a class="btn btn--white" href="/book?from=contact_footer" data-book="contact_footer">
-            <Icon name="calendar" size={12} /> Book a free exam
+            <Icon name="calendar" size={12} /> Book a complimentary exam
           </a>
           <a class="btn btn--out" href={BIZ.phoneHref} data-phone="contact_footer">
             <Icon name="phone" size={11} /> Call {BIZ.phoneDisplay}
