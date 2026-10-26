@@ -148,8 +148,8 @@ export const HomePage: FC = () => (
               link: 'Metal & clear braces for every age',
             },
             {
-              img: 'invisalign',
-              alt: 'A clear Invisalign aligner',
+              img: 'invisalign-smile',
+              alt: 'A clear Invisalign aligner held up in front of a smiling woman',
               eyebrow: 'Adults, teens & children',
               title: 'Invisalign® Clear Aligners',
               body: 'Three aligner systems, one for each stage of life: Invisalign® for adults, Invisalign Teen® for teenagers and Invisalign First® for children. Removable, so you eat and drink normally, and a more aesthetic option at work, at school or in photos.',
