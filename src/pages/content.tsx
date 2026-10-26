@@ -509,7 +509,7 @@ export const AdultsPage: FC = () => (
           </div>
           <div class="split__media reveal">
             <div class="frame-rose">
-              <Pic name="adults" alt="A clear Invisalign® aligner held by a dental professional" sizes="(max-width: 1000px) 100vw, 50vw" widths={[480, 960]} w={960} h={640} />
+              <Pic name="adults-laugh" alt="A smiling adult woman in a green coat, laughing outdoors" sizes="(max-width: 1000px) 100vw, 50vw" widths={[480, 960]} w={960} h={640} />
             </div>
           </div>
         </div>
