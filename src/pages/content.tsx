@@ -495,7 +495,7 @@ export const AdultsPage: FC = () => (
               place throughout treatment. Clear (ceramic) brackets are much less visible than metal.
             </p>
             <p>
-              A small number of adult cases need more than tooth movement. Where the jaw itself is the issue, we plan
+              A small number of adult cases need more than tooth movement. Where the jaw itself is the issue, we plan{' '}
               <a href="/surgical-orthodontics">surgical orthodontics</a> with an oral and maxillofacial surgeon.
             </p>
             <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.5rem">
@@ -509,7 +509,7 @@ export const AdultsPage: FC = () => (
           </div>
           <div class="split__media reveal">
             <div class="frame-rose">
-              <Pic name="invisalign" alt="A clear Invisalign® aligner" sizes="(max-width: 1000px) 100vw, 50vw" widths={[480, 960]} w={960} h={640} />
+              <Pic name="adults" alt="A clear Invisalign® aligner held by a dental professional" sizes="(max-width: 1000px) 100vw, 50vw" widths={[480, 960]} w={960} h={640} />
             </div>
           </div>
         </div>
