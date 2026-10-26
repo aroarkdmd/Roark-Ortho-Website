@@ -202,9 +202,9 @@ app.get('/kids-braces', (c) =>
     <Layout
       tag={tagFor(c)}
       seo={{
-        title: 'Braces & Invisalign First® for Kids in Franklin, TN',
+        title: 'Kids & Teen Orthodontics and Braces in Franklin, TN | Roark Orthodontics',
         description:
-          'Braces, Invisalign First® and Invisalign Teen® for children and teenagers in downtown Franklin, TN. First screening from age 7, complimentary exam with a digital scan.',
+          'Orthodontic care for children and teens in downtown Franklin, TN: braces, Invisalign First® and Invisalign Teen®. Screening from age 7, with a complimentary exam and a written plan.',
         canonical: '/kids-braces',
         active: 'kids',
         breadcrumb: [{ name: 'Home', href: '/' }, { name: 'Kids & Teens' }],

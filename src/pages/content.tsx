@@ -262,8 +262,8 @@ export const KidsPage: FC = () => (
       img="family"
       imgAlt="A mother and her daughter smiling together"
       crumbs={[{ name: 'Home', href: '/' }, { name: 'Kids & Teens' }]}
-      h1="Braces & Invisalign First® for Kids in Franklin, TN"
-      sub="Children and teens often benefit from a first orthodontic check by age 7. We offer braces at every age and Invisalign First® and Invisalign Teen® for growing smiles. Your complimentary exam answers one question clearly: does your child need treatment now, or is it simply a good time to keep an eye on things?"
+      h1="Orthodontics for Kids & Teens in Franklin, TN"
+      sub="The American Association of Orthodontists recommends a first screening by age 7, while growth can still be guided. We offer braces at every age and Invisalign First® and Invisalign Teen® for growing smiles. Your complimentary exam tells you whether treatment is needed now."
       eager
     />
 
@@ -271,7 +271,7 @@ export const KidsPage: FC = () => (
       items={[
         ['First screening', 'Age 7', 'The age the American Association of Orthodontists recommends, while growth can still be guided.'],
         ['Treatment length', '6–24 months', 'A first phase runs 6–12 months; comprehensive treatment 18–24 months.'],
-        ['The exam', 'No charge', 'Photographs, an x-ray and a digital iTero scan, then a written plan.'],
+        ['The exam', 'No charge', 'Photographs, an x-ray and a digital iTero scan, with a written plan before you decide.'],
       ]}
     />
 
@@ -279,8 +279,8 @@ export const KidsPage: FC = () => (
       <div class="wrap wrap-wide">
         <SectionHead
           eyebrow="What to look for at home"
-          title="Six signs a parent can spot without a dental degree"
-          body="Most children who need early treatment give at least one of these hints. None of them is a diagnosis."
+          title="Six signs to look for at home"
+          body="Most children who need early treatment show at least one of these. None is a diagnosis on its own."
         />
         <div class="grid-3" style="margin-top:3rem">
           {[
@@ -300,8 +300,8 @@ export const KidsPage: FC = () => (
           ))}
         </div>
         <Callout max="54rem">
-          <b>Nothing here is a diagnosis.</b> A screening is the only way to know. It is complimentary, it takes
-          about thirty minutes, and most visits end with a plan to watch rather than a plan to treat.
+          <b>Nothing here is a diagnosis.</b> Only a screening can tell you what your child needs. It is complimentary,
+          takes about 45 minutes, and most visits end with a plan to watch rather than a plan to treat.
         </Callout>
       </div>
     </section>
@@ -310,16 +310,16 @@ export const KidsPage: FC = () => (
       <div class="wrap wrap-wide">
         <SectionHead
           eyebrow="Treatment options"
-          title="Every option, open to the right age group"
-          body="Braces reach the same result as aligners. The aligner systems are named by audience, and each is shaped for a specific stage of growth."
+          title="Every option, matched to your child's age"
+          body="Braces work well at any age. Each aligner system is designed for a particular stage of growth."
         />
         <div class="grid-3" style="margin-top:3rem">
           {[
-            ['Metal braces', 'The proven option. Driven by the bite rather than the birthday, and reasonable at any age.'],
-            ['Clear (ceramic) braces', 'Tooth-colored brackets — less visible, and the same reliable mechanics as metal.'],
-            ['Invisalign First®', 'Clear aligners designed for growing mouths, from about age 7 to 10.'],
-            ['Invisalign Teen®', 'Built for teenage mouths and teenage life, with compliance visible at each visit.'],
-            ['Palatal expander', 'A fixed appliance that widens a narrow upper jaw while the growth center is open.'],
+            ['Metal braces', 'The proven option, chosen by the bite rather than the age. A reliable choice at any age.'],
+            ['Clear braces', 'Tooth-colored brackets that are less visible, with the same dependable mechanics as metal.'],
+            ['Invisalign First®', 'Clear aligners designed for growing mouths, typically from about age 7 to 10.'],
+            ['Invisalign Teen®', 'Clear, removable aligners built for teenage life, with wear tracked at each visit.'],
+            ['Palatal expander', 'A fixed appliance that gently widens a narrow upper jaw while the growth center is still open.'],
           ].map(([t, b]) => (
             <div class="card reveal" style="padding:1.75rem">
               <h3 style="font-family:var(--font-display);font-size:var(--fs-h5);font-weight:var(--fw-medium);color:var(--navy-600);margin:0 0 .5rem">
@@ -338,11 +338,11 @@ export const KidsPage: FC = () => (
           <div class="reveal">
             <span class="eb">The first visit</span>
             <h2 class="h-section" style="font-size:var(--fs-h3);margin-bottom:1.25rem">
-              Screening a child takes about thirty minutes
+              A screening takes about 45 minutes
             </h2>
             <p>
-              No impressions, no needles, nothing uncomfortable. We take photographs and a digital scan with our
-              iTero scanner, and Dr. Roark looks at how the bite closes and how the jaw is developing.
+              There are no impression trays and no needles. We take photographs and a digital scan with our
+              iTero scanner, and Dr. Roark reviews how the bite closes and how the jaw is developing.
             </p>
             <Ticks
               items={[
@@ -414,14 +414,14 @@ export const KidsPage: FC = () => (
 
     <section class="sec sec--paper cv" id="faq">
       <div class="wrap wrap-narrow">
-        <SectionHead eyebrow="Parents usually ask" title="Kids’ braces questions, answered" narrow />
+        <SectionHead eyebrow="Parents usually ask" title="Common questions from Franklin parents" narrow />
         <div style="margin-top:2.5rem">
           <FaqList items={KIDS_FAQ} idPrefix="kidsfaq" />
         </div>
       </div>
     </section>
 
-    <CLOSING_CTA from="kids_cta" title="We can't wait to meet your family!" body="Book a complimentary screening and you will leave knowing exactly where your child stands." />
+    <CLOSING_CTA from="kids_cta" title="Let's find out what your child needs" body="Book a complimentary screening and you'll leave with a clear picture of where your child stands." />
 
     <CrossLinks
       links={[
