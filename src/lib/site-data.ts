@@ -155,7 +155,7 @@ export const TREATMENTS: Treatment[] = [
     name: 'Palatal Expander',
     audience: 'Children',
     href: '/palatal-expander',
-    img: 'gallery-3',
+    img: 'expander-girl',
     blurb:
       'A fixed appliance that gently widens a narrow upper jaw — often the right answer for a crossbite while the growth center is still open.',
   },

@@ -49,6 +49,7 @@ export const PHOTO_WIDTHS: Record<string, number[]> = {
   'invisalign-smile': [480, 960],
   'adults-laugh': [480, 960],
   'adults-hero': [480, 960],
+  'expander-girl': [480, 960],
   'dr-roark': [480, 683],
   family: [480, 960],
   'first-visit': [480, 960, 1440, 1600],
