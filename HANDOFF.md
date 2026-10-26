@@ -464,7 +464,7 @@ changes, both must change.
 - **No staff headshots exist** in `public/static/photos/`. The team cards render an initials
   monogram (`.team__mono`) rather than reusing an office photo, which would imply it shows that
   person. Drop real portraits in and swap `<Monogram>` for `<Pic>` to finish.
-- The `Smile Journal` was **removed from the header nav** at the practice's request (footer only).
+- The blog (then called `Smile Journal`, now `Franklin Orthodontics Blog`) was **removed from the header nav** at the practice's request (footer only).
   This is SEO-neutral: the footer is sitewide, so `/blog` keeps an internal link on every page.
   It also fixed a real layout bug — eight header items overflowed the bar between 1000px (the nav
   collapse breakpoint) and roughly 1070px. Seven fit.
