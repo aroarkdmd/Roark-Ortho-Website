@@ -88,10 +88,8 @@ export const TreatmentsPage: FC = () => (
           Orthodontic treatment in Franklin, TN
         </h1>
         <p class="lead" style="max-width:54rem;margin-bottom:1rem">
-          Braces and clear aligners both straighten teeth, and <b>both are available to every age group</b> at our
-          practice. The aligner range is named by audience: children are treated with Invisalign First®, teenagers
-          with Invisalign Teen®, and adults with Invisalign®. Adults can equally be treated with braces — and for
-          some jaw problems, neither alone is enough and we plan surgical orthodontics with an oral surgeon.
+          Braces are available at every age. Invisalign® is available for children, teens and adults, with each
+          system matched to the stage of growth.
         </p>
         <p style="max-width:54rem">
           Which one you need is a clinical decision, not a preference. That is what the free exam is for: a scan, a
