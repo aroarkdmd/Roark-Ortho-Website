@@ -51,9 +51,10 @@ export const PHOTO_WIDTHS: Record<string, number[]> = {
   invisalign: [480, 960],
   'itero-scan': [480, 960],
   'treatment-header': [960],
-  /* Team portraits, cropped 3:4 from the practice's own photographs on
-     roarkortho.com. Each width here is a file that exists on disk. */
-  'team-nicole': [480, 800],
+  /* Team portraits, from the practice's own photographs on roarkortho.com.
+     Nicole's is kept at its native 3:2; Kelsey's at 3:4. Each width here is a
+     file that exists on disk. */
+  'team-nicole': [480, 960],
   'team-kelsey': [480, 730],
   /* The Roark family — Ashley, Brian, Margot and Sloane walking in the
      woods. From the practice's own shoot, kept at its native 3:2. */
