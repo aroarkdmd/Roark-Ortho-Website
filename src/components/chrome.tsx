@@ -40,6 +40,7 @@ const SwapLogo: FC<{ solid?: boolean; width?: string }> = ({ solid, width = '13.
    Only the widths that actually exist on disk, so a srcset entry can never
    404. Mirrors site/photo-manifest.jsx from the handoff.                   */
 export const PHOTO_WIDTHS: Record<string, number[]> = {
+  adults: [480, 960],
   braces: [480, 960],
   'dr-roark': [480, 683],
   family: [480, 960],

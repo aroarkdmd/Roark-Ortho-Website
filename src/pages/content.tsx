@@ -181,7 +181,7 @@ export const TreatmentsPage: FC = () => (
           </a>
           <a class="path__card path__card--adults" href="/adults">
             <div class="path__media">
-              <Pic name="invisalign" alt="A clear Invisalign® aligner" sizes="(max-width: 1000px) 100vw, 50vw" widths={[480, 960]} w={960} h={640} />
+              <Pic name="adults" alt="A clear Invisalign® aligner held by a dental professional" sizes="(max-width: 1000px) 100vw, 50vw" widths={[480, 960]} w={960} h={640} />
               <span class="path__tag">For adults</span>
             </div>
             <div class="path__body">
