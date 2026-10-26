@@ -483,4 +483,3 @@ build. It resolved only when the user uploaded the real vendor files.
 **Lesson for next session: when integrating a third-party library, ask for the vendor bundle they
 were given (or the install docs from their vendor portal) before reverse-engineering anything.**
 One request would have saved the entire detour.
-tire detour.
