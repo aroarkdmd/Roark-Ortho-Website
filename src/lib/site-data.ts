@@ -135,29 +135,11 @@ export const TREATMENTS: Treatment[] = [
   {
     id: 'invisalign',
     name: 'Invisalign®',
-    audience: 'Adults, teens & children',
+    audience: 'Children, teens & adults',
     href: '/invisalign',
     img: 'invisalign',
     blurb:
-      'A series of custom clear aligners that straighten teeth discreetly. Removable, so you eat and drink normally, and more aesthetic at work or in photographs. Three systems, one for each stage of growth.',
-  },
-  {
-    id: 'invisalign-teen',
-    name: 'Invisalign Teen®',
-    audience: 'Teens',
-    href: '/kids-braces#options',
-    img: 'family',
-    blurb:
-      'The aligner system built for teenage mouths and teenage life — clear and more aesthetic in photos, removable for sport and band, and with compliance built into the trays so we can see wear at each visit.',
-  },
-  {
-    id: 'invisalign-first',
-    name: 'Invisalign First®',
-    audience: 'Children',
-    href: '/invisalign-first',
-    img: 'family',
-    blurb:
-      'Clear aligners designed specifically for growing mouths. Corrects crowding and spacing early (and narrow arches alongside an expander), and because it guides growth while the adult teeth are still arriving it can make a later phase simpler or unnecessary.',
+      'Clear, removable aligners for every age. Each system is matched to the stage of growth.',
   },
   {
     id: 'braces',

@@ -110,7 +110,7 @@ export const TreatmentsPage: FC = () => (
 
     <section class="sec sec--paper cv">
       <div class="wrap wrap-wide">
-        <div class="grid-3">
+        <div class="grid-2">
           {TREATMENTS.map((t) => (
             <a class="card card--accent reveal" href={t.href}>
               <div class="card__img">
