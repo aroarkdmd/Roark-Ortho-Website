@@ -221,12 +221,12 @@ export const HomePage: FC = () => (
           </div>
           <div class="split__media reveal">
             <Pic
-              name="gallery-7"
-              alt="A treatment bay at Roark Orthodontics"
+              name="dr-roark"
+              alt="Dr. Ashley Roark, board certified orthodontist at Roark Orthodontics in Franklin, Tennessee"
               sizes="(max-width: 1000px) 100vw, 50vw"
-              widths={[480]}
+              widths={[480, 683]}
               w={683}
-              h={1024}
+              h={911}
               style="aspect-ratio:3/4;object-fit:cover"
             />
           </div>
