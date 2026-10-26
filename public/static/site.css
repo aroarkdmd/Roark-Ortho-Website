@@ -824,17 +824,21 @@ img { display: block; }
            align-items: center; justify-content: space-between; }
 
 /* ── 8. GEO FOOTER ────────────────────────────────────────────────────── */
-.ftr { background: var(--roark-pink); color: var(--white); padding: var(--sp-10) 0 var(--sp-5); }
+.ftr { background: var(--roark-pink); color: var(--white); padding: var(--sp-9) 0 var(--sp-5); }
 .ftr a { color: var(--white); text-decoration: none; }
 .ftr a:hover { color: var(--rose-200); }
-.ftr__grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: var(--sp-8); }
+.ftr__grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: var(--sp-8); align-items: start; }
 .ftr__logo { display: block; margin-bottom: var(--sp-5); }
 .ftr h5 { font-family: var(--font-body); font-size: var(--fs-eyebrow); font-weight: var(--fw-semi);
           letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--white);
-          margin: 0 0 var(--sp-4); opacity: .95; }
-.ftr ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
-.ftr li { font-size: var(--fs-body-sm); }
-.ftr p { font-size: var(--fs-body-sm); color: rgba(255,255,255,.92); margin: 0 0 var(--sp-4); }
+          margin: 0 0 var(--sp-4); padding-bottom: var(--sp-3); position: relative; }
+.ftr h5::after { content: ""; position: absolute; left: 0; bottom: 0; width: 2.25rem; height: 2px;
+                 background: var(--rose-200); }
+.ftr ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .7rem; }
+.ftr li { font-size: var(--fs-body-sm); line-height: 1.4; }
+.ftr li a { border-bottom: 1px solid transparent; transition: var(--tr-all); }
+.ftr li a:hover { border-bottom-color: var(--rose-200); }
+.ftr p { font-size: var(--fs-body-sm); color: rgba(255,255,255,.92); margin: 0 0 var(--sp-4); line-height: 1.6; max-width: 34ch; }
 .ftr__social { display: flex; gap: .75rem; margin-top: var(--sp-4); }
 .ftr__social a { width: 2.4rem; height: 2.4rem; border-radius: 50%;
                  border: 1px solid rgba(255,255,255,.5); display: flex;
@@ -843,7 +847,8 @@ img { display: block; }
 .ftr__social svg { width: 1rem; height: 1rem; fill: currentColor; }
 
 /* NAP block — machine-readable, mirrors the Google Business Profile exactly */
-.nap { font-style: normal; display: grid; gap: .35rem; }
+.nap { font-style: normal; display: grid; gap: .35rem; font-size: var(--fs-body-sm); }
+.nap span { color: rgba(255,255,255,.85); }
 .nap b { font-family: var(--font-display); font-weight: var(--fw-medium);
          font-size: var(--fs-body-sm); }
 .nap address { font-style: normal; }
@@ -876,11 +881,13 @@ img { display: block; }
 .prox__cities a:hover { border-bottom-color: var(--white); }
 .prox p { max-width: 62rem; }
 .ftr__base {
-  margin-top: var(--sp-7); padding-top: var(--sp-5);
-  border-top: 1px solid rgba(255,255,255,.3);
-  display: flex; justify-content: space-between; gap: var(--sp-5); flex-wrap: wrap;
-  font-size: var(--fs-caption); color: rgba(255,255,255,.88);
+  margin-top: var(--sp-8); padding-top: var(--sp-5);
+  border-top: 1px solid rgba(255,255,255,.25);
+  display: flex; justify-content: space-between; align-items: center; gap: var(--sp-4) var(--sp-6); flex-wrap: wrap;
+  font-size: var(--fs-caption); color: rgba(255,255,255,.85);
 }
+.ftr__base a { border-bottom: 1px solid rgba(255,255,255,.4); padding-bottom: 1px; }
+.ftr__base a:hover { border-bottom-color: var(--white); }
 
 /* ── 9. PPC LANDING PAGE SHELL ────────────────────────────────────────── */
 /* No main nav, no social. One job: get the visitor into the scheduler. */
@@ -1368,7 +1375,8 @@ slotmark { display: none; }
   .hero { min-height: 34rem; padding-top: calc(var(--header-h) + var(--sp-8)); }
   .pbanner { min-height: 22rem; }
   .hero h1, .pbanner h1 { font-size: var(--fs-h1); }
-  .ftr__grid { grid-template-columns: 1fr; }
+  .ftr__grid { grid-template-columns: 1fr; gap: var(--sp-7); }
+  .ftr__base { flex-direction: column; align-items: flex-start; }
   .form__row { grid-template-columns: 1fr; }
   .creds { grid-template-columns: 1fr 1fr; gap: var(--sp-3); }
   .hdr__top { display: none; }
