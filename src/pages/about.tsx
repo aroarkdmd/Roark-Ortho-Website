@@ -151,8 +151,8 @@ const PersonRow: FC<{
 export const AboutPage: FC = () => (
   <main id="main">
     <SiloBanner
-      img="first-visit"
-      imgAlt="Dr. Roark's treatment room at Roark Orthodontics in downtown Franklin"
+      img="office-hall"
+      imgAlt="The hallway at Roark Orthodontics in downtown Franklin, with the treatment room and digital lab"
       crumbs={[{ name: 'Home', href: '/' }, { name: 'About' }]}
       h1="Meet Dr. Roark and our team in downtown Franklin, TN"
       sub="Three of us in one office on East Main Street. You will get to know all three."

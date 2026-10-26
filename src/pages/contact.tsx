@@ -8,8 +8,8 @@ export const ContactPage: FC = () => (
   <main id="main">
     <section class="pbanner">
       <Pic
-        name="gallery-1-storefront"
-        alt="The Roark Orthodontics storefront on East Main Street, downtown Franklin"
+        name="office-hall"
+        alt="The hallway at Roark Orthodontics in downtown Franklin, with the treatment room and digital lab"
         eager
         sizes="100vw"
         widths={[480, 960]}
