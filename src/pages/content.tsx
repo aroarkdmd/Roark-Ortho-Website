@@ -7,7 +7,7 @@ import { SectionHead, FaqList, SiloBanner, FactStrip, Callout, ContactPanel, Cre
 const CLOSING_CTA: FC<{ from: string; title?: string; body?: string }> = ({
   from,
   title = 'Not sure which treatment you need?',
-  body = 'The 0000exam includes a digital scan and a clear recommendation — including, sometimes, that nothing is needed yet.',
+  body = 'The complimentary exam includes a digital scan and a clear recommendation — including, sometimes, that nothing is needed yet.',
 }) => (
   <section class="sec sec--rose on-rose">
     <div class="wrap wrap-narrow center">
@@ -92,7 +92,7 @@ export const TreatmentsPage: FC = () => (
           system matched to the stage of growth.
         </p>
         <p style="max-width:54rem">
-          Which one you need is a clinical decision, not a preference. The 0000exam gives you a scan, a clear
+          Which one you need is a clinical decision, not a preference. The complimentary exam gives you a scan, a clear
           recommendation and a written price.
         </p>
         <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:2rem">
@@ -246,11 +246,11 @@ const KIDS_FAQ: Faq[] = [
   },
   {
     q: 'How long will my child be in treatment?',
-    a: 'A first phase of early treatment usually runs 6 to 12 months. Comprehensive treatment once the adult teeth are through typically runs 18 to 24 months. Aligner cases often finish in 6 to 18 months. Your own estimate is given in writing at the 0000exam.',
+    a: 'A first phase of early treatment usually runs 6 to 12 months. Comprehensive treatment once the adult teeth are through typically runs 18 to 24 months. Aligner cases often finish in 6 to 18 months. Your own estimate is given in writing at the complimentary exam.',
   },
   {
     q: 'What does it cost, and does insurance help?',
-    a: 'Comprehensive treatment at our office generally falls between $3,400 and $6,250, and a shorter early interceptive phase between $1,900 and $3,400. Most dental plans that include orthodontic benefits contribute toward either, usually from a lifetime orthodontic maximum. We verify your specific coverage and give you a written figure at the 0000exam.',
+    a: 'Comprehensive treatment at our office generally falls between $3,400 and $6,250, and a shorter early interceptive phase between $1,900 and $3,400. Most dental plans that include orthodontic benefits contribute toward either, usually from a lifetime orthodontic maximum. We verify your specific coverage and give you a written figure at the complimentary exam.',
   },
 ]
 
@@ -451,7 +451,7 @@ const ADULT_FAQ: Faq[] = [
   },
   {
     q: 'How much does adult treatment cost?',
-    a: 'Most treatment at our office falls between $3,400 and $6,250. That range is the same for metal braces, clear braces and Invisalign®, because we price by how complex your bite is, not by the appliance you choose. Your exact fee is quoted in writing at the 0000exam.',
+    a: 'Most treatment at our office falls between $3,400 and $6,250. That range is the same for metal braces, clear braces and Invisalign®, because we price by how complex your bite is, not by the appliance you choose. Your exact fee is quoted in writing at the complimentary exam.',
   },
   {
     q: 'Does insurance cover adult orthodontics?',
@@ -590,7 +590,7 @@ export const AdultsPage: FC = () => (
       </div>
     </section>
 
-    <CLOSING_CTA from="adults_cta" title="Ready to see what is possible?" body="The 0000exam includes a digital scan and a written plan with fees." />
+    <CLOSING_CTA from="adults_cta" title="Ready to see what is possible?" body="The complimentary exam includes a digital scan and a written plan with fees." />
 
     <CrossLinks
       links={[
@@ -628,11 +628,11 @@ export const InvisalignFirstPage: FC = () => (
           <div class="reveal">
             <span class="eb">Children's clear aligners</span>
             <h2 class="h-section" style="font-size:var(--fs-h3);margin-bottom:1.25rem">
-              Yes — Children Can Have Aligners
+              Children can wear clear aligners too
             </h2>
             <p>
-              Parents are usually surprised to learn this, but Invisalign® makes an aligner system designed
-              specifically for children, called <b>Invisalign First®</b>. It is not an adult tray scaled down. The
+              Many parents do not realize that Invisalign® offers an aligner system designed specifically for
+              children, called <b>Invisalign First®</b>. It is not an adult tray scaled down. The
               aligners are shaped to fit a smaller mouth with baby teeth still present, and they can work around
               teeth that have not fully erupted yet.
             </p>
@@ -641,12 +641,12 @@ export const InvisalignFirstPage: FC = () => (
               the teeth — the same objective as early braces, reached differently.
             </p>
             <p>
-              We recommend it often. It is comfortable, there is far less hardware to clean around than with
-              brackets, and children generally find it easier to live with.
+              It is comfortable, there is far less hardware to clean around than with brackets, and many children
+              find it easier to live with.
             </p>
             <Callout>
               <b>When braces make more sense.</b> Both reach similar results, so it usually comes down to your child.
-              One who will not realistically keep trays in for 20 hours a day is better served by braces — we will
+              A child who will not realistically keep trays in for 20 hours a day may do better with braces. We will
               talk it through at the screening.
             </Callout>
             <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.5rem">
@@ -1053,7 +1053,7 @@ export const ExpanderPage: FC = () => (
 const FIN_FAQ: Faq[] = [
   {
     q: 'How much do braces or Invisalign® cost in Franklin, TN?',
-    a: 'Most treatment at our office falls between $3,400 and $6,250 — and that range is the same whether you choose metal braces, clear (ceramic) braces or Invisalign®. We do not price by appliance. What sets your fee is how complex the bite is. A shorter early interceptive phase is $1,900 to $3,400. Your exact fee is quoted in writing at the 0000exam.',
+    a: 'Most treatment at our office falls between $3,400 and $6,250 — and that range is the same whether you choose metal braces, clear (ceramic) braces or Invisalign®. We do not price by appliance. What sets your fee is how complex the bite is. A shorter early interceptive phase is $1,900 to $3,400. Your exact fee is quoted in writing at the complimentary exam.',
   },
   {
     q: 'Does the fee include everything, or are there extra charges?',
@@ -1122,7 +1122,7 @@ export const FinancingPage: FC = () => (
             </p>
             <Ticks
               items={[
-                'One fee, quoted in writing at the 0000exam',
+                'One fee, quoted in writing at the complimentary exam',
                 'No separate charge for a broken bracket',
                 'Sibling and family treatment discounts applied automatically',
               ]}
@@ -1193,7 +1193,7 @@ export const FinancingPage: FC = () => (
       </div>
     </section>
 
-    <CLOSING_CTA from="financing_cta" title="Get a written price before you decide" body="The 0000exam ends with a treatment plan, a fee breakdown and what your insurance contributes." />
+    <CLOSING_CTA from="financing_cta" title="Get a written price before you decide" body="The complimentary exam ends with a treatment plan, a fee breakdown and what your insurance contributes." />
   </main>
 )
 

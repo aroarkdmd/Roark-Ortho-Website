@@ -321,7 +321,7 @@ export const HomePage: FC = () => (
               Clear prices, flexible payments
             </h3>
             <p>
-              At your 0000exam you receive a written fee that covers everything — records, appliances, every
+              At your complimentary exam you receive a written fee that covers everything — records, appliances, every
               adjustment, your first set of retainers and post-treatment visits.
             </p>
             <Ticks
