@@ -347,9 +347,9 @@ app.get('/areas-we-serve', (c) =>
     <Layout
       tag={tagFor(c)}
       seo={{
-        title: 'Areas We Serve | Roark Orthodontics, Downtown Franklin TN',
+        title: 'Orthodontics in Franklin, TN and Williamson County | Roark Orthodontics',
         description:
-          'Roark Orthodontics serves Franklin, Cool Springs, Westhaven, Berry Farms, Brentwood, Nolensville, Thompson’s Station, Spring Hill and across Williamson County, TN.',
+          'Roark Orthodontics serves Franklin, TN and surrounding Williamson County communities, including Cool Springs, Brentwood, Spring Hill and Thompson’s Station. Complimentary exam with a written plan.',
         canonical: '/areas-we-serve',
         breadcrumb: [{ name: 'Home', href: '/' }, { name: 'Areas we serve' }],
       }}

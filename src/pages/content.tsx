@@ -1266,7 +1266,7 @@ export const AreasPage: FC = () => (
         </nav>
         <span class="eb">Franklin &amp; Williamson County</span>
         <h1 class="h-section" style="max-width:44rem;margin-bottom:1.25rem">
-          An easy drive from across Williamson County
+          Orthodontics for Franklin, TN and Williamson County
         </h1>
         <p class="lead" style="max-width:54rem">
           The office is on East Main Street in historic downtown Franklin, with free parking in front of the
@@ -1332,7 +1332,7 @@ export const AreasPage: FC = () => (
       </div>
     </section>
 
-    <CLOSING_CTA from="areas_cta" title="Fifteen minutes from most of the county" body="Book a complimentary exam and you will leave with a written plan and price." />
+    <CLOSING_CTA from="areas_cta" title="Book your complimentary exam" body="Dr. Roark and the team will give you a written plan and price at your exam." />
   </main>
 )
 
