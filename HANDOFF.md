@@ -4,9 +4,93 @@ Last updated: 2026-10-26
 Repo: https://github.com/aroarkdmd/Roark-Ortho-Website (branch `main`, public)
 Live: https://roark-orthodontics.pages.dev
 Project dir: `/home/user/webapp`
+**Last commit: `d89343f`** — read §0 before doing anything.
 
 Read this first. It is written so a fresh session can start work without re-deriving
 anything that cost time to establish.
+
+---
+
+## 0. RESUME HERE (written 2026-10-26, end of session)
+
+### State: code complete, NOT deployed, email NOT live
+
+Four pieces of work were finished and committed but **never deployed**. The live site
+(`roark-orthodontics.pages.dev`) is still running the *previous* build. If you open a fresh
+sandbox, first restore from the repo:
+
+```bash
+git clone https://github.com/aroarkdmd/Roark-Ortho-Website.git   # or use the existing /home/user/webapp
+cd /home/user/webapp && npm install && npm run build
+```
+
+`npm install` IS required. Only `hono` is a runtime dep; `vite`, `wrangler` and `jsdom` are dev deps.
+
+### What was completed this session
+
+1. **Retainers & relapse care removed from `/treatments`** — three places: the `TREATMENTS`
+   grid in `src/lib/site-data.ts`, the comparison matrix, and the options card grid. Commit
+   `f6de072`. Deliberately scoped: fee copy still says "includes your first set of retainers",
+   because that is a true statement about what the fee covers, not a service listing.
+2. **Contact form replaces the in-page scheduler** — `/adults` and `/invisalign` now render
+   `ContactPanel` with a "Would you rather pick a time?" link to `/book`. `SchedulerPanel`,
+   `/api/scheduler` and `initSchedulerForms()` were **deleted** (not fixed). See §14.
+3. **`/about` page** — new, rebuilt from the practice's old WordPress page. Both `/about` and
+   `/about/` are routed; `#meet-the-team` anchor preserved. See §16.
+4. **`sitemap.xml` + `robots.txt`** — generated from a route table, all 18 URLs verified 200.
+   See §15. Also fixed the footer "Sitemap" link, which pointed at a 404.
+5. **Smile Journal moved to footer only** (practice request) — SEO-neutral, and it fixed a real
+   header overflow between the 1000px collapse point and ~1070px.
+
+### THE ONE BLOCKING TASK
+
+**`RESEND_API_KEY` and `MAIL_FROM` are unset, so contact forms email nobody.**
+
+Every enquiry IS stored in D1 and the visitor DOES see "Message sent" — that part is honest and
+works. But no email reaches info@ or admin@. The rows sit in the database until someone reads
+`GET /api/submissions`. **Do not describe the contact form as "done" until this is set.**
+
+The user was going to create a Resend account and supply the key. Full setup walkthrough is in
+§13, including the DNS records and the two traps:
+
+- **`MAIL_FROM` must not be `info@` or `admin@`** — those are Google Workspace mailboxes; sending
+  as them breaks DMARC alignment. Use `noreply@roarkortho.com`.
+- **Root SPF needs no change.** It already includes `amazonses.com`; Resend's SPF lives on the
+  `send` subdomain.
+
+### Open question that blocked the last step
+
+Deploying now would put live forms in front of patients that silently email nobody. The user was
+asked to choose:
+
+- **(a)** wait for the Resend key, then deploy once — my recommendation; or
+- **(b)** deploy now, set the secret afterwards in the dashboard — forms store correctly in the
+  meantime and start emailing the moment the secret exists.
+
+**No answer was given before the session ended.** Ask, do not assume.
+
+### Do not repeat these mistakes
+
+- **`dig` is not installed in this sandbox.** It exits silently and every lookup looks like "no
+  record". I wrongly reported your DNS as empty because of this. Use
+  `curl -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=X&type=Y'`.
+- **There is no headless browser.** `PlaywrightConsoleCapture` fails, and `playwright`/`puppeteer`
+  are not installed. Do not claim a layout is verified by eye — you cannot see it. Ask for a
+  screenshot, or measure with `fontTools` against the real woff2 in `public/static/fonts/`.
+  I burned time re-deriving a header-overflow number twice and got two different answers.
+- **`/about` does not match `/about/`** in a Workers route. Both must be registered. The old site
+  used the trailing-slash form, so external links depend on it.
+
+### Verification that was actually run (all passing at commit `d89343f`)
+
+```
+npm run build                     → green, dist/_worker.js 220.40 kB (gzip 63.33 kB)
+20-route sweep                    → 0 failures
+all 18 sitemap URLs              → 200
+sitemap.xml                      → valid XML, correct MIME
+robots.txt                       → /api/ and /health disallowed; /book NOT disallowed
+/about/ and /about/#meet-the-team → 200
+```
 
 ---
 
