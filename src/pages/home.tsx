@@ -45,8 +45,8 @@ const PathwayCards: FC = () => (
         <a class="path__card path__card--adults" href="/adults">
           <div class="path__media">
             <Pic
-              name="adults"
-              alt="A clear Invisalign® aligner held by a dental professional"
+              name="adults-laugh"
+              alt="A smiling adult woman in a green coat, laughing outdoors"
               sizes="(max-width: 1000px) 100vw, 50vw"
               widths={[480, 960]}
               w={960}
