@@ -132,7 +132,7 @@ export const HomePage: FC = () => (
         <SectionHead
           eyebrow="Treatment options"
           title="Orthodontic services in Franklin, TN"
-          body="Braces are open to every age group, and the aligner range is named by audience — Invisalign® for adults, Invisalign Teen® for teenagers and Invisalign First® for children. And where the jaw rather than the teeth is the issue, we plan surgical orthodontics with an oral surgeon."
+          body="Braces are available at every age. Our Invisalign® range is matched to each stage of life: Invisalign® for adults, Invisalign Teen® for teenagers and Invisalign First® for children. When the jaw itself needs correcting, Dr. Roark plans surgical orthodontics with your oral and maxillofacial surgeon."
         />
         <div class="grid-3" style="margin-top:3.5rem">
           {[
