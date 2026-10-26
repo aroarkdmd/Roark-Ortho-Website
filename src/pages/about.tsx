@@ -165,7 +165,7 @@ export const AboutPage: FC = () => (
         <SectionHead
           eyebrow="Meet the team"
           title="The people you will meet"
-          body="There is no call center and no rotating cast. The person who plans your treatment is the person who carries it out."
+          body="Get to know the people you will see at every visit."
         />
 
         <div class="people">
