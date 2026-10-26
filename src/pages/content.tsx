@@ -905,7 +905,7 @@ export const InvisalignPage: FC = () => (
             />
             <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.75rem">
               <a class="btn btn--pri" href="/book?from=invisalign_hero" data-book="invisalign_hero">
-                <Icon name="calendar" size={11} /> Book a free exam
+                <Icon name="calendar" size={11} /> Book a complimentary exam
               </a>
               <a class="btn btn--out-ink" href="/braces">
                 Compare with braces
