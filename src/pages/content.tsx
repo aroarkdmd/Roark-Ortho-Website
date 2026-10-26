@@ -462,8 +462,8 @@ const ADULT_FAQ: Faq[] = [
 export const AdultsPage: FC = () => (
   <main id="main">
     <SiloBanner
-      img="invisalign"
-      imgAlt="A clear Invisalign® aligner held up to the light"
+      img="adults-hero"
+      imgAlt="A treatment room at Roark Orthodontics with blue chairs and a view down the row"
       crumbs={[{ name: 'Home', href: '/' }, { name: 'Adults' }]}
       h1="Orthodontics for Adults in Franklin, TN: Braces & Invisalign®"
       sub="Braces, or clear, removable Invisalign® aligners that suit work and everyday life. One fee whichever you choose, and a written price before you commit."

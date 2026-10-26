@@ -227,7 +227,7 @@ app.get('/adults', (c) =>
         canonical: '/adults',
         active: 'adults',
         breadcrumb: [{ name: 'Home', href: '/' }, { name: 'Adults' }],
-        preloadImage: '/static/photos/invisalign',
+        preloadImage: '/static/photos/adults-hero',
       }}
     >
       <AdultsPage />
