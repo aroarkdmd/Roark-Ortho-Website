@@ -965,6 +965,37 @@ export const InvisalignPage: FC = () => (
   </main>
 )
 
+const EXPANDER_FAQ: Faq[] = [
+  {
+    q: 'What is a palatal expander?',
+    a: 'A palatal expander is a custom appliance that gently widens the upper jaw. It works because the two halves of the upper jaw have not yet fused while a child is growing. Widening the arch can resolve a crossbite and create more room for the teeth.',
+  },
+  {
+    q: 'What is the difference between a traditional RPE and an Invisalign® expander?',
+    a: 'A traditional rapid palatal expander (RPE) is fixed and bonded to the upper back teeth. It is turned with a key, typically once a day, depending on the patient. An Invisalign® expander is a removable, aligner-style appliance that is worn as prescribed and taken out for meals and brushing. Both widen the upper jaw. The right one depends on your child\'s bite, how much widening is needed and how the appliance will be used at home.',
+  },
+  {
+    q: 'How long will my child wear an expander?',
+    a: 'Treatment has two parts: a turning phase of a few weeks, then a holding period while new bone fills the gap. The total time depends on the case, and we give an estimate at the complimentary screening.',
+  },
+  {
+    q: 'Does an expander hurt?',
+    a: 'Most children adjust within a few days. Some pressure or tenderness is normal in the first week, and we explain what to expect before treatment starts.',
+  },
+  {
+    q: 'Can my child eat and speak normally with an expander?',
+    a: 'Yes. Speech usually adjusts within a short time. A traditional RPE is fixed, so there is nothing to remember to wear, but we advise avoiding sticky foods that can loosen it.',
+  },
+  {
+    q: 'Is an expander the same as surgery?',
+    a: 'No. An expander is used while growth is still under way, when the jaw can be widened without surgery. After growth finishes, the same widening usually requires surgery, which is why timing matters.',
+  },
+  {
+    q: 'Can an expander be used with braces or Invisalign First®?',
+    a: 'Yes. Expanders are often used alongside Invisalign First® or braces, depending on your child\'s needs.',
+  },
+]
+
 export const ExpanderPage: FC = () => (
   <main id="main">
     <SiloBanner
@@ -1060,6 +1091,14 @@ export const ExpanderPage: FC = () => (
           <div class="reveal">
             <ContactPanel id="expander-contact" location="expander_cost" title="Ask about expanders" lede="A question about your child's bite or timing? Send it here and we will reply by email." />
           </div>
+        </div>
+      </div>
+    </section>
+    <section class="sec sec--paper cv" id="faq">
+      <div class="wrap wrap-narrow">
+        <SectionHead eyebrow="Parents usually ask" title="Palatal expander questions" narrow />
+        <div style="margin-top:2.5rem">
+          <FaqList items={EXPANDER_FAQ} idPrefix="expanderfaq" />
         </div>
       </div>
     </section>
