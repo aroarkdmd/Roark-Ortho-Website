@@ -212,12 +212,16 @@ export const MobileNav: FC<{ active?: string }> = ({ active }) => (
 export const Footer: FC = () => (
   <footer class="ftr" id="area">
     <div class="wrap wrap-wide">
+      <div class="ftr__top">
+        <span class="ftr__logo">
+          <Logo variant="rose" width="15rem" />
+        </span>
+        <p>Board certified orthodontist in historic downtown Franklin, TN.</p>
+      </div>
+
       <div class="ftr__grid">
         <div>
-          <span class="ftr__logo">
-            <Logo variant="rose" width="10rem" />
-          </span>
-          <p>Board certified orthodontist in historic downtown Franklin, TN.</p>
+          <h5>Visit the office</h5>
           <div class="nap">
             <b>{BIZ.name}</b>
             <address>
