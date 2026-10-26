@@ -26,7 +26,7 @@ const SIGNS: [string, string][] = [
   ],
   [
     'Severe joint issues',
-    'Significant problems with the temporomandibular joints, such as a jaw that locks or a joint that is breaking down — not just occasional clicking or aching.',
+    'Significant problems with the jaw joints. Only an examination and imaging can tell whether they are part of the picture.',
   ],
 ]
 
@@ -49,7 +49,7 @@ const SEQUENCE: { icon: string; t: string; b: string }[] = [
   {
     icon: 'check',
     t: '4 · The surgery',
-    b: 'Performed by the oral surgeon in a hospital or accredited facility. Usually one night in hospital, and about two weeks away from your normal routine.',
+    b: 'Performed by your oral and maxillofacial surgeon. Your surgeon explains the procedure and recovery to you directly.',
   },
   {
     icon: 'check',
@@ -97,9 +97,9 @@ export const SurgicalOrthoPage: FC = () => (
           'Dr. Roark plans the orthodontic phases around it and coordinates timing with them.',
         ],
         [
-          'Recovery',
-          'About 2 weeks',
-          'Most patients return to their normal routine within two weeks of surgery.',
+          'Planning',
+          'Together',
+          'Dr. Roark and your surgeon plan the timing of each phase together.',
         ],
       ]}
     />
@@ -126,8 +126,8 @@ export const SurgicalOrthoPage: FC = () => (
               then a finishing phase of orthodontics fine-tunes the bite.
             </p>
             <p>
-              Dr. Roark completed complex surgical cases during her three-year residency at Montefiore Medical
-              Center in New York, and plans and coordinates these cases here in Franklin in conjunction with your
+              Dr. Roark completed her orthodontic residency at Montefiore Medical
+              Center in New York, and plans and coordinates surgical cases here in Franklin in conjunction with your
               oral and maxillofacial surgeon.
             </p>
           </div>

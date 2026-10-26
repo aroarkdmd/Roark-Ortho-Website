@@ -391,7 +391,7 @@ const ARTICLE_BODIES: Record<string, { h: string; p: string[] }[]> = {
       h: 'The sequence, and why the order matters',
       p: [
         'Braces or aligners go on first. That sounds backwards — why straighten teeth that are going to be repositioned anyway? Because the surgeon needs the teeth in a known, aligned position to plan where the jaws must go. The pre-surgical phase usually takes 9 to 15 months.',
-        'The surgery is performed by an oral and maxillofacial surgeon in a hospital or accredited facility. It usually means one night in hospital and about two weeks away from your normal routine.',
+        'The surgery is performed by an oral and maxillofacial surgeon, who explains the procedure and recovery to you directly.',
         'Then a finishing phase of orthodontics — roughly 6 to 12 months — settles the bite and fine-tunes how the teeth fit now the jaws are in their corrected position. Retainers follow, and hold the result for life.',
       ],
     },

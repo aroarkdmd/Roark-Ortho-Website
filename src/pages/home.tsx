@@ -199,7 +199,7 @@ export const HomePage: FC = () => (
               Dr. Roark loves helping patients feel confident about their smiles. Born and raised in Middlesboro,
               Kentucky, she earned her dental degree at the University of Louisville, practiced as a general
               dentist for three years, then completed a three-year orthodontic residency at Montefiore Medical
-              Center in New York City — including complex surgical cases.
+              Center in New York City.
             </p>
             <p>
               She is board certified by the American Board of Orthodontics, and she lives in Brentwood with her

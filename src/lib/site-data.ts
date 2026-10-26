@@ -187,7 +187,7 @@ export const SURG_FAQ: Faq[] = [
   },
   {
     q: 'How long does the whole process take?',
-    a: 'Typically 18 to 30 months in total. The usual sequence is a pre-surgical orthodontic phase of 9 to 15 months to align the teeth, the surgery itself, then a post-surgical phase of roughly 6 to 12 months to finish the bite. Recovery from the surgery usually means about two weeks away from normal routine.',
+    a: 'Typically 18 to 30 months in total. The usual sequence is a pre-surgical orthodontic phase of 9 to 15 months to align the teeth, the surgery itself, then a post-surgical phase of roughly 6 to 12 months to finish the bite.',
   },
   {
     q: 'How does insurance work for surgical orthodontics?',

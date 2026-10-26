@@ -47,7 +47,7 @@ const BioParas: FC<{ paras: string[] }> = ({ paras }) => (
 const DOCTOR_BIO: string[] = [
   'Dr. Roark loves helping patients feel confident about their smiles. Born and raised in Middlesboro, Kentucky, she developed an early interest in helping others, which led her to earn her Bachelor of Science in Psychology from the University of Kentucky. While she loves her Kentucky Wildcats, she chose to pursue her dental degree at the University of Louisville, where her dedication to dentistry grew.',
   'After earning her degree, Dr. Roark practiced as a general dentist for three years. In her first job out of training she worked alongside an orthodontist and fell in love with the specialty. Her years as a general dentist give her a unique view of each case. She has seen these teeth from more than one angle.',
-  'Dr. Roark completed a three-year orthodontic residency at Montefiore Medical Center in New York City, where she gained extensive training in all aspects of orthodontics, including complex surgical cases. She is board certified by the American Board of Orthodontics, and she treats children, teenagers and adults in braces and in the full Invisalign® range.',
+  'Dr. Roark completed a three-year orthodontic residency at Montefiore Medical Center in New York City, where she gained extensive training in all aspects of orthodontics. She is board certified by the American Board of Orthodontics, and she treats children, teenagers and adults in braces and in the full Invisalign® range.',
 ]
 
 const DOCTOR_FAMILY: string[] = [
