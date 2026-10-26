@@ -46,8 +46,8 @@ export const PrivacyPage: FC = () => (
           Privacy policy
         </h1>
         <p class="lead">
-          What this website collects, why we collect it, and how to have it removed. Written to be read, not to be
-          survived.
+          What this website collects, why we collect it, and how to have it removed. Plain language, with each point
+          explained.
         </p>
         <p class="caption" style="margin-top:1.5rem">
           Last updated <time datetime="2026-10-26">October 26, 2026</time> · Applies to roarkortho.com
@@ -129,8 +129,8 @@ export const PrivacyPage: FC = () => (
               accept. You can decline and still use every part of the site.
             </li>
             <li>
-              <b>You can ask us to delete what you sent.</b> One phone call or one email, and it is gone from our
-              lead records.
+              <b>You can ask us to delete what you sent.</b> One phone call or one email, and it is removed from our
+              enquiry records.
             </li>
           </ul>
           <div class="callout">
@@ -314,7 +314,7 @@ export const PrivacyPage: FC = () => (
             We advertise the practice on Google, and we need to know whether those adverts lead to real appointment
             requests — otherwise we would be spending money blindly. To do that, this site loads a Google Tag Manager
             container that reports two kinds of event: <b>that the contact form was submitted</b>, and <b>that an
-            appointment was booked</b>, together with which page it came from and a booking reference.
+            appointment was booked</b>, together with which page it came from. The event also carries a fixed conversion value of one US dollar and the page address and title, and no booking number.
           </p>
           <p>
             <b>Those events carry no patient information.</b> No name, no email, no phone number, no message, no date
