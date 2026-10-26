@@ -171,8 +171,10 @@ export const TreatmentsPage: FC = () => (
               <span class="eb">Children &amp; teens</span>
               <h2 style="color:var(--navy-600)">Braces, Invisalign First® and Invisalign Teen® for kids</h2>
               <p>
-                Early screening from age 7, braces and the stage-matched aligner systems, with both options open at
-                every age.
+                Children and teens often benefit from a first orthodontic check by age 7. We offer braces at every age
+                and Invisalign First® and Invisalign Teen® for growing smiles. Your complimentary exam answers one
+                question clearly: does your child need treatment now, or is it simply a good time to keep an eye on
+                things?
               </p>
               <span class="path__go">
                 See the options <Icon name="arrowRight" size={12} />
