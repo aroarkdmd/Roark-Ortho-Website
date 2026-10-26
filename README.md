@@ -75,15 +75,19 @@ needs no proxy. Nothing is proxied through Cloudflare, and no PHI passes through
 
 ## API
 - `POST /api/contact` — contact panel (`name`, `email`, `phone`, `message`, `source`, `page`)
-- `POST /api/scheduler` — *legacy* new-patient-exam request panel (the old mock scheduler)
-- `POST /api/booking` — *legacy* mock booking flow confirmation
+- `POST /api/scheduler` — **live**, on `/adults` and `/invisalign` (see the bug below)
+- `POST /api/booking` — genuinely unrouted; only `src/pages/book.tsx` called it
 - `GET /api/submissions` — admin read of stored submissions (not linked from the site)
 - `GET /health`
 
-`/api/scheduler` and `/api/booking` belong to the previous mock booking UI. **`/book` no longer
-calls either** — it is served by Wave. `src/pages/book.tsx` is still on disk but is no longer routed.
+**`/api/scheduler` is NOT legacy.** An earlier draft of this file claimed it was unrouted. It is
+not: `SchedulerPanel` (`src/components/blocks.tsx:270`) is rendered on `/adults`
+(`src/pages/content.tsx:577`) and `/invisalign` (`:954`), and `public/static/app.js:413` posts to it.
 
-All three write to D1 table `submissions` (schema auto-created on first write).
+`/api/booking` and `src/pages/book.tsx` **are** dead — `/book` no longer routes to `BookPage`, so
+`booking.js` never runs (it bails at the `.bk-shell` guard) and nothing posts to `/api/booking`.
+
+All of these write to D1 table `submissions` (schema auto-created on first write).
 Validation rules and error copy mirror the design exactly.
 
 **A confirmation is only shown when the row was actually stored.** This is deliberately
@@ -92,9 +96,16 @@ costs one phone call. `POST /api/contact` returns `503 {ok:false,error:'not_stor
 storage failure or a missing binding, and the client renders a visible
 `[data-form-alert]` with the office number instead of the success panel.
 
-> **Known gap:** `POST /api/scheduler` still answers `{ok:true, bookingId, stored:false}` on a
-> storage failure and the client does not yet treat that as an error. Fixing the scheduler panel
-> is deliberately deferred (see Status).
+> **OPEN BUG — `/api/scheduler` loses enquiries (`src/index.tsx:567-580`).** It wraps the insert in
+> `try/catch`, and the `catch` returns `{ok:true, bookingId, stored:false}` — a 200 that claims
+> success. `app.js` ignores `stored`, so the panel shows "Request received" on an enquiry that was
+> never written. This is the exact defect already fixed for `/api/contact`; the fix is to mirror
+> `/api/contact` — throw when `c.env.DB` is missing, return `503 {ok:false,error:'not_stored'}` in
+> the catch, and have `app.js` render `[data-form-alert]` (the element already exists at
+> `blocks.tsx:238`) instead of calling `finish()`.
+>
+> **Decide first:** these two panels may be redundant now that `/book` runs the real Wave book.
+> Either fix `/api/scheduler` or delete `SchedulerPanel` and point that traffic at Wave.
 
 ## Design fidelity notes
 - Tokens, type scale, radii, shadows, motion and breakpoints are the handoff's values.

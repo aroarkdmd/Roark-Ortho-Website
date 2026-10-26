@@ -18,17 +18,27 @@
      2. the patient clicked "Please call me instead".
 
    Case 2 is NOT a booking. Firing a Google Ads conversion for it would inflate
-   the conversion count with appointment requests that never became appointments
-   — the same class of bug as the scheduler that used to claim "booked" on a
-   failed write. Wave distinguishes the two only by the message text, which is
-   brittle, so we additionally watch for an actual slot selection:
+   the conversion count with requests that never became appointments — the same
+   class of bug as the scheduler that used to claim "booked" on a failed write.
 
-     · a click inside .available-time-button / .confirm-button marks a slot as
-       chosen (captured at the container with a capture-phase listener, so it
-       keeps working across Wave's re-renders)
-     · a click on .wave-appointment-scheduler-please-call-me clears it again
+   The library's own logic (see O() in the minified source) is:
 
-   A booking therefore requires BOTH a chosen slot AND a success response.
+     appointment_scheduler.value ? message = generatedAppointmentString()
+     : appointment_call_me.value  && message = CALL_ME_TEXT
+     message && (result.appointmentMessage = message)
+
+   So appointmentMessage is present exactly when an appointment was attached to
+   the submission, and absent when none was. That is the signal we use:
+
+     · no appointmentMessage              → no appointment; "requested"
+     · appointmentMessage === CALL_ME_TEXT → asked to be called; "requested"
+     · any other appointmentMessage        → a real slot; "booked"
+
+   An earlier version tracked clicks on the time buttons instead. That was
+   wrong: clicking a time only SELECTS it, and a submission carrying a
+   selected-but-unconfirmed slot still counted as a booking, inflating the
+   conversion count. Reading Wave's own field cannot drift out of sync with what
+   Wave actually submitted.
    ========================================================================= */
 (function () {
   'use strict';
@@ -52,31 +62,16 @@
       return;
     }
 
-    /* ── slot-selection tracking ───────────────────────────────────────── */
-    var pickedSlot = false;
-    el.addEventListener(
-      'click',
-      function (ev) {
-        var t = ev.target;
-        if (!t || typeof t.closest !== 'function') return;
-        if (t.closest('.wave-appointment-scheduler-please-call-me')) {
-          pickedSlot = false;
-          return;
-        }
-        if (t.closest('.available-time-button, .confirm-button, .selected-time')) {
-          pickedSlot = true;
-        }
-      },
-      true,
-    ); // capture: survives Wave replacing the inner nodes on every re-render
-
     /* ── submission ────────────────────────────────────────────────────── */
     W.onFormSubmission = function (res) {
       if (res && res.error) return; // Wave renders its own field errors
 
-      var isCallMe = res && res.appointmentMessage === CALL_ME_TEXT;
-      var isBooking = pickedSlot && !isCallMe;
-      pickedSlot = false; // one submission, one decision
+      /* Read Wave's own field rather than inferring from clicks. A message that
+         is present but is not the call-me string means a real appointment was
+         attached to this submission; no message at all means none was. */
+      var message = (res && res.appointmentMessage) || '';
+      var isCallMe = message === CALL_ME_TEXT;
+      var isBooking = message !== '' && !isCallMe;
 
       window.dataLayer = window.dataLayer || [];
 
@@ -123,10 +118,28 @@
         var container = scope.querySelector('.available-appointments-container');
         if (!container) return;
 
-        var btn = container.querySelector('.confirm-button');
-        if (!btn) return; // no slot chosen yet, nothing to move
-
         var slot = container.querySelector('.roark-confirm-slot');
+        var selected = container.querySelector('.selected-time');
+
+        /* Wave clears .selected-time when the patient moves to another day (or
+           the server hands back a fresh set of slots for that day), but it does
+           NOT remove the Confirm button — because by then that button lives in
+           OUR wrapper, outside the <tbody> Wave rewrites.
+
+           Left alone, the button survives pointing at the previous day's time
+           ($wave_appointmentConfirmed('09:00:00')) while the calendar has moved
+           on and nothing is selected. The patient could confirm a slot that is
+           not on screen. So: no selection, no button. */
+        if (!selected) {
+          if (slot) {
+            while (slot.firstChild) slot.removeChild(slot.firstChild);
+          }
+          return;
+        }
+
+        var btn = container.querySelector('.confirm-button');
+        if (!btn) return; // selection rendered but no button yet
+
         if (!slot) {
           /* Sibling of the table, so it sits under the whole list. Recreated
              rather than assumed, because Wave may replace the container's
