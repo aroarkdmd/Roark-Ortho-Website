@@ -831,7 +831,9 @@ img { display: block; }
              padding-bottom: var(--sp-7); margin-bottom: var(--sp-7); border-bottom: 1px solid rgba(255,255,255,.25); }
 .ftr__top p { margin: 0; max-width: 42ch; font-size: var(--fs-body); }
 .ftr__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sp-8); align-items: start; }
-.ftr__logo { display: block; }
+.ftr__logo { display: block; width: 17rem; overflow: hidden; flex: none; }
+/* The PNG carries ~24% transparent padding on each side; crop it so the wordmark sits flush left. */
+.ftr__logo .logo-img { width: 25rem !important; max-width: none; margin-left: -4.2rem; margin-top: -2.1rem; margin-bottom: -2.1rem; }
 .ftr h5 { font-family: var(--font-body); font-size: var(--fs-eyebrow); font-weight: var(--fw-semi);
           letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--white);
           margin: 0 0 var(--sp-4); padding-bottom: var(--sp-3); position: relative; }
