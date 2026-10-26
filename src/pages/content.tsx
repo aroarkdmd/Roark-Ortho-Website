@@ -493,10 +493,9 @@ export const AdultsPage: FC = () => (
               around work, photographs, meetings and everything else in an ordinary week.
             </p>
             <p>
-              That is why most of our adult patients choose <b>Invisalign® clear aligners</b>: they are clear,
-              removable, and you eat and drink normally. Plenty choose braces instead, and that is a perfectly
-              reasonable decision. Braces work well for adults, and clear (ceramic)
-              brackets are much less visible than metal.
+              Many of our adult patients choose <b>Invisalign® clear aligners</b> because they are clear, removable,
+              and let you eat and drink normally. Plenty choose braces, and that is a perfectly reasonable decision.
+              Clear (ceramic) brackets are much less visible than metal.
             </p>
             <p>
               A small number of adult cases are different: where the jaw itself is the problem, moving teeth alone
