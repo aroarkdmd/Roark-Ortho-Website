@@ -282,7 +282,7 @@ export const KidsPage: FC = () => (
         />
         <div class="grid-3" style="margin-top:3rem">
           {[
-            ['Early or late loss of baby teeth', 'Losing the first tooth before 4, or still having baby teeth at 13, is worth a look.'],
+            ['Early or late loss of baby teeth', 'Baby teeth lost much earlier or later than the children around them is worth a look.'],
             ['Crowding or overlapping teeth', 'Adult teeth arriving behind, above or in front of the baby teeth.'],
             ['A bite that does not meet', 'Front teeth that do not touch when the back teeth are closed, or a lower jaw that sits to one side.'],
             ['Mouth breathing or snoring', 'Persistent mouth breathing can be related to a narrow upper arch.'],
@@ -1067,7 +1067,7 @@ export const ExpanderPage: FC = () => (
             head={['', 'Traditional RPE', 'Invisalign® expander']}
             rows={[
               ['Appliance', 'Fixed, bonded to the upper back teeth', 'Removable, aligner-style appliance'],
-              ['At home', 'Turned with a key, typically once a day, depending on the patient', 'Worn as prescribed, and removed for meals and brushing'],
+              ['At home', 'Turned with a key, typically once a day, depending on the patient', 'Worn full time, including meals, and removed only to brush and floss, as the doctor prescribes'],
             ]}
             minWidth="36rem"
           />
@@ -1270,7 +1270,7 @@ export const AreasPage: FC = () => (
         </h1>
         <p class="lead" style="max-width:54rem">
           The office is on East Main Street in historic downtown Franklin, with free parking in front of the
-          building and in the 2nd Street garage across the street. Most of our patients are within about fifteen
+          building and in the 2nd Street garage across the street. Most of our patients are within about twenty
           minutes.
         </p>
       </div>

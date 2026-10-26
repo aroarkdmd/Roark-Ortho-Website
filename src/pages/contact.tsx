@@ -107,7 +107,7 @@ export const ContactPage: FC = () => (
             </div>
             <p style="margin-bottom:2rem">
               Downtown Franklin is an easy drive from Cool Springs, Westhaven, Berry Farms, Brentwood, Nolensville,
-              Thompson&rsquo;s Station and Spring Hill — most of our patients are within about fifteen minutes.
+              Thompson&rsquo;s Station and Spring Hill — most of our patients are within about twenty minutes.
             </p>
             <div style="display:flex;gap:.75rem;flex-wrap:wrap">
               <a class="btn btn--pri" href={BIZ.gbp} target="_blank" rel="noopener">
