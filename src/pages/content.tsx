@@ -867,7 +867,7 @@ export const InvisalignPage: FC = () => (
       imgAlt="A clear Invisalign® aligner held up to the light"
       crumbs={[{ name: 'Home', href: '/' }, { name: 'Treatments', href: '/treatments' }, { name: 'Invisalign®' }]}
       h1="Invisalign® Clear Aligners in Franklin, TN"
-      sub="Clear, removable, and the more aesthetic option at work or in photographs. Three systems, one for each stage of growth — and the adult one is Invisalign®."
+      sub="Clear, removable aligners for every age, at work, at school or in photographs. Three systems, one for each stage of growth, and the adult one is Invisalign®."
       eager
     />
     <FactStrip
@@ -883,7 +883,7 @@ export const InvisalignPage: FC = () => (
           <div class="reveal">
             <span class="eb">Clear aligners</span>
             <h2 class="h-section" style="font-size:var(--fs-h3);margin-bottom:1.25rem">
-              Named by audience, not interchangeable
+              Three Invisalign systems, one for each age group
             </h2>
             <p>
               The aligner range is built in three systems and the names matter: <b>Invisalign®</b> is the adult
@@ -891,8 +891,8 @@ export const InvisalignPage: FC = () => (
               age group decides which one applies.
             </p>
             <p>
-              Aligners are clear, removable, and you eat and drink normally. They are the more aesthetic option at
-              work, at school or in photographs — and they are still visible, particularly up close. What they ask
+              Aligners are clear, removable, and you eat and drink normally. They are discreet at work, at
+              school and in photographs, though they are still visible up close. What they ask
               in return is wear time: around 20 to 22 hours a day, changed every 7 days.
             </p>
             <Ticks
@@ -926,7 +926,7 @@ export const InvisalignPage: FC = () => (
         <CompareTable
           head={['System', 'For', 'Typical length', 'Notes']}
           rows={[
-            ['Invisalign®', 'Adults', '6–18 months', 'The adult system. Clear and removable; more aesthetic at work.'],
+            ['Invisalign®', 'Adults', '6–18 months', 'The adult system. Clear and removable, and discreet at work.'],
             ['Invisalign Teen®', 'Teenagers', '6–18 months', 'Compliance indicators so wear is visible at each visit.'],
             ['Invisalign First®', 'Children (7–10)', '6–12 months', 'Designed for growing mouths with baby teeth present.'],
           ]}
