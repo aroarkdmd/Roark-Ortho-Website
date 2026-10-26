@@ -52,7 +52,7 @@ const DOCTOR_BIO: string[] = [
 
 const DOCTOR_FAMILY: string[] = [
   'She and her husband, Brian George, live in Brentwood with their two daughters, Margot and Sloane. When she is not crafting smiles she is outside with her family, traveling somewhere new, or stealing the mic for karaoke — even though she is the first to admit she cannot carry a tune.',
-  'Dr. Roark is proud to serve the Franklin community and looks forward to helping your family achieve their healthiest, happiest smiles.',
+  'Dr. Roark is proud to serve the Franklin community and looks forward to helping your family reach their healthiest smiles.',
 ]
 
 /* Nicole and Kelsey. `short` is the one-line reason you are glad they are the
@@ -87,7 +87,7 @@ const TEAM: Person[] = [
       'Nicole grew up right here in Franklin. She attended the University of Alabama, where she obtained a Bachelor of Arts in Communication and Information Sciences.',
       'After graduating, Nicole moved back home to Franklin and began working in dermatology and then plastic surgery, managing the front office and social media. She then began work at an orthodontic office, and her love for all things teeth flourished.',
       'She now lives in Franklin with her husband, Benton Zielinski, and their four cats and dog.',
-      'In her spare time, Nicole loves to cook, entertain and spend time with family and friends. She enjoys helping patients in their smile journey to find their most confident selves.',
+      'In her spare time, Nicole loves to cook, entertain and spend time with family and friends. She loves helping each patient feel confident and comfortable.',
     ],
   },
   {
@@ -104,7 +104,7 @@ const TEAM: Person[] = [
     bio: [
       'Kelsey is the first face you will see when you step into the office. Originally from Michigan, she moved to Murfreesboro after graduating from Hope College. She has been working in administration and marketing ever since.',
       'Kelsey shares her home with her husband, their dog, and a three-legged cat.',
-      'Outside of the office you can find her lost in a good book, crocheting, and being the coolest aunt to her five nieces and nephews. Kelsey is dedicated to ensuring that your journey to a new smile is as smooth, seamless and stress-free as possible.',
+      'Outside of the office you can find her lost in a good book, crocheting, and being the coolest aunt to her five nieces and nephews. Kelsey makes sure your start with us is easy and stress-free.',
     ],
   },
 ]

@@ -95,7 +95,7 @@ export const HomePage: FC = () => (
         <div class="hero__in">
           <span class="eb eb--light">Downtown Franklin, Tennessee</span>
           <h1 id="home-h1">
-            Braces and Invisalign for <em>every smile</em> in Franklin, TN.
+            Board-certified orthodontic care for children, teens and adults in Franklin, TN.
           </h1>
           <p>
             Board certified orthodontics on Main Street, for children, teens and adults. Every exam includes
@@ -191,10 +191,10 @@ export const HomePage: FC = () => (
           <div class="reveal">
             <span class="eb">Meet your orthodontist</span>
             <h2 class="h-section" style="margin-bottom:1.25rem">
-              Dr. Ashley Roark
+              Dr. Ashley Roark, DMD, Board-Certified Orthodontist
             </h2>
             <p>
-              Dr. Roark is passionate about creating beautiful, confident smiles. Born and raised in Middlesboro,
+              Dr. Roark loves helping patients feel confident about their smiles. Born and raised in Middlesboro,
               Kentucky, she earned her dental degree at the University of Louisville, practiced as a general
               dentist for three years, then completed a three-year orthodontic residency at Montefiore Medical
               Center in New York City — including complex surgical cases.
@@ -202,7 +202,7 @@ export const HomePage: FC = () => (
             <p>
               She is board certified by the American Board of Orthodontics, and she lives in Brentwood with her
               husband, Dr. Brian George, and their two daughters. She is proud to serve the Franklin community and
-              looks forward to helping your family smile.
+              We look forward to caring for your family.
             </p>
             <div class="creds creds--founder">
               <div class="cred">
@@ -239,7 +239,7 @@ export const HomePage: FC = () => (
       <div class="wrap wrap-wide">
         <SectionHead
           eyebrow="Our office"
-          title="Step into the world of beautiful smiles"
+          title="A calm, modern office on East Main Street"
           body="Our modern facility is designed to give you a comfortable, positive experience — from the welcoming reception area to our treatment rooms."
         />
         <div class="mas" style="margin-top:3rem">
@@ -284,7 +284,7 @@ export const HomePage: FC = () => (
         <SectionHead
           eyebrow="New patients"
           title="Your first visit — what actually happens"
-          body="No pressure, no goopy impressions, and no decision required on the day."
+          body="No pressure, no messy impression trays, and no decision required on the day."
         />
         <div class="grid-3" style="margin-top:3rem">
           {[
@@ -296,7 +296,7 @@ export const HomePage: FC = () => (
             {
               icon: 'star',
               title: '2 · A friendly first exam',
-              body: 'Dr. Roark takes photos and a digital iTero scan — no goopy impressions — and talks through what she sees in plain language. This visit is complimentary, and there is no obligation to treat.',
+              body: 'Dr. Roark takes photos and a digital iTero scan — no messy impression trays — and talks through what she sees in plain language. This visit is complimentary, and there is no obligation to treat.',
             },
             {
               icon: 'check',
@@ -414,7 +414,7 @@ export const HomePage: FC = () => (
       <div class="wrap wrap-wide">
         <SectionHead
           eyebrow="Smile Journal"
-          title="Straight talk about orthodontics"
+          title="Orthodontic advice for Franklin families"
           body="What treatment really costs, when to bring your child in, and how we choose between aligners and braces."
         />
         <div class="posts" style="margin-top:3rem">
@@ -458,7 +458,7 @@ export const HomePage: FC = () => (
           Ready to start your smile journey?
         </h2>
         <p class="lead" style="margin-bottom:2rem">
-          Schedule your free exam today — we would love to meet your family.
+          Schedule your complimentary exam and we will walk you through your options.
         </p>
         <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
           <a class="btn btn--white" href="/book?from=home_footer_cta" data-book="home_footer_cta">

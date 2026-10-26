@@ -345,7 +345,7 @@ export const KidsPage: FC = () => (
             <Ticks
               items={[
                 'Complimentary — no charge for the screening itself',
-                'Photographs and a digital iTero scan, no goopy impression trays',
+                'Photographs and a digital iTero scan, no messy impression trays',
                 'A clear answer: nothing needed yet, watch and re-check, or treat now',
                 'A written fee and what your dental plan contributes, before you decide',
                 'Dr. Roark sees every patient herself, at every visit',
@@ -1297,7 +1297,7 @@ export const BlogPage: FC = () => (
         </nav>
         <span class="eb">Smile Journal</span>
         <h1 class="h-section" style="max-width:44rem;margin-bottom:1rem">
-          Straight talk about orthodontics
+          Orthodontic advice for Franklin families
         </h1>
         <p class="lead" style="max-width:52rem">
           What treatment really costs, when to bring your child in, and how we choose between aligners and braces.

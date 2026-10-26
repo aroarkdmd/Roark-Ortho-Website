@@ -366,7 +366,7 @@ app.get('/blog', (c) =>
       seo={{
         title: 'Smile Journal | Orthodontic Advice from Franklin, TN',
         description:
-          'Straight talk about orthodontics from Roark Orthodontics in downtown Franklin, TN: what treatment costs, when to bring your child in, and aligners versus braces.',
+          'Orthodontic advice for Franklin families from Roark Orthodontics in downtown Franklin, TN: what treatment costs, when to bring your child in, and aligners versus braces.',
         canonical: '/blog',
         active: 'blog',
         breadcrumb: [{ name: 'Home', href: '/' }, { name: 'Smile Journal' }],
