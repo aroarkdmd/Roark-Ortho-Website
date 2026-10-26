@@ -399,7 +399,7 @@ npx wrangler pages secret put MAIL_FROM     --project-name roark-orthodontics
 breaks DMARC alignment. Replies still reach a human because the form sets reply-to to the patient.
 
 Recipients come from `CONTACT_INBOXES` in `src/lib/site-data.ts`, overridable at runtime with a
-`CONTACT_INBOXES` env var (comma separated). `BIZ.email` (`hello@roarkortho.com`) is the address
+`CONTACT_INBOXES` env var (comma separated). `BIZ.email` (`admin@roarkortho.com`) is the address
 *printed on the site* — deliberately a separate value from where enquiries are delivered.
 
 DNS facts established 2026-10-26 (re-verify if in doubt — `dig` is NOT installed in the sandbox;

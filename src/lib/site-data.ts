@@ -16,7 +16,7 @@ export const BIZ = {
   phoneDisplay: '(615) 814-4884',
   phoneHref: 'tel:+16158144884',
   phoneE164: '+1-615-814-4884',
-  email: 'hello@roarkortho.com',
+  email: 'admin@roarkortho.com',
   url: 'https://roarkortho.com/',
   lat: 35.9248,
   lng: -86.8714,
@@ -212,7 +212,7 @@ export const HOME_FAQ: Faq[] = [
 export const CONTACT_FAQ: Faq[] = [
   {
     q: 'How do I contact Roark Orthodontics?',
-    a: 'Call or text (615) 814-4884, email hello@roarkortho.com, or use the form on this page. We are at 212 E Main St, Ste 100, Franklin, TN 37064 — on the north side of East Main Street in historic downtown Franklin. The fastest way to get a time booked is the online scheduler.',
+    a: 'Call or text (615) 814-4884, email admin@roarkortho.com, or use the form on this page. We are at 212 E Main St, Ste 100, Franklin, TN 37064 — on the north side of East Main Street in historic downtown Franklin. The fastest way to get a time booked is the online scheduler.',
   },
   {
     q: 'Where do I park, and how do I find the entrance?',

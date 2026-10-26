@@ -118,7 +118,7 @@ app.get('/contact', (c) =>
       seo={{
         title: 'Contact Roark Orthodontics | Downtown Franklin, TN',
         description:
-          'Contact Roark Orthodontics at 212 E Main St, Ste 100, downtown Franklin, TN. Call (615) 814-4884, email hello@roarkortho.com, or send us a message. Open Monday to Wednesday.',
+          'Contact Roark Orthodontics at 212 E Main St, Ste 100, downtown Franklin, TN. Call (615) 814-4884, email admin@roarkortho.com, or send us a message. Open Monday to Wednesday.',
         canonical: '/contact',
         active: 'contact',
         faq: CONTACT_FAQ,
