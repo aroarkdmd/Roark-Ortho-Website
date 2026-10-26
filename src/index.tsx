@@ -383,7 +383,7 @@ const ARTICLE_BODIES: Record<string, { h: string; p: string[] }[]> = {
       h: 'Two things move, and only one of them is the teeth',
       p: [
         'Orthodontics moves teeth through bone. It is very good at that. What it cannot do is change the size or position of the jaw itself — and in some patients the jaw is precisely the problem.',
-        'When the lower jaw sits noticeably too far forward or too far back, when the upper jaw is underdeveloped, or when the bite is open at the front, straightening the teeth alone will not hold. The teeth end up in a correct relationship with each other but a poor one with the jaws, and the bite relapses.',
+        'When the lower jaw sits noticeably too far forward or too far back, when the upper jaw is underdeveloped, or when the bite is open at the front, straightening the teeth alone may not give a stable result, because the jaw relationship is the underlying issue. The teeth can end up in a correct relationship with each other but a poor one with the jaws.',
         'That is the case for surgical orthodontics — also called orthognathic treatment — where the orthodontic work and corrective jaw surgery are planned together as one course rather than two separate opinions.',
       ],
     },
@@ -398,7 +398,7 @@ const ARTICLE_BODIES: Record<string, { h: string; p: string[] }[]> = {
     {
       h: 'Who it is actually for',
       p: [
-        'The signs are functional more than aesthetic: an underbite, a significant overbite with a receding chin, an open bite where the front teeth do not meet, a chin that shifts to one side on closing, persistent difficulty chewing or biting through food, or severe jaw joint problems.',
+        'The signs are functional more than aesthetic: an underbite, a significant overbite with a receding chin, an open bite where the front teeth do not meet, a chin that shifts to one side on closing, persistent difficulty chewing or biting through food, or severe joint issues.',
         'Most adult orthodontic cases need no surgery at all. If you recognize a couple of these signs it is worth a consultation — and if surgery is not indicated, we will say so plainly and treat you with braces or aligners alone.',
       ],
     },
@@ -429,9 +429,9 @@ const ARTICLE_BODIES: Record<string, { h: string; p: string[] }[]> = {
   ],
   'invisalign-first-kids': [
     {
-      h: 'Yes — children can have aligners',
+      h: 'Children can wear clear aligners too',
       p: [
-        'Parents are usually surprised to hear it, but there is an aligner system designed specifically for children. Invisalign First® is not an adult tray scaled down: the aligners are shaped to fit a smaller mouth with baby teeth still present, and they can work around teeth that have not fully erupted.',
+        'Many parents do not realize there is an aligner system designed specifically for children. Invisalign First® is not an adult tray scaled down: the aligners are shaped to fit a smaller mouth with baby teeth still present, and they can work around teeth that have not fully erupted.',
         'It is designed for roughly age 7 to 10, while the adult teeth are arriving and the jaw is still growing.',
       ],
     },

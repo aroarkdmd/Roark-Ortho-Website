@@ -267,7 +267,7 @@ export const POSTS: Post[] = [
   {
     slug: 'surgical-orthodontics',
     href: '/blog/surgical-orthodontics',
-    title: 'Surgical Orthodontics: When Braces Alone Are Not Enough',
+    title: 'Surgical Orthodontics in Franklin, TN: Braces Combined with Jaw Surgery',
     ex: 'Some jaw discrepancies cannot be fixed by orthodontics alone. How combined orthodontic and oral-surgery treatment works, who it is for, and what the timeline looks like.',
     date: '2026-09-05',
     dateText: 'September 5, 2026',
@@ -293,8 +293,8 @@ export const POSTS: Post[] = [
   {
     slug: 'invisalign-first-kids',
     href: '/blog/invisalign-first-kids',
-    title: 'Invisalign First® for Kids: Aligners Before Braces',
-    ex: 'Yes — children can have aligners. What Invisalign First® corrects, the age that works best, and how it differs from aligners for adults.',
+    title: 'Invisalign First® for Kids in Franklin, TN: Clear Aligners for Growing Mouths',
+    ex: 'Children can wear clear aligners too. What Invisalign First® corrects, the age that works best, and how it differs from aligners for adults.',
     date: '2026-09-18',
     dateText: 'September 18, 2026',
     tag: 'Kids & Aligners',
