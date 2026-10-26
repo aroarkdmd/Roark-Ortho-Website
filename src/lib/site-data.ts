@@ -137,7 +137,7 @@ export const TREATMENTS: Treatment[] = [
     name: 'Braces',
     audience: 'Children, teens & adults',
     href: '/braces',
-    img: 'braces',
+    img: 'braces-girl',
     blurb:
       'Traditional metal braces and tooth-colored clear (ceramic) braces. A proven, reliable option — and a perfectly reasonable choice at any age.',
   },
