@@ -1389,7 +1389,7 @@ slotmark { display: none; }
   .sticky__call { width: 3rem; }
 }
 @media (max-width: 420px) {
-  .logo-link .logo-img { width: 8.5rem !important; }
+  .logo-link .logo-img { width: 10.5rem !important; }
   .lphdr__hrs { display: none; }
 }
 

@@ -29,10 +29,10 @@ export const Logo: FC<{ variant?: 'paper' | 'reverse' | 'rose'; width?: string; 
 
 /* The design's logo swap is two stacked images cross-fading as the header goes
    solid. In JSX we render both and let the .hdr--solid rules do the work. */
-const SwapLogo: FC<{ solid?: boolean; width?: string }> = ({ solid, width = '11rem' }) => (
+const SwapLogo: FC<{ solid?: boolean; width?: string }> = ({ solid, width = '13.5rem' }) => (
   <a class="logo-link" href="/" aria-label="Roark Orthodontics — home">
-    <Logo variant="reverse" width={solid ? '9.5rem' : width} alt="" />
-    <Logo variant="paper" width={solid ? '9.5rem' : width} alt="Roark Orthodontics" />
+    <Logo variant="reverse" width={solid ? '11rem' : width} alt="" />
+    <Logo variant="paper" width={solid ? '11rem' : width} alt="Roark Orthodontics" />
   </a>
 )
 
