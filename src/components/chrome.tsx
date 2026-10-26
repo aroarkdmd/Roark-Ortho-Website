@@ -41,6 +41,7 @@ const SwapLogo: FC<{ solid?: boolean; width?: string }> = ({ solid, width = '11r
    404. Mirrors site/photo-manifest.jsx from the handoff.                   */
 export const PHOTO_WIDTHS: Record<string, number[]> = {
   braces: [480, 960],
+  family: [480, 960],
   'first-visit': [480, 960, 1440, 1600],
   'gallery-1-storefront': [480, 960],
   'gallery-3': [480, 960],

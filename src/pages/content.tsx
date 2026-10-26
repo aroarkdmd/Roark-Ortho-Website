@@ -164,7 +164,7 @@ export const TreatmentsPage: FC = () => (
         <div class="path" style="margin-top:3rem">
           <a class="path__card path__card--kids" href="/kids-braces">
             <div class="path__media">
-              <Pic name="gallery-6" alt="A young patient at Roark Orthodontics" sizes="(max-width: 1000px) 100vw, 50vw" widths={[480, 960]} w={960} h={640} />
+              <Pic name="family" alt="A mother and her daughter smiling together" sizes="(max-width: 1000px) 100vw, 50vw" widths={[480, 960]} w={960} h={640} />
               <span class="path__tag">For parents</span>
             </div>
             <div class="path__body">
@@ -257,8 +257,8 @@ const KIDS_FAQ: Faq[] = [
 export const KidsPage: FC = () => (
   <main id="main">
     <SiloBanner
-      img="gallery-6"
-      imgAlt="A young patient smiling at Roark Orthodontics in Franklin, Tennessee"
+      img="family"
+      imgAlt="A mother and her daughter smiling together"
       crumbs={[{ name: 'Home', href: '/' }, { name: 'Kids & Teens' }]}
       h1="Braces & Invisalign First® for Kids in Franklin, TN"
       sub="Early screening from age 7, braces for every age, and the stage-matched aligner systems. A complimentary exam tells you whether anything is needed yet — and often the answer is no."
@@ -609,8 +609,8 @@ export const AdultsPage: FC = () => (
 export const InvisalignFirstPage: FC = () => (
   <main id="main">
     <SiloBanner
-      img="gallery-6"
-      imgAlt="A young patient smiling at Roark Orthodontics in Franklin, Tennessee"
+      img="family"
+      imgAlt="A mother and her daughter smiling together"
       crumbs={[{ name: 'Home', href: '/' }, { name: 'Treatments', href: '/treatments' }, { name: 'Invisalign First®' }]}
       h1="Invisalign First® for Kids in Franklin, TN"
       sub="Clear aligners made specifically for growing mouths — an alternative to early braces for many children."
@@ -663,7 +663,7 @@ export const InvisalignFirstPage: FC = () => (
           </div>
           <div class="split__media reveal">
             <div class="frame-rose">
-              <Pic name="gallery-6" alt="A child patient at Roark Orthodontics" sizes="(max-width: 1000px) 100vw, 50vw" widths={[480, 960]} w={960} h={640} />
+              <Pic name="family" alt="A mother and her daughter smiling together" sizes="(max-width: 1000px) 100vw, 50vw" widths={[480, 960]} w={960} h={640} />
             </div>
           </div>
         </div>
@@ -1024,7 +1024,7 @@ export const ExpanderPage: FC = () => (
           </div>
           <div class="split__media reveal">
             <div class="frame-rose">
-              <Pic name="gallery-6" alt="A child patient at Roark Orthodontics" sizes="(max-width: 1000px) 100vw, 50vw" widths={[480, 960]} w={960} h={640} />
+              <Pic name="family" alt="A mother and her daughter smiling together" sizes="(max-width: 1000px) 100vw, 50vw" widths={[480, 960]} w={960} h={640} />
             </div>
           </div>
         </div>

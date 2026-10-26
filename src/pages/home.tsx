@@ -11,8 +11,8 @@ const PathwayCards: FC = () => (
         <a class="path__card path__card--kids" href="/kids-braces">
           <div class="path__media">
             <Pic
-              name="gallery-6"
-              alt="A young patient at Roark Orthodontics"
+              name="family"
+              alt="A mother and her daughter smiling together"
               sizes="(max-width: 1000px) 100vw, 50vw"
               widths={[480, 960]}
               w={960}
@@ -263,7 +263,7 @@ export const HomePage: FC = () => (
             <Pic name="treatment-header" alt="Inside the practice" sizes="(max-width: 1000px) 50vw, 33vw" widths={[960]} w={960} h={720} />
           </figure>
           <figure>
-            <Pic name="gallery-6" alt="A young patient at Roark Orthodontics" sizes="(max-width: 1000px) 50vw, 33vw" widths={[480, 960]} w={960} h={720} />
+            <Pic name="family" alt="A mother and her daughter smiling together" sizes="(max-width: 1000px) 50vw, 33vw" widths={[480, 960]} w={960} h={640} />
           </figure>
         </div>
       </div>

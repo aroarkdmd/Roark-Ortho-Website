@@ -136,8 +136,8 @@ export const AboutPage: FC = () => (
           <div class="split__media reveal">
             <div class="frame-rose">
               <Pic
-                name="gallery-6"
-                alt="A treatment bay at Roark Orthodontics in downtown Franklin"
+                name="family"
+                alt="A mother and her daughter smiling together"
                 sizes="(max-width: 1000px) 100vw, 50vw"
                 widths={[480, 960]}
                 w={960}

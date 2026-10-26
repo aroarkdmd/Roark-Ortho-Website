@@ -208,7 +208,7 @@ app.get('/kids-braces', (c) =>
         canonical: '/kids-braces',
         active: 'kids',
         breadcrumb: [{ name: 'Home', href: '/' }, { name: 'Kids & Teens' }],
-        preloadImage: '/static/photos/gallery-6',
+        preloadImage: '/static/photos/family',
       }}
     >
       <KidsPage />
@@ -251,7 +251,7 @@ app.get('/invisalign-first', (c) =>
           { name: 'Treatments', href: '/treatments' },
           { name: 'Invisalign First®' },
         ],
-        preloadImage: '/static/photos/gallery-6',
+        preloadImage: '/static/photos/family',
       }}
     >
       <InvisalignFirstPage />

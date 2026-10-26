@@ -146,7 +146,7 @@ export const TREATMENTS: Treatment[] = [
     name: 'Invisalign Teen®',
     audience: 'Teens',
     href: '/kids-braces#options',
-    img: 'gallery-6',
+    img: 'family',
     blurb:
       'The aligner system built for teenage mouths and teenage life — clear and more aesthetic in photos, removable for sport and band, and with compliance built into the trays so we can see wear at each visit.',
   },
@@ -155,7 +155,7 @@ export const TREATMENTS: Treatment[] = [
     name: 'Invisalign First®',
     audience: 'Children',
     href: '/invisalign-first',
-    img: 'gallery-6',
+    img: 'family',
     blurb:
       'Clear aligners designed specifically for growing mouths. Corrects crowding and spacing early (and narrow arches alongside an expander), and because it guides growth while the adult teeth are still arriving it can make a later phase simpler or unnecessary.',
   },
@@ -317,9 +317,9 @@ export const POSTS: Post[] = [
     dateText: 'September 18, 2026',
     tag: 'Kids & Aligners',
     mins: 7,
-    img: '/static/photos/gallery-6-960.webp',
-    imgSm: '/static/photos/gallery-6-480.webp',
-    alt: 'A young patient smiling in the treatment chair at Roark Orthodontics',
+    img: '/static/photos/family-960.webp',
+    imgSm: '/static/photos/family-480.webp',
+    alt: 'A mother and her daughter smiling together',
   },
 ].sort((a, b) => (a.date < b.date ? 1 : -1)) as Post[]
 
