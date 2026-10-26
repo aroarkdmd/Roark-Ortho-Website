@@ -253,7 +253,7 @@ export const ContactPanel: FC<{
             <p class="form__book">
               Would you rather pick a time?{' '}
               <a href={bookHref} data-book={bookFrom}>
-                {bookLabel || 'Book the free exam online'} <Icon name="arrowRight" size={9} />
+                {bookLabel || 'Book the complimentary exam online'} <Icon name="arrowRight" size={9} />
               </a>
             </p>
           )}

@@ -198,7 +198,7 @@ export const SURG_FAQ: Faq[] = [
 export const HOME_FAQ: Faq[] = [
   {
     q: 'How much do braces cost in Franklin, TN?',
-    a: 'Most treatment at our office falls between $3,400 and $6,250 — and that range is the same for metal braces, clear braces and clear aligners, because we price by how complex the bite is rather than by the appliance. That figure includes everything — records, the iTero scan, all your adjustments, your first set of retainers and post-treatment check-ins. Your exact fee is quoted in writing at the free initial exam, before you commit to anything.',
+    a: 'Most treatment at our office falls between $3,400 and $6,250 — and that range is the same for metal braces, clear braces and clear aligners, because we price by how complex the bite is rather than by the appliance. That figure includes everything — records, the iTero scan, all your adjustments, your first set of retainers and post-treatment check-ins. Your exact fee is quoted in writing at the complimentary initial exam, before you commit to anything.',
   },
   {
     q: 'At what age should my child first see an orthodontist?',

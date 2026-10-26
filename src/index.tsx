@@ -67,7 +67,7 @@ app.get('/', (c) =>
       seo={{
         title: 'Roark Orthodontics | Braces & Invisalign in Franklin, TN',
         description:
-          'Board certified orthodontist in downtown Franklin, TN. Braces for kids and teens, Invisalign® for adults and teens, Invisalign First® for children. Free exam, written prices, 0% plans with a down payment at the start.',
+          'Board certified orthodontist in downtown Franklin, TN. Braces for kids and teens, Invisalign® for adults and teens, Invisalign First® for children. 0000exam, written prices, 0% plans with a down payment at the start.',
         canonical: '/',
         active: 'home',
         faq: HOME_FAQ,
@@ -88,7 +88,7 @@ app.get('/surgical-orthodontics', (c) =>
       seo={{
         title: 'Surgical Orthodontics in Franklin, TN | Braces with Jaw Surgery',
         description:
-          'Combined orthodontic and jaw surgery treatment in downtown Franklin, TN, planned with your oral and maxillofacial surgeon. Board certified orthodontist. Free consultation.',
+          'Combined orthodontic and jaw surgery treatment in downtown Franklin, TN, planned with your oral and maxillofacial surgeon. Board certified orthodontist. 0000consultation.',
         canonical: '/surgical-orthodontics',
         active: 'treatments',
         faq: SURG_FAQ,
@@ -186,7 +186,7 @@ app.get('/treatments', (c) =>
       seo={{
         title: 'Orthodontic Treatments in Franklin, TN | Braces, Invisalign® & More',
         description:
-          'Braces, Invisalign® clear aligners, Invisalign Teen® and Invisalign First® for children, palatal expanders and surgical orthodontics in downtown Franklin, TN. Board certified orthodontist. Free initial exam.',
+          'Braces, Invisalign® clear aligners, Invisalign Teen® and Invisalign First® for children, palatal expanders and surgical orthodontics in downtown Franklin, TN. Board certified orthodontist. Complimentary initial exam.',
         canonical: '/treatments',
         active: 'treatments',
         breadcrumb: [{ name: 'Home', href: '/' }, { name: 'Treatments' }],
@@ -242,7 +242,7 @@ app.get('/invisalign-first', (c) =>
       seo={{
         title: 'Invisalign First® for Kids in Franklin, TN | Children’s Clear Aligners',
         description:
-          "Invisalign First® clear aligners for children in downtown Franklin, TN. Designed for growing mouths. Free screening with a board certified orthodontist.",
+          "Invisalign First® clear aligners for children in downtown Franklin, TN. Designed for growing mouths. 0000screening with a board certified orthodontist.",
         canonical: '/invisalign-first',
         active: 'treatments',
         faq: FIRST_FAQ,

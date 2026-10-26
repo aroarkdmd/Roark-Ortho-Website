@@ -7,7 +7,7 @@ import { SectionHead, FaqList, SiloBanner, FactStrip, Callout, ContactPanel, Cre
 const CLOSING_CTA: FC<{ from: string; title?: string; body?: string }> = ({
   from,
   title = 'Not sure which treatment you need?',
-  body = 'The free exam includes a digital scan and a clear recommendation — including, sometimes, that nothing is needed yet.',
+  body = 'The 0000exam includes a digital scan and a clear recommendation — including, sometimes, that nothing is needed yet.',
 }) => (
   <section class="sec sec--rose on-rose">
     <div class="wrap wrap-narrow center">
@@ -17,7 +17,7 @@ const CLOSING_CTA: FC<{ from: string; title?: string; body?: string }> = ({
       <p style="margin-bottom:2rem">{body}</p>
       <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
         <a class="btn btn--white" href={'/book?from=' + from} data-book={from}>
-          <Icon name="calendar" size={12} /> Book a free consultation
+          <Icon name="calendar" size={12} /> Book a complimentary consultation
         </a>
         <a class="btn btn--out" href={BIZ.phoneHref} data-phone={from}>
           <Icon name="phone" size={11} /> {BIZ.phoneDisplay}
@@ -92,12 +92,12 @@ export const TreatmentsPage: FC = () => (
           system matched to the stage of growth.
         </p>
         <p style="max-width:54rem">
-          Which one you need is a clinical decision, not a preference. The free exam gives you a scan, a clear
+          Which one you need is a clinical decision, not a preference. The 0000exam gives you a scan, a clear
           recommendation and a written price.
         </p>
         <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:2rem">
           <a class="btn btn--pri" href="/book?from=treatments_hero" data-book="treatments_hero">
-            <Icon name="calendar" size={11} /> Book a free exam
+            <Icon name="calendar" size={11} /> Book a complimentary exam
           </a>
           <a class="btn btn--out-ink" href={BIZ.phoneHref} data-phone="treatments_hero">
             <Icon name="phone" size={11} /> {BIZ.phoneDisplay}
@@ -246,11 +246,11 @@ const KIDS_FAQ: Faq[] = [
   },
   {
     q: 'How long will my child be in treatment?',
-    a: 'A first phase of early treatment usually runs 6 to 12 months. Comprehensive treatment once the adult teeth are through typically runs 18 to 24 months. Aligner cases often finish in 6 to 18 months. Your own estimate is given in writing at the free exam.',
+    a: 'A first phase of early treatment usually runs 6 to 12 months. Comprehensive treatment once the adult teeth are through typically runs 18 to 24 months. Aligner cases often finish in 6 to 18 months. Your own estimate is given in writing at the 0000exam.',
   },
   {
     q: 'What does it cost, and does insurance help?',
-    a: 'Comprehensive treatment at our office generally falls between $3,400 and $6,250, and a shorter early interceptive phase between $1,900 and $3,400. Most dental plans that include orthodontic benefits contribute toward either, usually from a lifetime orthodontic maximum. We verify your specific coverage and give you a written figure at the free exam.',
+    a: 'Comprehensive treatment at our office generally falls between $3,400 and $6,250, and a shorter early interceptive phase between $1,900 and $3,400. Most dental plans that include orthodontic benefits contribute toward either, usually from a lifetime orthodontic maximum. We verify your specific coverage and give you a written figure at the 0000exam.',
   },
 ]
 
@@ -356,7 +356,7 @@ export const KidsPage: FC = () => (
               the office and in the 2nd Street garage across the street. Open Monday to Wednesday, 7:30am to 4:00pm.
             </p>
             <a class="btn btn--pri" href="/book?from=kids_visit" data-book="kids_visit" style="margin-top:1.5rem">
-              <Icon name="calendar" size={11} /> Book a free screening
+              <Icon name="calendar" size={11} /> Book a complimentary screening
             </a>
           </div>
           <div class="split__media reveal">
@@ -451,7 +451,7 @@ const ADULT_FAQ: Faq[] = [
   },
   {
     q: 'How much does adult treatment cost?',
-    a: 'Most treatment at our office falls between $3,400 and $6,250. That range is the same for metal braces, clear braces and Invisalign®, because we price by how complex your bite is, not by the appliance you choose. Your exact fee is quoted in writing at the free exam.',
+    a: 'Most treatment at our office falls between $3,400 and $6,250. That range is the same for metal braces, clear braces and Invisalign®, because we price by how complex your bite is, not by the appliance you choose. Your exact fee is quoted in writing at the 0000exam.',
   },
   {
     q: 'Does insurance cover adult orthodontics?',
@@ -500,7 +500,7 @@ export const AdultsPage: FC = () => (
             </p>
             <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.5rem">
               <a class="btn btn--pri" href="/book?from=adults_hero" data-book="adults_hero">
-                <Icon name="calendar" size={11} /> Book a free exam
+                <Icon name="calendar" size={11} /> Book a complimentary exam
               </a>
               <a class="btn btn--out-ink" href={BIZ.phoneHref} data-phone="adults_hero">
                 <Icon name="phone" size={11} /> {BIZ.phoneDisplay}
@@ -590,7 +590,7 @@ export const AdultsPage: FC = () => (
       </div>
     </section>
 
-    <CLOSING_CTA from="adults_cta" title="Ready to see what is possible?" body="The free exam includes a digital scan and a written plan with fees." />
+    <CLOSING_CTA from="adults_cta" title="Ready to see what is possible?" body="The 0000exam includes a digital scan and a written plan with fees." />
 
     <CrossLinks
       links={[
@@ -651,7 +651,7 @@ export const InvisalignFirstPage: FC = () => (
             </Callout>
             <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.5rem">
               <a class="btn btn--pri" href="/book?from=if_hero" data-book="if_hero">
-                <Icon name="calendar" size={11} /> Book a free screening
+                <Icon name="calendar" size={11} /> Book a complimentary screening
               </a>
               <a class="btn btn--out-ink" href="/braces">
                 Compare with braces
@@ -1010,7 +1010,7 @@ export const ExpanderPage: FC = () => (
             />
             <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.75rem">
               <a class="btn btn--pri" href="/book?from=expander_hero" data-book="expander_hero">
-                <Icon name="calendar" size={11} /> Book a free screening
+                <Icon name="calendar" size={11} /> Book a complimentary screening
               </a>
               <a class="btn btn--out-ink" href="/kids-braces">
                 Kids' treatment options
@@ -1053,7 +1053,7 @@ export const ExpanderPage: FC = () => (
 const FIN_FAQ: Faq[] = [
   {
     q: 'How much do braces or Invisalign® cost in Franklin, TN?',
-    a: 'Most treatment at our office falls between $3,400 and $6,250 — and that range is the same whether you choose metal braces, clear (ceramic) braces or Invisalign®. We do not price by appliance. What sets your fee is how complex the bite is. A shorter early interceptive phase is $1,900 to $3,400. Your exact fee is quoted in writing at the free exam.',
+    a: 'Most treatment at our office falls between $3,400 and $6,250 — and that range is the same whether you choose metal braces, clear (ceramic) braces or Invisalign®. We do not price by appliance. What sets your fee is how complex the bite is. A shorter early interceptive phase is $1,900 to $3,400. Your exact fee is quoted in writing at the 0000exam.',
   },
   {
     q: 'Does the fee include everything, or are there extra charges?',
@@ -1122,7 +1122,7 @@ export const FinancingPage: FC = () => (
             </p>
             <Ticks
               items={[
-                'One fee, quoted in writing at the free exam',
+                'One fee, quoted in writing at the 0000exam',
                 'No separate charge for a broken bracket',
                 'Sibling and family treatment discounts applied automatically',
               ]}
@@ -1193,7 +1193,7 @@ export const FinancingPage: FC = () => (
       </div>
     </section>
 
-    <CLOSING_CTA from="financing_cta" title="Get a written price before you decide" body="The free exam ends with a treatment plan, a fee breakdown and what your insurance contributes." />
+    <CLOSING_CTA from="financing_cta" title="Get a written price before you decide" body="The 0000exam ends with a treatment plan, a fee breakdown and what your insurance contributes." />
   </main>
 )
 
@@ -1248,7 +1248,7 @@ export const AreasPage: FC = () => (
             </div>
             <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:2rem">
               <a class="btn btn--pri" href="/book?from=areas" data-book="areas">
-                <Icon name="calendar" size={11} /> Book a free exam
+                <Icon name="calendar" size={11} /> Book a complimentary exam
               </a>
               <a class="btn btn--out-ink" href={BIZ.gbp} target="_blank" rel="noopener">
                 <Icon name="directions" size={11} /> Get directions

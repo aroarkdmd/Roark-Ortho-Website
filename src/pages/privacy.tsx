@@ -584,7 +584,7 @@ export const PrivacyPage: FC = () => (
         </p>
         <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
           <a class="btn btn--pri" href="/book?from=privacy" data-book="privacy">
-            Book a free exam
+            Book a complimentary exam
           </a>
           <a class="btn btn--out-ink" href={BIZ.phoneHref} data-phone="privacy">
             Call {BIZ.phoneDisplay}

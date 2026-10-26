@@ -105,7 +105,7 @@ export const HomePage: FC = () => (
           </p>
           <div class="hero__cta">
             <a class="btn btn--rose" href="/book?from=home_hero" data-book="home_hero">
-              <Icon name="calendar" size={12} /> Book a Free Consultation
+              <Icon name="calendar" size={12} /> Book a Complimentary Consultation
             </a>
             <a class="btn btn--out" href={BIZ.phoneHref} data-phone="home_hero">
               <Icon name="phone" size={11} /> {BIZ.phoneDisplay}
@@ -116,7 +116,7 @@ export const HomePage: FC = () => (
               <Icon name="check" size={11} /> Board certified (ABO)
             </span>
             <span style="display:inline-flex;gap:.5rem;align-items:center">
-              <Icon name="check" size={11} /> Free initial exam
+              <Icon name="check" size={11} /> Complimentary initial exam
             </span>
             <span style="display:inline-flex;gap:.5rem;align-items:center">
               <Icon name="check" size={11} /> 0% plans · down payment at start
@@ -321,7 +321,7 @@ export const HomePage: FC = () => (
               Clear prices, flexible payments
             </h3>
             <p>
-              At your free exam you receive a written fee that covers everything — records, appliances, every
+              At your 0000exam you receive a written fee that covers everything — records, appliances, every
               adjustment, your first set of retainers and post-treatment visits.
             </p>
             <Ticks
@@ -393,7 +393,7 @@ export const HomePage: FC = () => (
                 <Icon name="directions" size={11} /> Get directions
               </a>
               <a class="btn btn--out-ink" href="/book?from=home_visit" data-book="home_visit">
-                <Icon name="calendar" size={11} /> Book a free exam
+                <Icon name="calendar" size={11} /> Book a complimentary exam
               </a>
             </div>
           </div>
@@ -464,7 +464,7 @@ export const HomePage: FC = () => (
         </p>
         <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
           <a class="btn btn--white" href="/book?from=home_footer_cta" data-book="home_footer_cta">
-            <Icon name="calendar" size={12} /> Book a free consultation
+            <Icon name="calendar" size={12} /> Book a complimentary consultation
           </a>
           <a class="btn btn--out" href={BIZ.phoneHref} data-phone="home_footer_cta">
             <Icon name="phone" size={11} /> Call {BIZ.phoneDisplay}

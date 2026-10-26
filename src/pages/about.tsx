@@ -247,7 +247,7 @@ export const AboutPage: FC = () => (
             </p>
             <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.75rem">
               <a class="btn btn--pri" href="/book?from=about" data-book="about">
-                <Icon name="calendar" size={11} /> Book a free exam
+                <Icon name="calendar" size={11} /> Book a complimentary exam
               </a>
               <a class="btn btn--out-ink" href="/treatments">
                 Treatment options <Icon name="arrowRight" size={11} />
@@ -355,7 +355,7 @@ export const AboutPage: FC = () => (
         </p>
         <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
           <a class="btn btn--white" href="/book?from=about_cta" data-book="about_cta">
-            <Icon name="calendar" size={12} /> Book a free consultation
+            <Icon name="calendar" size={12} /> Book a complimentary consultation
           </a>
           <a class="btn btn--out" href={BIZ.phoneHref} data-phone="about_cta">
             <Icon name="phone" size={11} /> {BIZ.phoneDisplay}
