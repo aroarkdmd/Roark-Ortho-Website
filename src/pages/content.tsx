@@ -758,7 +758,7 @@ export const InvisalignFirstPage: FC = () => (
     <CrossLinks
       links={[
         { eyebrow: 'Also for children', title: 'Braces for kids & teens in Franklin', body: 'Metal and clear braces, and early screening from age 7.', href: '/kids-braces', more: "Kids' treatment options" },
-        { eyebrow: 'Smile Journal', title: 'Aligners before braces: a parent’s guide', body: 'What Invisalign First® treats, at what age, and how it differs from adult aligners.', href: '/blog/invisalign-first-kids', more: 'Read the article' },
+        { eyebrow: 'Franklin Orthodontics Blog', title: 'Aligners before braces: a parent’s guide', body: 'What Invisalign First® treats, at what age, and how it differs from adult aligners.', href: '/blog/invisalign-first-kids', more: 'Read the article' },
         { eyebrow: 'All options', title: 'Compare every treatment we offer', body: 'Braces, aligners, expanders and surgical orthodontics, side by side.', href: '/treatments', more: 'Treatment menu' },
       ]}
     />
@@ -1293,11 +1293,11 @@ export const BlogPage: FC = () => (
         <nav class="crumbs" aria-label="Breadcrumb">
           <a href="/">Home</a>
           <span aria-hidden="true">/</span>
-          <span>Smile Journal</span>
+          <span>Franklin Orthodontics Blog</span>
         </nav>
-        <span class="eb">Smile Journal</span>
+        <span class="eb">Franklin Orthodontics Blog</span>
         <h1 class="h-section" style="max-width:44rem;margin-bottom:1rem">
-          Orthodontic advice for Franklin families
+          Braces and Invisalign advice for Franklin families
         </h1>
         <p class="lead" style="max-width:52rem">
           What treatment really costs, when to bring your child in, and how we choose between aligners and braces.
@@ -1341,7 +1341,7 @@ export const BlogArticlePage: FC<{ post: (typeof POSTS)[number]; body: { h: stri
         <nav class="crumbs" aria-label="Breadcrumb">
           <a href="/">Home</a>
           <span aria-hidden="true">/</span>
-          <a href="/blog">Smile Journal</a>
+          <a href="/blog">Franklin Orthodontics Blog</a>
           <span aria-hidden="true">/</span>
           <span>{post.tag}</span>
         </nav>

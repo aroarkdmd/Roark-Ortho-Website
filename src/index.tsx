@@ -364,12 +364,12 @@ app.get('/blog', (c) =>
     <Layout
       tag={tagFor(c)}
       seo={{
-        title: 'Smile Journal | Orthodontic Advice from Franklin, TN',
+        title: 'Franklin Orthodontics Blog | Braces & Invisalign Advice, Franklin TN',
         description:
-          'Orthodontic advice for Franklin families from Roark Orthodontics in downtown Franklin, TN: what treatment costs, when to bring your child in, and aligners versus braces.',
+          'Braces and Invisalign advice for Franklin families from Roark Orthodontics in downtown Franklin, TN: what treatment costs, when to bring your child in, and aligners versus braces.',
         canonical: '/blog',
         active: 'blog',
-        breadcrumb: [{ name: 'Home', href: '/' }, { name: 'Smile Journal' }],
+        breadcrumb: [{ name: 'Home', href: '/' }, { name: 'Franklin Orthodontics Blog' }],
       }}
     >
       <BlogPage />
@@ -467,7 +467,7 @@ app.get('/blog/:slug', (c) => {
         active: 'blog',
         breadcrumb: [
           { name: 'Home', href: '/' },
-          { name: 'Smile Journal', href: '/blog' },
+          { name: 'Franklin Orthodontics Blog', href: '/blog' },
           { name: post.tag },
         ],
         preloadImage: '/static/photos/gallery-3',

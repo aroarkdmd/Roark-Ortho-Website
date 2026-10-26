@@ -72,7 +72,7 @@ export const SERVICE_AREAS = [
 
 export type NavItem = { id: string; label: string; href: string }
 
-/* Header navigation. The Smile Journal is deliberately absent: the practice
+/* Header navigation. The Franklin Orthodontics Blog is deliberately absent: the practice
    wants it reachable from the footer only. It is still linked sitewide from
    FOOTER_PATIENTS below, and from the homepage and the cross-link cards, so
    the blog keeps its internal links — it is simply not in the top bar.
@@ -100,7 +100,7 @@ export const FOOTER_TREATMENTS = [
   { label: 'Treatment Costs', href: '/financing#cost' },
 ]
 
-/* Footer "Patients" column. This is where the Smile Journal now lives — it is
+/* Footer "Patients" column. This is where the Franklin Orthodontics Blog now lives — it is
    the only navigation that carries it, by the practice's request. Nothing is
    lost: the footer appears on every page, so /blog keeps a sitewide internal
    link with descriptive anchor text, which is what crawlers and AI answer
@@ -113,7 +113,7 @@ export const FOOTER_PATIENTS = [
   { label: 'Insurance & Financing', href: '/financing#insurance' },
   { label: 'Book Online', href: '/book' },
   { label: 'Contact the Office', href: '/contact' },
-  { label: 'Smile Journal (Blog)', href: '/blog' },
+  { label: 'Franklin Orthodontics Blog', href: '/blog' },
   { label: 'Areas We Serve', href: '/areas-we-serve' },
   { label: 'FAQs', href: '/#faq' },
 ]

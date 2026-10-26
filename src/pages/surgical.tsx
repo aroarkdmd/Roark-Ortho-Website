@@ -269,7 +269,7 @@ export const SurgicalOrthoPage: FC = () => (
             </span>
           </a>
           <a class="card" href="/blog/surgical-orthodontics" style="padding:2rem">
-            <span class="eb">Smile Journal</span>
+            <span class="eb">Franklin Orthodontics Blog</span>
             <h3 style="font-family:var(--font-display);font-size:var(--fs-h4);color:var(--navy-600);margin:0 0 .5rem">
               When braces alone are not enough
             </h3>

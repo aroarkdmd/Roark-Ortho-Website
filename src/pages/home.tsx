@@ -413,8 +413,8 @@ export const HomePage: FC = () => (
     <section class="sec sec--cream cv" id="journal">
       <div class="wrap wrap-wide">
         <SectionHead
-          eyebrow="Smile Journal"
-          title="Orthodontic advice for Franklin families"
+          eyebrow="Franklin Orthodontics Blog"
+          title="Braces and Invisalign advice for Franklin families"
           body="What treatment really costs, when to bring your child in, and how we choose between aligners and braces."
         />
         <div class="posts" style="margin-top:3rem">

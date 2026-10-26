@@ -20,7 +20,7 @@ not shipped: the design is reimplemented as a server-rendered Hono app on Cloudf
 | `/kids-braces`, `/adults` | Demographic silos |
 | `/invisalign-first`, `/braces`, `/invisalign`, `/palatal-expander` | Treatment detail |
 | `/financing` | Cost, insurance, 0% plans |
-| `/areas-we-serve`, `/blog`, `/blog/:slug` | Geo page + Smile Journal |
+| `/areas-we-serve`, `/blog`, `/blog/:slug` | Geo page + Franklin Orthodontics Blog |
 | `/book` | **Live WaveOrtho exam scheduler** (see below) |
 
 ## Booking page (`/book`) — WaveOrtho scheduler
