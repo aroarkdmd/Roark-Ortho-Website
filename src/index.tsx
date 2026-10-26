@@ -146,9 +146,9 @@ const ABOUT_PAGE = (c: any) =>
     <Layout
       tag={tagFor(c)}
       seo={{
-        title: 'Meet the Team | Roark Orthodontics, Franklin TN',
+        title: 'Meet Our Orthodontist and Team in Franklin, TN | Roark Orthodontics',
         description:
-          'Meet the team at Roark Orthodontics in downtown Franklin, TN: Dr. Ashley Roark, Nicole Zielinski and Kelsey Gibson. Three people, one office, and the same faces at every visit.',
+          'Meet Dr. Ashley Roark, board-certified orthodontist, and the team at Roark Orthodontics in downtown Franklin, TN. Three people, one office, and the same faces at every visit.',
         canonical: '/about',
         active: 'about',
         breadcrumb: [{ name: 'Home', href: '/' }, { name: 'About' }],

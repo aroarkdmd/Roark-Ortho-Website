@@ -45,13 +45,13 @@ const BioParas: FC<{ paras: string[] }> = ({ paras }) => (
 /* Dr. Roark's biography, split the way the old site split it: the career in
    one column, then the photograph, then the family paragraph in the next. */
 const DOCTOR_BIO: string[] = [
-  'Dr. Roark is passionate about creating beautiful smiles that inspire confidence. Born and raised in Middlesboro, Kentucky, she developed an early interest in helping others, which led her to earn her Bachelor of Science in Psychology from the University of Kentucky. While she loves her Kentucky Wildcats, she chose to pursue her dental degree at the University of Louisville, where her dedication to dentistry grew.',
-  'After earning her degree, Dr. Roark practiced as a general dentist for three years. In her first job out of training she worked alongside an orthodontist and fell in love with the specialty. While it was not the most direct path to her dream career, her years as a general dentist help her view cases through a unique lens — she has seen these teeth from more than one angle.',
-  'Dr. Roark completed a three-year orthodontic residency at Montefiore Medical Center in New York City, where she gained extensive training in all aspects of orthodontics, including complex surgical cases. Her work is board certified by the American Board of Orthodontics, and she treats children, teenagers and adults in braces and in the full Invisalign® range.',
+  'Dr. Roark loves helping patients feel confident about their smiles. Born and raised in Middlesboro, Kentucky, she developed an early interest in helping others, which led her to earn her Bachelor of Science in Psychology from the University of Kentucky. While she loves her Kentucky Wildcats, she chose to pursue her dental degree at the University of Louisville, where her dedication to dentistry grew.',
+  'After earning her degree, Dr. Roark practiced as a general dentist for three years. In her first job out of training she worked alongside an orthodontist and fell in love with the specialty. Her years as a general dentist give her a unique view of each case. She has seen these teeth from more than one angle.',
+  'Dr. Roark completed a three-year orthodontic residency at Montefiore Medical Center in New York City, where she gained extensive training in all aspects of orthodontics, including complex surgical cases. She is board certified by the American Board of Orthodontics, and she treats children, teenagers and adults in braces and in the full Invisalign® range.',
 ]
 
 const DOCTOR_FAMILY: string[] = [
-  'She and her husband, Brian George, live in Brentwood with their two daughters, Margot and Sloane. When she is not crafting smiles she is outside with her family, traveling somewhere new, or stealing the mic for karaoke — even though she is the first to admit she cannot carry a tune.',
+  'She and her husband, Brian George, live in Brentwood with their two daughters, Margot and Sloane. Outside the office, she is with her family, traveling somewhere new, or stealing the mic for karaoke, even though she admits she cannot carry a tune.',
   'Dr. Roark is proud to serve the Franklin community and looks forward to helping your family reach their healthiest smiles.',
 ]
 
@@ -154,8 +154,8 @@ export const AboutPage: FC = () => (
       img="first-visit"
       imgAlt="Dr. Roark's treatment room at Roark Orthodontics in downtown Franklin"
       crumbs={[{ name: 'Home', href: '/' }, { name: 'About' }]}
-      h1="The people behind the smiles"
-      sub="Three of us, one office on East Main Street — and you will get to know all three."
+      h1="Meet Dr. Roark and our team in downtown Franklin, TN"
+      sub="Three of us in one office on East Main Street. You will get to know all three."
       eager
     />
 
@@ -164,14 +164,14 @@ export const AboutPage: FC = () => (
       <div class="wrap wrap-wide">
         <SectionHead
           eyebrow="Meet the team"
-          title="The people you will actually meet"
-          body="No call center and no rotating cast. The person who plans your treatment is the person who carries it out."
+          title="The people you will meet"
+          body="There is no call center and no rotating cast. The person who plans your treatment is the person who carries it out."
         />
 
         <div class="people">
           {/* Row 1 — Dr. Roark, photograph right */}
           <PersonRow
-            role="Founder &amp; orthodontist"
+            role="Founder and board-certified orthodontist"
             name="Dr. Ashley Roark, DMD"
             photo="dr-roark"
             alt="Dr. Ashley Roark, orthodontist and founder of Roark Orthodontics in Franklin, Tennessee"
@@ -195,7 +195,7 @@ export const AboutPage: FC = () => (
             h={960}
             ratio="ar-3-2"
             mediaFirst
-            caption="Ashley, Brian, Margot and Sloane — out walking, which is where you will usually find them."
+            caption="Ashley, Brian, Margot and Sloane, out walking."
           >
             <BioParas paras={DOCTOR_FAMILY} />
           </PersonRow>
@@ -268,7 +268,7 @@ export const AboutPage: FC = () => (
               />
             </div>
             <figcaption class="photo-cap">
-              The waiting room on East Main Street. One office, three people, and the same chairs every visit.
+              The waiting room on East Main Street. One office, three people, and the same team at every visit.
             </figcaption>
           </figure>
         </div>
@@ -347,11 +347,11 @@ export const AboutPage: FC = () => (
     <section class="sec sec--rose on-rose">
       <div class="wrap wrap-narrow center">
         <h2 class="h-section" style="margin-bottom:1rem">
-          Come and meet us properly
+          Come meet the team
         </h2>
         <p style="margin-bottom:2rem">
-          The exam is complimentary, takes about 45 minutes, and includes photographs, an x-ray and a digital scan —
-          so you leave with a real answer rather than an estimate.
+          The exam is complimentary and takes about 45 minutes. It includes photographs, an x-ray and a digital scan,
+          so you leave with a clear answer rather than an estimate.
         </p>
         <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
           <a class="btn btn--white" href="/book?from=about_cta" data-book="about_cta">
