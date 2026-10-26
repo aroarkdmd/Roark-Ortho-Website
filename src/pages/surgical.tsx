@@ -25,7 +25,7 @@ const SIGNS: [string, string][] = [
     'Persistent trouble biting through food, or a lisp related to the jaw relationship.',
   ],
   [
-    'Severe jaw joint problems',
+    'Severe joint issues',
     'Significant problems with the temporomandibular joints, such as a jaw that locks or a joint that is breaking down — not just occasional clicking or aching.',
   ],
 ]
@@ -99,7 +99,7 @@ export const SurgicalOrthoPage: FC = () => (
         [
           'Recovery',
           'About 2 weeks',
-          'Most patients return to normal routine within a fortnight of the operation.',
+          'Most patients return to their normal routine within two weeks of surgery.',
         ],
       ]}
     />
@@ -116,8 +116,8 @@ export const SurgicalOrthoPage: FC = () => (
             <p>
               Orthodontics moves teeth. It cannot change the size or position of a jaw. So when the underlying
               issue is that the lower jaw sits too far forward or too far back, or the upper jaw is
-              underdeveloped, or the bite is open — moving the teeth into alignment will not hold, because the
-              foundation they are moving into is the thing that is wrong.
+              underdeveloped, or the bite is open, moving the teeth alone may not give a stable result, because
+              the jaw relationship is the underlying issue.
             </p>
             <p>
               <b>Surgical orthodontics</b> (also called orthognathic treatment) solves this by planning the
