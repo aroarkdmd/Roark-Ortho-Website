@@ -436,24 +436,24 @@ export const KidsPage: FC = () => (
 /* ══ ADULTS ═══════════════════════════════════════════════════════════════ */
 const ADULT_FAQ: Faq[] = [
   {
-    q: 'Is it too late for braces in my 40s or 50s?',
-    a: 'No. As long as your teeth and gums are healthy, teeth move at any age. Adult treatment typically runs 6 to 18 months, and a large share of our adult patients are in their forties, fifties and beyond.',
+    q: 'Is it too late to start in my 40s or 50s?',
+    a: 'Not at all. Teeth move at any age, as long as your teeth and gums are healthy. Adult treatment typically runs 6 to 18 months.',
   },
   {
     q: 'Will anyone notice I am wearing braces?',
-    a: 'That depends on what you choose. Clear aligners are clear, removable, and the more aesthetic option at work. Clear (ceramic) braces use tooth-colored brackets, so they are much less visible than metal — but they are still braces, and they are still visible up close. We will not tell you either one is invisible.',
+    a: 'Both options have their own level of visibility. Clear aligners are clear and removable. Clear (ceramic) braces use tooth-colored brackets, so they are much less visible than metal, though they are still visible up close. We will be honest with you about what to expect from either one.',
   },
   {
     q: 'Can adults use Invisalign®?',
-    a: 'Yes, and most adult aligner cases at our office are treated with Invisalign®. It is the adult system in the range — teenagers are treated with Invisalign Teen® and children with Invisalign First®. The names are not interchangeable.',
+    a: 'Yes. Invisalign® is the adult system in our aligner range. Teenagers are treated with Invisalign Teen®, and children with Invisalign First®.',
   },
   {
     q: 'What if I need jaw surgery?',
-    a: 'For a minority of adult cases the underlying problem is the position or size of the jaw rather than the teeth, and moving teeth alone will not hold. That is surgical orthodontics, planned together with an oral and maxillofacial surgeon. Most adult cases need no surgery at all.',
+    a: "For a small number of adults, the problem is the position or size of the jaw rather than the teeth, and moving teeth alone won't correct it. In those cases we plan surgical orthodontics with an oral and maxillofacial surgeon. Most adult cases need no surgery at all.",
   },
   {
     q: 'How much does adult treatment cost?',
-    a: 'Most treatment at our office falls between $3,400 and $6,250, and that range is the same whether you choose metal braces, clear braces or Invisalign® — we price by how complex the bite is rather than by the appliance. Your exact fee is quoted in writing at the free exam.',
+    a: 'Most treatment at our office falls between $3,400 and $6,250. That range is the same for metal braces, clear braces and Invisalign®, because we price by how complex your bite is, not by the appliance you choose. Your exact fee is quoted in writing at the free exam.',
   },
   {
     q: 'Does insurance cover adult orthodontics?',
@@ -489,18 +489,16 @@ export const AdultsPage: FC = () => (
               It is never too late — as long as your teeth and gums are healthy
             </h2>
             <p>
-              Teeth move at any age. What changes after thirty is not whether treatment works, but how it fits
-              around work, photographs, meetings and everything else in an ordinary week.
+              Teeth move at any age. What changes is how treatment fits around work, photographs, meetings and everyday life.
             </p>
             <p>
-              Many of our adult patients choose <b>Invisalign® clear aligners</b> because they are clear, removable,
-              and let you eat and drink normally. Plenty choose braces, and that is a perfectly reasonable decision.
-              Clear (ceramic) brackets are much less visible than metal.
+              Clear aligners and braces both straighten teeth and correct the bite, so the right choice comes down to
+              your lifestyle. Clear aligners are removable, so you can eat and drink normally, while braces stay in
+              place throughout treatment. Clear (ceramic) brackets are much less visible than metal.
             </p>
             <p>
-              A small number of adult cases are different: where the jaw itself is the problem, moving teeth alone
-              will not hold, and we plan <a href="/surgical-orthodontics">surgical orthodontics</a> with an oral and
-              maxillofacial surgeon.
+              A small number of adult cases need more than tooth movement. Where the jaw itself is the issue, we plan
+              <a href="/surgical-orthodontics">surgical orthodontics</a> with an oral and maxillofacial surgeon.
             </p>
             <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.5rem">
               <a class="btn btn--pri" href="/book?from=adults_hero" data-book="adults_hero">
@@ -525,16 +523,16 @@ export const AdultsPage: FC = () => (
         <SectionHead
           eyebrow="How we decide"
           title="Aligners or braces — the honest comparison"
-          body="Both straighten teeth and correct the bite. The differences are compliance, hygiene and, in rare cases, the bite itself."
+          body="Both options straighten teeth and correct the bite. The differences come down to comfort, daily routine and how well each suits your lifestyle."
         />
         <CompareTable
           head={['Consideration', 'Invisalign®', 'Braces']}
           rows={[
-            ['Visibility', 'Clear; more aesthetic, still visible', 'Metal is visible; clear brackets much less so'],
+            ['Visibility', 'Clear; still visible up close', 'Metal is visible; clear brackets much less so'],
             ['Removable', 'Yes — out to eat and to brush', 'No'],
             ['Eating', 'Trays out for meals', 'Avoid hard, sticky foods'],
             ['Cleaning teeth', 'Normal brushing and flossing', 'Extra care around brackets'],
-            ['Depends on', '20–22 hours of wear a day', 'Nothing — it works regardless'],
+            ['Depends on', '20–22 hours of wear a day', 'Regular wear is not required'],
             ['Best for', 'Adults who will keep trays in', 'Adults who would rather not manage trays'],
           ]}
           minWidth="40rem"
@@ -587,7 +585,7 @@ export const AdultsPage: FC = () => (
 
     <section class="sec sec--cream cv" id="faq">
       <div class="wrap wrap-narrow">
-        <SectionHead eyebrow="Adults usually ask" title="Adult aligner questions, answered" narrow />
+        <SectionHead eyebrow="Adults usually ask" title="Common questions from adults" narrow />
         <div style="margin-top:2.5rem">
           <FaqList items={ADULT_FAQ} idPrefix="adultfaq" />
         </div>
