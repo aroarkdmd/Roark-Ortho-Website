@@ -444,15 +444,48 @@
   background: transparent;
 }
 
-/* Wave lays the chosen time and the Confirm button out side by side
-   (display:flex; justify-content:space-between) in a 173px column, which is why
-   Confirm ends up crammed next to the time. Stacking them gives Confirm the full
-   width underneath. */
+/* Wave's .selected-appointment-container is display:flex +
+   justify-content:space-between, which squeezes Confirm into a narrow column
+   beside the chosen time.
+
+   wave-roark.js moves the Confirm button out of this container and below the
+   whole times table (see the `roark-confirm-slot` rules further down), so this
+   is back to a plain block holding just the time — full width, nothing split. */
 #waveInquiryForm .available-appointments-table .selected-appointment-container {
+  display: block;
+}
+
+/* The relocated Confirm button, appended as a sibling of the times table by
+   wave-roark.js. Styled to read as the last item in the list: same width and
+   radius as the slot buttons above it, but filled so it is unmistakably the
+   action. */
+#waveInquiryForm .roark-confirm-slot {
+  margin-top: .5rem;
+}
+
+#waveInquiryForm .roark-confirm-slot .confirm-button {
   display: flex;
-  flex-direction: column;
-  gap: .5rem;
-  justify-content: flex-start;
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: .7rem .9rem;
+  font-family: 'Lora', Georgia, serif;
+  font-size: .8125rem;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--w-rose);
+  border: 1px solid var(--w-rose);
+  border-radius: .55rem;
+  cursor: pointer;
+  transition: background .16s ease, border-color .16s ease;
+}
+
+#waveInquiryForm .roark-confirm-slot .confirm-button:hover {
+  background: var(--rose-700, #a87b77);
+  border-color: var(--rose-700, #a87b77);
 }
 
 #waveInquiryForm .available-time-button,
