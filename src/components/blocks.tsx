@@ -23,8 +23,9 @@ export const SiloBanner: FC<{
   h1: string
   sub: string
   eager?: boolean
-}> = ({ img, imgAlt, crumbs, h1, sub, eager }) => (
-  <section class="pbanner">
+  bannerClass?: string
+}> = ({ img, imgAlt, crumbs, h1, sub, eager, bannerClass }) => (
+  <section class={'pbanner' + (bannerClass ? ' ' + bannerClass : '')}>
     <Pic name={img} alt={imgAlt} eager={eager} sizes="100vw" widths={[480, 960]} w={1600} h={1067} />
     <div class="wrap wrap-wide">
       <div class="pbanner__in">
