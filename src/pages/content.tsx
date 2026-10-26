@@ -134,7 +134,7 @@ export const TreatmentsPage: FC = () => (
       <div class="wrap wrap-wide">
         <SectionHead
           eyebrow="Which appliance, which age"
-          title="Braces are open to every age group — and each aligner system is built for one"
+          title="Compare your options"
           body="Braces work well at any age, and the bite, not the birthday, decides which treatment fits. Each aligner system is designed for a specific stage of growth, so your age group decides which one applies."
         />
         <CompareTable
