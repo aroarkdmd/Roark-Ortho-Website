@@ -4,20 +4,32 @@ Last updated: 2026-10-26
 Repo: https://github.com/aroarkdmd/Roark-Ortho-Website (branch `main`, public)
 Live: https://roark-orthodontics.pages.dev
 Project dir: `/home/user/webapp`
-**Last commit: `d89343f`** — read §0 before doing anything.
+**Last commit: `d5d4361`** — read §0 before doing anything.
 
 Read this first. It is written so a fresh session can start work without re-deriving
 anything that cost time to establish.
 
 ---
 
-## 0. RESUME HERE (written 2026-10-26, end of session)
+## 0. RESUME HERE (rewritten 2026-10-26 — DEPLOYED)
 
-### State: code complete, NOT deployed, email NOT live
+### State: DEPLOYED and live. Email delivery still NOT live.
 
-Four pieces of work were finished and committed but **never deployed**. The live site
-(`roark-orthodontics.pages.dev`) is still running the *previous* build. If you open a fresh
-sandbox, first restore from the repo:
+> **This section previously said "code complete, NOT deployed". That is now out of date and
+> was corrected after verifying production.** Everything described below IS on the live site.
+> Do not re-deploy those four features — they are already serving.
+
+The user said "deploy now", explicitly accepting that contact forms would store enquiries without
+emailing anyone until the Resend key exists. Deploy happened via `cf-byok-deploy`:
+
+```bash
+setup_cloudflare_api_key        # ← must run before ANY wrangler command
+npx wrangler whoami             # → Ashleyroarkdmd@gmail.com's Account, 3ee8313f...
+npm run build                   # → dist/_worker.js 220.40 kB (gzip 63.33 kB)
+npx wrangler pages deploy dist --project-name roark-orthodontics --branch main
+```
+
+To resume in a fresh sandbox:
 
 ```bash
 git clone https://github.com/aroarkdmd/Roark-Ortho-Website.git   # or use the existing /home/user/webapp
@@ -26,7 +38,22 @@ cd /home/user/webapp && npm install && npm run build
 
 `npm install` IS required. Only `hono` is a runtime dep; `vite`, `wrangler` and `jsdom` are dev deps.
 
-### What was completed this session
+### Verified against production after deploy (2026-10-26)
+
+```
+/  /about  /about/  /sitemap.xml  /robots.txt  /contact  /adults  /invisalign
+/treatments  /kids-braces  /financing  /book  /blog   → all 200
+sitemap.xml                                          → 18 <loc> entries, /book absent
+robots.txt                                           → correct
+POST /api/contact                                    → {"ok":true,"received":true,
+                                                        "delivered":false,"mailNote":"no_api_key"}
+malformed POST /api/contact                          → 400
+row written to REMOTE D1 (verified id 4, then deleted; table back to 0 rows)
+```
+
+`wrangler pages secret list` returns **empty** — no secrets set at all. That is the one blocker.
+
+### What was completed (all now live)
 
 1. **Retainers & relapse care removed from `/treatments`** — three places: the `TREATMENTS`
    grid in `src/lib/site-data.ts`, the comparison matrix, and the options card grid. Commit
@@ -58,16 +85,11 @@ The user was going to create a Resend account and supply the key. Full setup wal
 - **Root SPF needs no change.** It already includes `amazonses.com`; Resend's SPF lives on the
   `send` subdomain.
 
-### Open question that blocked the last step
+### The open question is now CLOSED
 
-Deploying now would put live forms in front of patients that silently email nobody. The user was
-asked to choose:
-
-- **(a)** wait for the Resend key, then deploy once — my recommendation; or
-- **(b)** deploy now, set the secret afterwards in the dashboard — forms store correctly in the
-  meantime and start emailing the moment the secret exists.
-
-**No answer was given before the session ended.** Ask, do not assume.
+The previous session asked whether to (a) wait for the Resend key or (b) deploy now. **The user
+chose (b): "deploy now"**, knowingly accepting that forms would store without emailing. That is done
+and is no longer an open question — do not re-ask it.
 
 ### Do not repeat these mistakes
 
@@ -81,7 +103,7 @@ asked to choose:
 - **`/about` does not match `/about/`** in a Workers route. Both must be registered. The old site
   used the trailing-slash form, so external links depend on it.
 
-### Verification that was actually run (all passing at commit `d89343f`)
+### Verification that was actually run (all passing at commit `d5d4361`, post-deploy)
 
 ```
 npm run build                     → green, dist/_worker.js 220.40 kB (gzip 63.33 kB)
@@ -313,11 +335,16 @@ from the user, who has been sending screenshots.
 
 ## 10. Current verified state
 
-- Build: green (`✓ 66 modules transformed`, `dist/_worker.js` ~206.66 kB)
-- Deploy: **live and matching the repo.** `public/static/wave-roark.js` is 8,779 bytes both locally
-  and in production; prod serves the new gate (`pickedSlot` absent, `appointmentMessage` present).
-- Git: `fb0aae2`, pushed to `origin/main`.
-- All routes 200 in production: `/`, `/book`, `/privacy`, and all four `/static/wave*` assets.
+- Build: green (`✓ 69 modules transformed`, `dist/_worker.js` 220.40 kB, gzip 63.33 kB)
+- Deploy: **live and matching the repo.** Deployed 2026-10-26 via `cf-byok-deploy`;
+  deployment URL `https://78ce104b.roark-orthodontics.pages.dev`, aliased at
+  `https://roark-orthodontics.pages.dev`.
+- Git: `d5d4361` on `main`, pushed to `origin/main`.
+- All routes 200 in production: `/`, `/about`, `/about/`, `/contact`, `/adults`, `/invisalign`,
+  `/treatments`, `/kids-braces`, `/financing`, `/book`, `/blog`, `/sitemap.xml`, `/robots.txt`.
+- `/about` and `/sitemap.xml` previously 404'd in production; both are now 200.
+- `POST /api/contact` verified end-to-end against **remote** D1: row written, then deleted.
+  Response `{"ok":true,"received":true,"delivered":false,"mailNote":"no_api_key"}`.
 - Confirmed working against the **live** Wave API: calendar renders 42 day cells; clicking a day
   returns real slots (e.g. Oct 27 → 7:30am unavailable, 9:00am + 10:30am bookable) at Franklin;
   location auto-locked to Franklin with the picker hidden.
@@ -344,9 +371,14 @@ from the user, who has been sending screenshots.
 
 ---
 
-## 13. Contact-form email delivery (added, not yet live)
+## 13. Contact-form email delivery (deployed; inert until secrets are set)
 
-Every contact form on the site posts to `/api/contact`, which now does two things:
+**Status: the code is live in production, but no email is sent** — `wrangler pages secret list`
+returns empty, so `sendEnquiry` short-circuits with `{sent:false, skipped:'no_api_key'}` and
+`/api/contact` responds `delivered:false`. It starts emailing the moment the two secrets below
+exist; no redeploy is needed, because Pages reads secrets at runtime.
+
+Every contact form on the site posts to `/api/contact`, which does two things:
 
 1. inserts the row into D1 `submissions` (as before), **then**
 2. emails it to **info@roarkortho.com and admin@roarkortho.com** via `src/lib/mail.ts`.
