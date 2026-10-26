@@ -1282,6 +1282,22 @@ slotmark { display: none; }
 /* Inline field errors inside the booking flow reuse the site's .field styles. */
 .field .field__hint { display: block; }
 
+/* Form-level failure (as opposed to a per-field validation error). Used when
+   the enquiry could not be stored, so the visitor is told to phone instead of
+   being shown a false confirmation. */
+.form__alert {
+  margin: 0;
+  padding: var(--sp-3) var(--sp-4);
+  border: 1px solid var(--c-error);
+  border-left-width: 3px;
+  border-radius: var(--r-sm);
+  background: var(--rose-050);
+  color: var(--c-error);
+  font-size: var(--fs-eyebrow);
+  line-height: 1.5;
+}
+.form__alert a { color: inherit; font-weight: var(--fw-semi); }
+
 /* ── FOUNDER BAND: credential cards ──────────────────────────────────────
    The handoff's founder band emits `.stat-row` / `.stat`, which the design
    never styles — no rule for either exists in site.css, so the prototype fell

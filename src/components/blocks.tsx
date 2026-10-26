@@ -232,6 +232,11 @@ export const ContactPanel: FC<{
             </button>
           </div>
 
+          {/* Form-level failure. Shown when the message was NOT stored — the
+              visitor must never see the success panel for an enquiry that was
+              discarded. role="alert" so a screen reader announces it. */}
+          <p class="form__alert" data-form-alert role="alert" hidden></p>
+
           <p class="form__note">
             We only use this to reply to you. For anything urgent — a broken bracket, a wire poking, or pain you
             cannot manage — please call <a href={BIZ.phoneHref}>{BIZ.phoneDisplay}</a> rather than message.

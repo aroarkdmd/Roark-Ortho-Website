@@ -23,7 +23,7 @@ import { BIZ, HOME_FAQ, SURG_FAQ, CONTACT_FAQ, FIRST_FAQ, POSTS } from './lib/si
 import { consentRequired, resolveGtmId } from './lib/tagging'
 import type { TagConfig } from './layout'
 
-type Bindings = { DB?: D1Database; GTM_ID?: string }
+type Bindings = { DB?: D1Database; GTM_ID?: string; ADMIN_TOKEN?: string }
 
 const app = new Hono<{ Bindings: Bindings }>()
 
@@ -491,19 +491,23 @@ app.post('/api/contact', async (c) => {
   if (Object.keys(errors).length) return c.json({ ok: false, errors }, 400)
 
   try {
-    if (c.env.DB) {
-      await ensureSchema(c.env.DB)
-      await c.env.DB.prepare(
-        `INSERT INTO submissions (kind, source, page, name, email, phone, message)
-         VALUES ('contact', ?, ?, ?, ?, ?, ?)`,
-      )
-        .bind(source, page, name, email, phone, message)
-        .run()
-    }
+    /* A missing binding is a deployment fault, not a visitor problem. It used
+       to fall through to a success response, so a misconfigured deploy showed
+       "Message sent" for every enquiry and stored none of them. */
+    if (!c.env.DB) throw new Error('no DB binding')
+    await ensureSchema(c.env.DB)
+    await c.env.DB.prepare(
+      `INSERT INTO submissions (kind, source, page, name, email, phone, message)
+       VALUES ('contact', ?, ?, ?, ?, ?, ?)`,
+    )
+      .bind(source, page, name, email, phone, message)
+      .run()
     return c.json({ ok: true, received: true })
   } catch (err) {
-    /* The visitor's confirmation must never depend on storage succeeding. */
-    return c.json({ ok: true, received: false, stored: false })
+    /* Never claim receipt of something we did not store. The client turns this
+       into a visible "call us" message so the enquiry is not silently lost. */
+    console.error('contact insert failed', err)
+    return c.json({ ok: false, error: 'not_stored' }, 503)
   }
 })
 
@@ -598,9 +602,22 @@ app.post('/api/booking', async (c) => {
   }
 })
 
-/* Admin read — deliberately not linked from the site. */
+/* Admin read — returns every stored submission, so it must not be public.
+   It previously answered anyone who asked, which on a live site collecting
+   patient names, emails and phone numbers is a data exposure.
+
+   Guarded by an ADMIN_TOKEN secret. If the secret is unset the route stays
+   closed (404) rather than falling open — a missing secret is a deployment
+   fault, and failing open here would leak PHI. */
 app.get('/api/submissions', async (c) => {
+  const expected = (c.env.ADMIN_TOKEN || '').trim()
+  const given = (c.req.header('authorization') || '').replace(/^Bearer\s+/i, '').trim()
+
+  if (!expected || given !== expected) {
+    return c.json({ ok: false, error: 'not_found' }, 404)
+  }
   if (!c.env.DB) return c.json({ ok: false, error: 'no database bound' }, 500)
+
   await ensureSchema(c.env.DB)
   const rows = await c.env.DB.prepare(
     `SELECT * FROM submissions ORDER BY id DESC LIMIT 200`,

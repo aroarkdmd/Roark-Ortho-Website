@@ -31,8 +31,17 @@ not shipped: the design is reimplemented as a server-rendered Hono app on Cloudf
 - `GET /health`
 
 All three write to D1 table `submissions` (schema auto-created on first write).
-Validation rules and error copy mirror the design exactly. **The success state never depends
-on the network call** — a storage failure still shows the confirmation.
+Validation rules and error copy mirror the design exactly.
+
+**A confirmation is only shown when the row was actually stored.** This is deliberately
+pessimistic: a wrong "sent" silently loses a patient's enquiry, while a wrong "please call us"
+costs one phone call. `POST /api/contact` returns `503 {ok:false,error:'not_stored'}` on a
+storage failure or a missing binding, and the client renders a visible
+`[data-form-alert]` with the office number instead of the success panel.
+
+> **Known gap:** `POST /api/scheduler` still answers `{ok:true, bookingId, stored:false}` on a
+> storage failure and the client does not yet treat that as an error. Fixing the scheduler panel
+> is deliberately deferred (see Status).
 
 ## Design fidelity notes
 - Tokens, type scale, radii, shadows, motion and breakpoints are the handoff's values.
@@ -54,8 +63,38 @@ curl http://localhost:3000
 Apply local D1: `npx wrangler d1 migrations apply webapp-production --local`
 
 ## Deploy
-`wrangler pages deploy dist --project-name <name>` (D1 binding `DB` required for form storage).
+
+Live on the practice's own Cloudflare account:
+
+- **Production:** https://roark-orthodontics.pages.dev
+- **Project:** `roark-orthodontics` (Pages, production branch `main`)
+- **D1:** `roark-orthodontics-production` (`ac7f7c75-fdda-436f-a756-9ff86c3efb52`), binding `DB`
+
+```bash
+npm run build
+npx wrangler pages deploy dist --project-name roark-orthodontics
+```
+
+The API token needs **Account · Cloudflare Pages · Edit** *and* **Account · D1 · Edit**.
+Without D1 the deploy fails on the binding, and form storage is unavailable.
 
 ## Status
-✅ Builds clean, all routes 200, all three endpoints verified writing to D1.
+
+✅ Builds clean, all routes 200 in production.
+✅ **Contact form verified end to end against the production database** — a test POST to
+`/api/contact` returned `{ok:true,received:true}` and the corresponding row was read back from
+`roark-orthodontics-production` via `wrangler d1 execute --remote` (test row since deleted).
+
+Deferred / outstanding:
+- ⏸ **Scheduler panel** (`POST /api/scheduler`) — still reports success on a storage failure and
+  its client handler does not yet reject `stored:false`. Deferred by request; the booking flow
+  (`/api/booking`) and the contact form are already correct.
+- ⚠ `GTM_ID` is unset, so **no tag loads**. Set it (`npx wrangler pages secret put GTM_ID
+  --project-name roark-orthodontics`) and add a GTM Custom Event trigger on `appointment_booked`.
+- ⚠ **No privacy policy or HIPAA Notice of Privacy Practices page.** The footer "Privacy" link
+  points at `/contact#faq`. A practice collecting names, emails and phone numbers needs both, and
+  this is independent of the cookie-consent question. Needs the practice's own reviewed text.
+- ⚠ `/api/submissions` is an unauthenticated admin read. It is not linked from the site, but it
+  returns every stored submission to anyone who requests it. Needs auth or removal before launch.
+
 Assets: logos, 4 woff2 fonts and 17 WebP photos copied from the handoff bundle.

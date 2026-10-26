@@ -7,6 +7,11 @@
 (function () {
   'use strict';
 
+  /* Kept in sync with BIZ.phoneDisplay in src/lib/site-data.ts. The failure
+     copy needs a number the visitor can dial, and this file has no access to
+     the server-side data module. */
+  var PHONE_DISPLAY = '(615) 814-4884';
+
   /* ── CONSENT MODE / ANALYTICS STUB ────────────────────────────────────────
      Every event carries page_path, page_title and any utm_* / gclid present.
      No PHI is ever pushed — never a name, email, phone, DOB or clinical note. */
@@ -258,6 +263,24 @@
           track('contact_form_success', { cta_location: payload.source });
         };
 
+        /* Failure must be visible. The old code called finish() from .catch(),
+           so a dropped connection or an unstored row still rendered "Message
+           sent" — the enquiry was lost and the visitor believed otherwise. */
+        var alertEl = form.querySelector('[data-form-alert]');
+        var fail = function (msg) {
+          if (btn) btn.disabled = false;
+          if (label) label.textContent = labelText;
+          if (alertEl) {
+            alertEl.textContent = msg;
+            alertEl.hidden = false;
+          }
+          track('contact_form_error', { cta_location: payload.source });
+        };
+        if (alertEl) {
+          alertEl.hidden = true;
+          alertEl.textContent = '';
+        }
+
         fetch('/api/contact', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -265,6 +288,7 @@
         })
           .then(function (r) { return r.json().catch(function () { return {}; }); })
           .then(function (data) {
+            /* Per-field validation errors stay inline on the fields. */
             if (data && data.ok === false && data.errors) {
               ['name', 'email', 'message'].forEach(function (k) {
                 var f = fieldOf(form, k);
@@ -277,11 +301,19 @@
               if (label) label.textContent = labelText;
               return;
             }
+            /* Anything other than an explicit success is a failure. This is
+               deliberately pessimistic: a wrong "sent" loses a patient's
+               enquiry, a wrong "call us" costs one phone call. */
+            if (!data || data.ok !== true || data.received !== true) {
+              fail('We could not send that just now. Please call ' +
+                PHONE_DISPLAY + ' and we will take the details over the phone.');
+              return;
+            }
             finish();
           })
           .catch(function () {
-            /* A backend failure must not cost the visitor their confirmation. */
-            finish();
+            fail('We could not reach the office just now. Please call ' +
+              PHONE_DISPLAY + ' and we will take the details over the phone.');
           });
       });
     });

@@ -1,14 +1,15 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "webapp",
+  "name": "roark-orthodontics",
   "compatibility_date": "2026-09-17",
   "pages_build_output_dir": "./dist",
   "compatibility_flags": ["nodejs_compat"],
   "d1_databases": [
     {
+      // Binding stays "DB" — every handler references c.env.DB.
       "binding": "DB",
-      "database_name": "webapp-production",
-      "database_id": "a1b2c3d4-0000-4000-8000-000000000001"
+      "database_name": "roark-orthodontics-production",
+      "database_id": "ac7f7c75-fdda-436f-a756-9ff86c3efb52"
     }
   ]
 }
