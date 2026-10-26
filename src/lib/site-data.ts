@@ -72,13 +72,19 @@ export const SERVICE_AREAS = [
 
 export type NavItem = { id: string; label: string; href: string }
 
+/* Header navigation. The Smile Journal is deliberately absent: the practice
+   wants it reachable from the footer only. It is still linked sitewide from
+   FOOTER_PATIENTS below, and from the homepage and the cross-link cards, so
+   the blog keeps its internal links — it is simply not in the top bar.
+   Nothing about a link's SEO value depends on whether it sits in the header
+   or the footer; both are sitewide. See the note above FOOTER_PATIENTS. */
 export const NAV: NavItem[] = [
   { id: 'home', label: 'Home', href: '/' },
+  { id: 'about', label: 'About', href: '/about' },
   { id: 'kids', label: 'Kids & Teens', href: '/kids-braces' },
   { id: 'adults', label: 'Adults', href: '/adults' },
   { id: 'treatments', label: 'Treatments', href: '/treatments' },
   { id: 'financing', label: 'Financing', href: '/financing' },
-  { id: 'blog', label: 'Smile Journal', href: '/blog' },
   { id: 'contact', label: 'Contact', href: '/contact' },
 ]
 
@@ -94,7 +100,15 @@ export const FOOTER_TREATMENTS = [
   { label: 'Treatment Costs', href: '/financing#cost' },
 ]
 
+/* Footer "Patients" column. This is where the Smile Journal now lives — it is
+   the only navigation that carries it, by the practice's request. Nothing is
+   lost: the footer appears on every page, so /blog keeps a sitewide internal
+   link with descriptive anchor text, which is what crawlers and AI answer
+   engines actually read. Header-vs-footer position carries no ranking weight.
+   The blog is also linked in-page from the homepage and the treatment pages. */
 export const FOOTER_PATIENTS = [
+  { label: 'About the Practice', href: '/about' },
+  { label: 'Meet the Team', href: '/about#meet-the-team' },
   { label: 'Your First Visit', href: '/#patients' },
   { label: 'Insurance & Financing', href: '/financing#insurance' },
   { label: 'Book Online', href: '/book' },

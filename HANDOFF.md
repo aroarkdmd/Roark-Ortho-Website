@@ -135,23 +135,17 @@ out of sync.
    *previous* day while nothing was selected. A patient could confirm a slot not on screen.
    `place()` now empties the wrapper when there is no `.selected-time`.
 
-### OPEN — needs a decision from the user
-**`/api/scheduler` loses enquiries.** `src/index.tsx:567-580` wraps the insert in `try/catch`, and
-the `catch` returns `{ok:true, bookingId, stored:false}` — HTTP 200 claiming success.
-`public/static/app.js` ignores `stored`, so the panel shows "Request received" for an enquiry that
-was never written. This is the identical defect already fixed for `/api/contact`.
+### RESOLVED 2026-10-26 — `/api/scheduler` was deleted, not fixed
+This briefly read as an open bug: `/api/scheduler` wrapped its insert in `try/catch` and the
+`catch` returned `{ok:true, bookingId, stored:false}` — HTTP 200 claiming success, so the panel
+showed "Request received" for an enquiry that was never written.
 
-This endpoint is **live**, not legacy: `SchedulerPanel` (`blocks.tsx:270`) renders on `/adults`
-(`content.tsx:577`) and `/invisalign` (`:954`), and `app.js:413` posts to it.
+**It is gone.** The practice asked for no in-page booking: every page now carries the same contact
+form, with a link to `/book` for anyone who wants to pick a time. So `SchedulerPanel`,
+`/api/scheduler` and `initSchedulerForms()` were all removed. Nothing posts to that endpoint and
+nothing renders that form. See §14.
 
-**Two options — ask the user which:**
-- (a) Fix it by mirroring `/api/contact`: throw when `c.env.DB` is missing, return
-  `503 {ok:false,error:'not_stored'}` in the catch, and have `app.js` render the
-  `[data-form-alert]` element (already present at `blocks.tsx:238`) instead of calling `finish()`.
-- (b) Delete `SchedulerPanel` from both pages and point that traffic at `/book` (Wave), since the
-  real scheduler now exists.
-
-`/api/booking` and `src/pages/book.tsx` are genuinely dead — nothing routes to `BookPage`, so
+`/api/booking` and `src/pages/book.tsx` are still genuinely dead — nothing routes to `BookPage`, so
 `booking.js` never runs (it bails at the `.bk-shell` guard) and nothing posts to `/api/booking`.
 Safe to delete whenever.
 
@@ -254,12 +248,111 @@ from the user, who has been sending screenshots.
   Event trigger on `appointment_booked`.
 - ⚠ **`ADMIN_TOKEN` is unset** → `GET /api/submissions` fails closed with 404. Set it before you
   need to read submissions.
+- ⚠ **`RESEND_API_KEY` / `MAIL_FROM` are unset** → `/api/contact` still stores every enquiry in
+  D1, but sends no email. Without the key the JSON response carries `delivered: false`. Set both
+  once the domain is verified in Resend; see §13.
 - ⚠ Footer **"Accessibility"** link (`src/components/chrome.tsx:321`) still points at
   `/contact#faq`, which says nothing about accessibility.
 - ⚠ **No HIPAA Notice of Privacy Practices.** `/privacy` covers the *website* only and says so
   explicitly. The clinical notice is the practice's own document.
-- Not requested, but noted: `src/pages/book.tsx` (540 lines) and `/api/booking` are dead weight;
-  `/api/scheduler`'s fake-availability hash was in the *old* mock and is no longer reachable.
+- Not requested, but noted: `src/pages/book.tsx` (540 lines) and `/api/booking` are dead weight.
+  `SchedulerPanel` and `/api/scheduler` were **deleted** — see §14.
+
+---
+
+## 13. Contact-form email delivery (added, not yet live)
+
+Every contact form on the site posts to `/api/contact`, which now does two things:
+
+1. inserts the row into D1 `submissions` (as before), **then**
+2. emails it to **info@roarkortho.com and admin@roarkortho.com** via `src/lib/mail.ts`.
+
+Order matters: the row is written first, so a mail outage cannot lose an enquiry. The response
+returns `delivered: true|false` plus `mailNote`, and the client never shows "Message sent" for a
+row that was not stored.
+
+Delivery uses Resend because a Worker cannot open an SMTP socket. Two secrets are required:
+
+```
+npx wrangler pages secret put RESEND_API_KEY --project-name roark-orthodontics
+npx wrangler pages secret put MAIL_FROM     --project-name roark-orthodontics
+```
+
+`MAIL_FROM` must be on a domain verified in Resend (e.g. `Roark Website <noreply@roarkortho.com>`).
+**Do not** send from `info@`/`admin@` — those are Google Workspace mailboxes and sending as them
+breaks DMARC alignment. Replies still reach a human because the form sets reply-to to the patient.
+
+Recipients come from `CONTACT_INBOXES` in `src/lib/site-data.ts`, overridable at runtime with a
+`CONTACT_INBOXES` env var (comma separated). `BIZ.email` (`hello@roarkortho.com`) is the address
+*printed on the site* — deliberately a separate value from where enquiries are delivered.
+
+DNS facts established 2026-10-26 (re-verify if in doubt — `dig` is NOT installed in the sandbox;
+use `curl -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=…&type=…'`):
+`roarkortho.com` is on Cloudflare nameservers (`brit.ns` / `sage.ns`), mail is Google Workspace,
+no `send` / `resend._domainkey` records exist yet, and there is **no DMARC record**.
+
+---
+
+## 14. Removed: the scheduler panel (2026-10-26)
+
+The practice asked for no direct booking inside pages — a contact form everywhere, plus a link to
+`/book` for anyone who wants to pick a time. So:
+
+- `SchedulerPanel` is **gone** from `src/components/blocks.tsx`
+- `/api/scheduler` is **gone** from `src/index.tsx`
+- `initSchedulerForms()` is **gone** from `public/static/app.js`
+
+`/adults` and `/invisalign` — the only two pages that rendered it — now show `ContactPanel` with
+`bookFrom` set, which renders a "Would you rather pick a time?" link to `/book` and a Book online
+button in the success state. `ContactPanel` takes `bookFrom?` / `bookLabel?` for this; omit them and
+the panel is a plain contact form with no booking link.
+
+**This also closed the open defect in §5** (`/api/scheduler` returning HTTP 200 `stored:false` for
+an enquiry it never wrote). The endpoint no longer exists.
+
+---
+
+## 15. Sitemap and robots (2026-10-26)
+
+Both are **generated**, not static files, from the route table in `src/lib/seo.ts`:
+
+- `/sitemap.xml` — 15 pages + every `POSTS` entry, each with a real `lastmod` taken from the post
+  date. **Every listed URL was verified to return 200**; a sitemap naming a 404 is worse than none.
+- `/robots.txt` — allows everything, disallows `/api/` and `/health`, names GPTBot / ClaudeBot /
+  PerplexityBot / Google-Extended / CCBot explicitly, and advertises the sitemap.
+
+Two rules that look like omissions but are deliberate:
+
+- **`/book` is not in the sitemap.** It sends `<meta name="robots" content="noindex">`
+  (`BookingLayout`). Listing it would contradict that.
+- **`/book` is not disallowed in robots.txt.** A crawler must be able to *fetch* the page to read
+  the noindex. Disallowing it hides the directive and leaves the URL eligible for a bare
+  "indexed without a description" listing.
+
+Adding a page means adding one line to `PAGES` in `src/lib/seo.ts`. Journal articles need no edit
+at all — they come from `POSTS`.
+
+`ORIGIN` is duplicated there because `src/layout.tsx` keeps its copy module-private. If the domain
+changes, both must change.
+
+---
+
+## 16. About page (2026-10-26)
+
+`/about` is new, rebuilt from the practice's previous WordPress page. `src/pages/about.tsx`.
+
+- **Bare `/about` does not match `/about/`** in a Workers route, and the old site published the
+  trailing-slash form — so **both** are registered and both canonicalise to `/about`.
+- The old deep link `/about/#meet-the-team` still works: the team section carries
+  `id="meet-the-team"`.
+- **No staff headshots exist** in `public/static/photos/`. The team cards render an initials
+  monogram (`.team__mono`) rather than reusing an office photo, which would imply it shows that
+  person. Drop real portraits in and swap `<Monogram>` for `<Pic>` to finish.
+- The `Smile Journal` was **removed from the header nav** at the practice's request (footer only).
+  This is SEO-neutral: the footer is sitewide, so `/blog` keeps an internal link on every page.
+  It also fixed a real layout bug — eight header items overflowed the bar between 1000px (the nav
+  collapse breakpoint) and roughly 1070px. Seven fit.
+
 
 ---
 

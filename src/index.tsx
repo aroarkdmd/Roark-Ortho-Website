@@ -5,6 +5,7 @@ import { Layout, BookingLayout, type Seo } from './layout'
 import { HomePage } from './pages/home'
 import { SurgicalOrthoPage } from './pages/surgical'
 import { ContactPage } from './pages/contact'
+import { AboutPage } from './pages/about'
 import { BookPage } from './pages/book'
 import { BookWavePage } from './pages/book-wave'
 import { PrivacyPage } from './pages/privacy'
@@ -23,6 +24,7 @@ import {
 } from './pages/content'
 import { BIZ, HOME_FAQ, SURG_FAQ, CONTACT_FAQ, FIRST_FAQ, POSTS } from './lib/site-data'
 import { sendEnquiry } from './lib/mail'
+import { buildSitemap, buildRobots } from './lib/seo'
 import { consentRequired, resolveGtmId } from './lib/tagging'
 import type { TagConfig } from './layout'
 
@@ -128,6 +130,37 @@ app.get('/contact', (c) =>
     </Layout>,
   ),
 )
+
+/* ── ABOUT ─────────────────────────────────────────────────────────────────
+   Two routes, one page. The previous site published this at /about/ (trailing
+   slash, WordPress permalink style) and external links — Google, directories,
+   the practice's own printed material — point at that form, often with the
+   #meet-the-team anchor. A Workers route match is exact, so /about alone would
+   404 every one of those. Both are registered and both canonicalise to
+   /about, so the ranking signal is not split between them.
+
+   The anchor is preserved because the team section carries
+   id="meet-the-team" — see src/pages/about.tsx.                          */
+const ABOUT_PAGE = (c: any) =>
+  c.html(
+    <Layout
+      tag={tagFor(c)}
+      seo={{
+        title: 'About Dr. Ashley Roark & the Team | Roark Orthodontics, Franklin TN',
+        description:
+          'Meet board certified orthodontist Dr. Ashley Roark and the team at Roark Orthodontics in downtown Franklin, TN. Her training, credentials, and the people you will meet at the office.',
+        canonical: '/about',
+        active: 'about',
+        breadcrumb: [{ name: 'Home', href: '/' }, { name: 'About' }],
+        preloadImage: '/static/photos/first-visit',
+      }}
+    >
+      <AboutPage />
+    </Layout>,
+  )
+
+app.get('/about', ABOUT_PAGE)
+app.get('/about/', ABOUT_PAGE)
 
 app.get('/privacy', (c) =>
   c.html(
@@ -635,6 +668,26 @@ app.get('/api/submissions', async (c) => {
 })
 
 app.get('/health', (c) => c.json({ ok: true, name: BIZ.name }))
+
+/* ── SEO FILES ─────────────────────────────────────────────────────────────
+   Both are generated from the route table in src/lib/seo.ts, so a new page
+   cannot be forgotten here. Content-Type is set explicitly because a Worker
+   returning a bare string defaults to text/plain, and some crawlers will
+   discard a sitemap served that way. Cache-Control is short — an hour — so a
+   new article appears promptly after a deploy without hammering the Worker. */
+app.get('/sitemap.xml', (c) =>
+  c.body(buildSitemap(), 200, {
+    'Content-Type': 'application/xml; charset=utf-8',
+    'Cache-Control': 'public, max-age=3600',
+  }),
+)
+
+app.get('/robots.txt', (c) =>
+  c.body(buildRobots(), 200, {
+    'Content-Type': 'text/plain; charset=utf-8',
+    'Cache-Control': 'public, max-age=3600',
+  }),
+)
 
 app.notFound((c) =>
   c.html(

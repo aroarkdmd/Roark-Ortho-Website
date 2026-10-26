@@ -74,38 +74,38 @@ the browser. That origin returns `Access-Control-Allow-Origin: *`, so this works
 needs no proxy. Nothing is proxied through Cloudflare, and no PHI passes through our own API.
 
 ## API
-- `POST /api/contact` — contact panel (`name`, `email`, `phone`, `message`, `source`, `page`)
-- `POST /api/scheduler` — **live**, on `/adults` and `/invisalign` (see the bug below)
+- `POST /api/contact` — every contact form on the site (`name`, `email`, `phone`, `message`,
+  `source`, `page`). Stores to D1, **then** emails both practice inboxes.
 - `POST /api/booking` — genuinely unrouted; only `src/pages/book.tsx` called it
-- `GET /api/submissions` — admin read of stored submissions (not linked from the site)
+- `GET /api/submissions` — admin read of stored submissions (Bearer `ADMIN_TOKEN`; 404 if unset)
 - `GET /health`
 
-**`/api/scheduler` is NOT legacy.** An earlier draft of this file claimed it was unrouted. It is
-not: `SchedulerPanel` (`src/components/blocks.tsx:270`) is rendered on `/adults`
-(`src/pages/content.tsx:577`) and `/invisalign` (`:954`), and `public/static/app.js:413` posts to it.
+## SEO files
+- `GET /sitemap.xml` — generated from the route table in `src/lib/seo.ts`
+- `GET /robots.txt` — generated; allows all, disallows `/api/` and `/health`, names the AI
+  crawlers, advertises the sitemap
 
-`/api/booking` and `src/pages/book.tsx` **are** dead — `/book` no longer routes to `BookPage`, so
-`booking.js` never runs (it bails at the `.bk-shell` guard) and nothing posts to `/api/booking`.
+Both are generated rather than static so a new page cannot be forgotten. Journal articles come
+from `POSTS`, so they appear with **no** second edit.
 
-All of these write to D1 table `submissions` (schema auto-created on first write).
-Validation rules and error copy mirror the design exactly.
+Two deliberate omissions, and why: **`/book` is not in the sitemap** (it sends
+`noindex`), and **`/book` is not disallowed in robots.txt** — a crawler must be able to fetch the
+page to read the noindex, and blocking it would hide the directive.
 
-**A confirmation is only shown when the row was actually stored.** This is deliberately
-pessimistic: a wrong "sent" silently loses a patient's enquiry, while a wrong "please call us"
-costs one phone call. `POST /api/contact` returns `503 {ok:false,error:'not_stored'}` on a
-storage failure or a missing binding, and the client renders a visible
-`[data-form-alert]` with the office number instead of the success panel.
+## Contact-form delivery
 
-> **OPEN BUG — `/api/scheduler` loses enquiries (`src/index.tsx:567-580`).** It wraps the insert in
-> `try/catch`, and the `catch` returns `{ok:true, bookingId, stored:false}` — a 200 that claims
-> success. `app.js` ignores `stored`, so the panel shows "Request received" on an enquiry that was
-> never written. This is the exact defect already fixed for `/api/contact`; the fix is to mirror
-> `/api/contact` — throw when `c.env.DB` is missing, return `503 {ok:false,error:'not_stored'}` in
-> the catch, and have `app.js` render `[data-form-alert]` (the element already exists at
-> `blocks.tsx:238`) instead of calling `finish()`.
->
-> **Decide first:** these two panels may be redundant now that `/book` runs the real Wave book.
-> Either fix `/api/scheduler` or delete `SchedulerPanel` and point that traffic at Wave.
+`/api/contact` writes the row to D1 **first**, then emails it to `info@roarkortho.com` and
+`admin@roarkortho.com` (from `CONTACT_INBOXES`, overridable with a `CONTACT_INBOXES` env var).
+Order matters: a mail outage cannot lose an enquiry. The response reports `delivered: true|false`.
+
+Requires two secrets — `RESEND_API_KEY` and `MAIL_FROM` (a verified address on the domain, e.g.
+`noreply@roarkortho.com`; **not** `info@`, which is a Google Workspace mailbox). Without the key,
+enquiries are still stored and the visitor still sees "Message sent", but no email is sent.
+
+A confirmation is only shown when the row was actually stored. `POST /api/contact` returns
+`503 {ok:false,error:'not_stored'}` on a storage failure or a missing binding, and the client
+renders a visible `[data-form-alert]` with the office number instead of the success panel.
+
 
 ## Design fidelity notes
 - Tokens, type scale, radii, shadows, motion and breakpoints are the handoff's values.
@@ -153,8 +153,10 @@ Deferred / outstanding:
 - ✅ **Booking is real.** `/book` now runs the practice's actual WaveOrtho appointment book instead of
   the previous mock. The mock's two defects (decorative slot availability computed from a hash, and a
   "welcome email is on its way" message with no email library behind it) are no longer reachable from
-  the UI. `/api/booking` and `/api/scheduler` remain in the codebase, unfixed, and unrouted — delete
-  them once you are happy with Wave.
+  the UI. `/api/booking` and `src/pages/book.tsx` remain in the codebase, unrouted — delete them
+  once you are happy with Wave. (`/api/scheduler`, `SchedulerPanel` and `initSchedulerForms()` were
+  **deleted** on 2026-10-26, not fixed — see HANDOFF.md §14. The practice wants no in-page booking:
+  every page carries a contact form, with a link to `/book` for anyone who wants to pick a time.)
 - ⚠ `GTM_ID` is unset, so **no tag loads**. Set it (`npx wrangler pages secret put GTM_ID
   --project-name roark-orthodontics`) and add a GTM Custom Event trigger on `appointment_booked`.
   Until then the conversion fires into `dataLayer` and goes nowhere.

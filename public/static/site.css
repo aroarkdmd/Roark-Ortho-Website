@@ -1121,9 +1121,29 @@ slotmark { display: none; }
           color: var(--ink-700); }
 .faq__a p:last-child { margin-bottom: 0; }
 
+/* ── ABOUT / TEAM ─────────────────────────────────────────────────────────
+   Monogram stand-in for a staff portrait. No photograph of Nicole or Kelsey
+   exists in the project's photo set, and reusing an office shot in a person's
+   card would imply it is them. The monogram is honest until real portraits
+   arrive; replace <Monogram> with <Pic> per person when they do. */
+.team__mono {
+  flex: none; width: 3.25rem; height: 3.25rem; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--rose-100); border: 1px solid var(--roark-pink);
+  color: var(--rose-800); font-family: var(--font-display);
+  font-size: 1.05rem; font-weight: var(--fw-medium); letter-spacing: .04em;
+  line-height: 1;
+}
+.team__mono--lg { width: 4.5rem; height: 4.5rem; font-size: 1.5rem; }
+.team__mono.on-rose { background: rgba(255,255,255,.16); border-color: rgba(255,255,255,.5);
+                      color: #fff; }
+
+/* Long-form explanatory copy that is not the blog's .article column. */
+.prose > p { font-size: var(--fs-body); color: var(--ink-700); }
+.prose > p:last-child { margin-bottom: 0; }
+
 /* credentials / hours (reused) */
-.creds { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-5); }
-.cred { background: var(--white); border: 1px solid var(--clay);
+.creds { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-5); }.cred { background: var(--white); border: 1px solid var(--clay);
         padding: var(--sp-5) var(--sp-4); text-align: center; }
 .cred b { display: block; font-family: var(--font-display); font-size: var(--fs-h4);
           font-weight: var(--fw-display); color: var(--navy-600);
