@@ -1093,8 +1093,8 @@ export const FinancingPage: FC = () => (
       img="treatment-header"
       imgAlt="Inside the Roark Orthodontics practice"
       crumbs={[{ name: 'Home', href: '/' }, { name: 'Financing' }]}
-      h1="Insurance & Payment Plans in Franklin, TN"
-      sub="One fee for every appliance, insurance verified before your first visit, and 0% interest plans with a down payment at the start. No surprises after the fact."
+      h1="Orthodontic Cost, Insurance & Payment Plans in Franklin, TN"
+      sub="One fee for every appliance, insurance checked before your first visit, and 0% interest payment plans with a down payment at the start."
     />
 
     <FactStrip
@@ -1111,12 +1111,12 @@ export const FinancingPage: FC = () => (
           <div class="reveal">
             <span class="eb">What it costs</span>
             <h2 class="h-section" style="font-size:var(--fs-h3);margin-bottom:1.25rem">
-              We price the bite, not the appliance
+              Your fee depends on your bite, not your appliance
             </h2>
             <p>
-              A mild crowding case and a case involving a deep overbite, a crossbite and impacted teeth are not the
-              same job. So the fee follows the complexity, and braces and aligners cost the same. That is deliberate
-              — the decision should be clinical, not financial.
+              A mild crowding case and a case with a deep overbite, a crossbite and impacted teeth are not the same
+              job. So the fee follows the complexity of the bite, and braces and aligners cost the same. That keeps
+              the choice clinical rather than financial.
             </p>
             <p>
               Your written fee covers records, the iTero scan, the appliance, every adjustment, your first set of
@@ -1126,7 +1126,6 @@ export const FinancingPage: FC = () => (
               items={[
                 'One fee, quoted in writing at the free exam',
                 'No separate charge for a broken bracket',
-                'The fee does not change if treatment runs longer than estimated',
                 'Sibling and family treatment discounts applied automatically',
               ]}
             />
@@ -1174,7 +1173,7 @@ export const FinancingPage: FC = () => (
         />
         <div class="grid-3" style="margin-top:3rem">
           {[
-            ['0% interest plans', 'A 24-month case runs 24 months. No interest, no finance charge, set up in the office in a few minutes.'],
+            ['0% interest plans', 'A 24-month case runs 24 months with no interest added. Set-up is simple at the office.'],
             ['Pay in full', 'A pay-in-full discount is available if you would rather settle the whole fee at once.'],
             ['HSA and FSA', 'Orthodontic treatment is an eligible expense for both. We can time treatment around your plan year.'],
           ].map(([t, b]) => (
@@ -1196,7 +1195,7 @@ export const FinancingPage: FC = () => (
       </div>
     </section>
 
-    <CLOSING_CTA from="financing_cta" title="A written price before you decide" body="The free exam ends with a treatment plan, a fee breakdown and what your insurance contributes." />
+    <CLOSING_CTA from="financing_cta" title="Get a written price before you decide" body="The free exam ends with a treatment plan, a fee breakdown and what your insurance contributes." />
   </main>
 )
 

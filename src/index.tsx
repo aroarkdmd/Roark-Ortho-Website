@@ -328,9 +328,9 @@ app.get('/financing', (c) =>
     <Layout
       tag={tagFor(c)}
       seo={{
-        title: 'Insurance & Payment Plans | Roark Orthodontics Franklin, TN',
+        title: 'Orthodontic Cost, Insurance and Payment Plans in Franklin, TN | Roark Orthodontics',
         description:
-          'What orthodontic treatment costs in Franklin, TN: one fee for every appliance, insurance verified before your first visit, and 0% interest plans with a down payment at the start.',
+          'What braces and Invisalign® cost in Franklin, TN: one fee for every appliance, insurance verified before your first visit, and 0% interest payment plans with a down payment at the start.',
         canonical: '/financing',
         active: 'financing',
         breadcrumb: [{ name: 'Home', href: '/' }, { name: 'Financing' }],
