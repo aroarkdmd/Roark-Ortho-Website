@@ -157,8 +157,8 @@ export const HomePage: FC = () => (
               link: 'Aligners for every age',
             },
             {
-              img: 'gallery-7',
-              alt: 'A treatment bay at Roark Orthodontics',
+              img: 'surgical-scan',
+              alt: 'A jaw scan on a computer screen, used to plan surgical orthodontics',
               eyebrow: 'Teens & adults',
               title: 'Surgical Orthodontics',
               body: 'For jaw discrepancies that moving teeth alone cannot correct. Dr. Roark plans and coordinates treatment together with your oral and maxillofacial surgeon, in both phases either side of surgery.',
