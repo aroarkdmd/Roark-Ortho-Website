@@ -322,7 +322,7 @@ export const PrivacyPage: FC = () => (
             appointment was booked&rdquo; and nothing about who it was for.
           </p>
           <p>
-            We also do not run a separate analytics product on this site. There is no per-page behavioural profile
+            We also do not run a separate analytics product on this site. There is no per-page behavioral profile
             being assembled here.
           </p>
           <h3>How consent works</h3>

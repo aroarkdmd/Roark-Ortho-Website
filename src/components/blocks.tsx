@@ -98,7 +98,7 @@ export const HoursList: FC<{ tone?: 'rose' }> = ({ tone }) => {
 
 /* ── FAQ ───────────────────────────────────────────────────────────────────
    Native <details>/<summary> is kept deliberately: keyboard support,
-   find-in-page and no-JS behaviour come for free. First item open.          */
+   find-in-page and no-JS behavior come for free. First item open.          */
 export const FaqList: FC<{ items: Faq[]; idPrefix?: string }> = ({ items, idPrefix = 'faq' }) => (
   <div class="faq">
     {items.map((it, i) => (

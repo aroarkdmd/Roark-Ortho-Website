@@ -4,7 +4,7 @@ import { Icon } from './icons'
 
 /* ── LOGO ──────────────────────────────────────────────────────────────────
    The rose rule is part of the mark, so each ground gets its own prepared
-   artwork rather than a recolour. Sizing is always by width (2.484:1).       */
+   artwork rather than a recolor. Sizing is always by width (2.484:1).       */
 export const LOGO_SRC = {
   paper: '/static/logos/roark-logo.png',
   reverse: '/static/logos/roark-logo-reverse.png',
@@ -51,6 +51,13 @@ export const PHOTO_WIDTHS: Record<string, number[]> = {
   invisalign: [480, 960],
   'itero-scan': [480, 960],
   'treatment-header': [960],
+  /* Team portraits, cropped 3:4 from the practice's own photographs on
+     roarkortho.com. Each width here is a file that exists on disk. */
+  'team-nicole': [480, 800],
+  'team-kelsey': [480, 730],
+  /* The Roark family — Ashley, Brian, Margot and Sloane walking in the
+     woods. From the practice's own shoot, kept at its native 3:2. */
+  'family-roark': [480, 960, 1440],
 }
 
 const PHOTO = '/static/photos/'

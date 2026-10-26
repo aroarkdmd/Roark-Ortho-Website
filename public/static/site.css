@@ -363,15 +363,15 @@ a:hover { color: var(--c-link-hover); }
 
 
 /* ============================================================================
-   LOGO COLOURWAYS — the supplied 1200×483 lockup, three prepared variants.
+   LOGO COLORWAYS — the supplied 1200×483 lockup, three prepared variants.
 
-   The rose rule is part of the mark, so the logo is NEVER recoloured with a
+   The rose rule is part of the mark, so the logo is NEVER recolored with a
    filter and NEVER sits on a plate or box. Instead each ground gets a variant
-   of the real artwork with its colours swapped:
+   of the real artwork with its colors swapped:
      roark-logo.png            navy lettering + rose rule   → light grounds
      roark-logo-reverse.png    paper lettering + ROSE rule  → navy / dark grounds
      roark-logo-on-rose.png    white lettering + pale rule  → the rose footer
-   Same letterforms, same lockup, both colours intact everywhere.
+   Same letterforms, same lockup, both colors intact everywhere.
 
    Sizing: set a width, never a height — the aspect ratio is 2.484:1.
    ========================================================================= */
@@ -381,9 +381,9 @@ a:hover { color: var(--c-link-hover); }
 
 /* ============================================================================
    ROARK ORTHODONTICS — UPGRADED SITE STYLESHEET
-   Structural / technical layer ONLY. Every colour, font, radius and shadow
+   Structural / technical layer ONLY. Every color, font, radius and shadow
    value is inherited from ../../colors_and_type.css — the verified brand tokens.
-   Nothing in this file introduces a new brand colour or typeface.
+   Nothing in this file introduces a new brand color or typeface.
 
    Contents
      1.  Base + layout helpers
@@ -392,7 +392,7 @@ a:hover { color: var(--c-link-hover); }
      4.  Hero + interior page banner
      5.  PATHWAY CARDS            (dual-demographic split)
      6.  WAVEORTHO EMBED          (responsive widget host + modal)
-     7.  STICKY MOBILE CTA        (conversion defence)
+     7.  STICKY MOBILE CTA        (conversion defense)
      8.  GEO FOOTER               (NAP · map embed · service proximity)
      9.  PPC LANDING PAGE SHELL   (ad-specific, nav-free)
      10. Blog (index + article)
@@ -585,7 +585,7 @@ img { display: block; }
    aspect-ratio (or a long unbreakable string) therefore blows the track wider
    than the viewport — and the page-wide `overflow-x: clip` would then HIDE the
    overflow instead of revealing it, silently CUTTING OFF TEXT on mobile.
-   min-width: 0 restores the intended shrink-to-fit behaviour. This is the single
+   min-width: 0 restores the intended shrink-to-fit behavior. This is the single
    most important rule for keeping content intact on a narrow screen. */
 .split > *, .grid-2 > *, .grid-3 > *, .grid-4 > *, .path > *,
 .posts > *, .lp__grid > *, .ftr__grid > *, .mas > *,
@@ -633,7 +633,7 @@ img { display: block; }
 .pbanner p { color: rgba(255,255,255,.9); max-width: 46rem; margin: 0; }
 
 /* breadcrumbs — visible trail + BreadcrumbList schema source of truth */
-/* Default styling is for light grounds (cream / paper): every text colour here
+/* Default styling is for light grounds (cream / paper): every text color here
    clears 4.5:1 against #f7f1ea — links #444 (8.7:1), current page #6a6a6a (4.8:1).
    The dark photo banner overrides below restore the white ramp. */
 .crumbs { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center;
@@ -1027,6 +1027,10 @@ slotmark { display: none; }
                       border: 2px solid var(--roark-pink); border-radius: var(--r-xs);
                       pointer-events: none; z-index: 0; }
 .frame-rose img { position: relative; z-index: 1; }
+/* Caption under a framed photo — sits outside the rose rule, quiet and small */
+.photo-cap { position: relative; z-index: 1; margin: var(--sp-5) 0 0;
+             font-size: var(--fs-caption); line-height: 1.5;
+             color: var(--ink-600); font-style: italic; }
 
 .card { background: var(--white); border: 1px solid var(--clay);
         border-radius: var(--r-md); overflow: hidden; display: flex;
@@ -1137,6 +1141,88 @@ slotmark { display: none; }
 .team__mono--lg { width: 4.5rem; height: 4.5rem; font-size: 1.5rem; }
 .team__mono.on-rose { background: rgba(255,255,255,.16); border-color: rgba(255,255,255,.5);
                       color: #fff; }
+
+/* ── TEAM PORTRAITS ────────────────────────────────────────────────────────
+   Real photographs of Nicole and Kelsey, cropped 3:4 from the practice's own
+   photographs on roarkortho.com. Dr. Roark's portrait already existed in the
+   photo set and is reused here, so all three read as one shoot. */
+.team__photo {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--sand);
+  border-radius: var(--r-xs);
+}
+.team__photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 18%;
+  transition: transform 1.1s var(--ease-warm);
+}
+.team__member:hover .team__photo img { transform: scale(1.03); }
+
+/* Founder block: portrait beside the full biography. The biography is long
+   enough that it needs the wider column. */
+.team__feature {
+  display: grid;
+  grid-template-columns: .8fr 1.2fr;
+  gap: var(--sp-9);
+  align-items: start;
+}
+
+/* The other two, side by side. Their biographies are shorter, so the portrait
+   sits above the text rather than beside it. */
+.team__grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-7);
+  align-items: start;
+  margin-top: var(--sp-9);
+}
+
+.team__member { display: flex; flex-direction: column; min-width: 0; }
+.team__meta { padding-top: var(--sp-5); }
+.team__name {
+  font-family: var(--font-display);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-medium);
+  color: var(--navy-600);
+  line-height: 1.2;
+  margin: 0 0 .3rem;
+}
+.team__role {
+  font-size: var(--fs-eyebrow);
+  font-weight: var(--fw-semi);
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--rose-800);
+  margin: 0 0 var(--sp-4);
+}
+/* The one-line reason this person is the one you are glad to see. Set in the
+   display serif and italic so it reads as a caption, not as body copy. */
+.team__short {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--fs-h5);
+  font-weight: var(--fw-display-light);
+  line-height: 1.35;
+  color: var(--rose-800);
+  margin: 0 0 var(--sp-5);
+}
+.team__bio {
+  font-size: var(--fs-body-sm);
+  color: var(--ink-700);
+  display: grid;
+  gap: .8rem;
+}
+.team__bio p { margin: 0; }
+
+@media (max-width: 1000px) {
+  .team__feature { grid-template-columns: 1fr; gap: var(--sp-7); }
+  .team__feature .team__photo { aspect-ratio: 4 / 3; }
+  .team__feature .team__photo img { object-position: center 30%; }
+  .team__grid2 { grid-template-columns: 1fr; margin-top: var(--sp-8); }
+}
 
 /* Long-form explanatory copy that is not the blog's .article column. */
 .prose > p { font-size: var(--fs-body); color: var(--ink-700); }
@@ -1339,7 +1425,7 @@ slotmark { display: none; }
    The handoff's founder band emits `.stat-row` / `.stat`, which the design
    never styles — no rule for either exists in site.css, so the prototype fell
    back to plain inline text. They are rebuilt here as bordered cards, which
-   makes the responsive behaviour ours to define.
+   makes the responsive behavior ours to define.
 
    Three cards across a ~440px column leave ~126px of text each, but
    "BOARD CERTIFIED" set at 15px/0.08em needs ~162px — so a 3-up row can never
@@ -1369,7 +1455,7 @@ slotmark { display: none; }
   /* Below ~430px two columns squeeze "OPENED ON MAIN ST" (159px at the
      caption size) into 145px of text box, so the row collapses to one card per
      line — set as a compact row (value left, label right) rather than three
-     tall centred blocks, which would push the photo far down the page. */
+     tall centered blocks, which would push the photo far down the page. */
   .creds--founder { grid-template-columns: 1fr; }
   .creds--founder .cred:last-child:nth-child(odd) { grid-column: auto; }
   .creds--founder .cred {
@@ -1396,7 +1482,7 @@ slotmark { display: none; }
      is always solid. That removes the scroll listener from the equation
      entirely: the transparent-until-you-scroll state (which is only worth it
      over the hero photograph) can no longer leave section text showing behind
-     the bar. Desktop keeps the transparent-over-hero behaviour. */
+     the bar. Desktop keeps the transparent-over-hero behavior. */
   .hdr .hdr__bar { background: var(--white); border-bottom-color: var(--clay); }
   .hdr, .hdr--solid { box-shadow: 0 1px 0 rgba(0, 41, 70, .06); }
   .hdr .burger { color: var(--navy-600); }
@@ -1425,7 +1511,7 @@ slotmark { display: none; }
    Used by the privacy policy to name storage keys (roark-booking-v1 and
    friends). Those names are literal identifiers, so they must not be
    re-flowed or confused with prose — hence a monospace face at a size that
-   still sits on the Lora baseline. Colour is deliberately the body ink, not
+   still sits on the Lora baseline. Color is deliberately the body ink, not
    an accent: this is a reference, not a link. */
 .article code {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;

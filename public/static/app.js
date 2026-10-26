@@ -1,5 +1,5 @@
 /* ============================================================================
-   ROARK ORTHODONTICS — site behaviour.
+   ROARK ORTHODONTICS — site behavior.
    Ported from the design's prototype scripts, minus the two known defects the
    handoff calls out: no client-side JSX compilation, no development React.
    Content is server-rendered; this file only adds interaction.
