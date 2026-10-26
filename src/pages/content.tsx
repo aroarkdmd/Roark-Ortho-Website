@@ -137,7 +137,7 @@ export const TreatmentsPage: FC = () => (
         <SectionHead
           eyebrow="Which appliance, which age"
           title="Braces are open to every age group — and each aligner system is built for one"
-          body="Braces are driven by the bite rather than the patient's birthday. The aligner range is different: each system is shaped for a specific stage of growth, so the age group decides which one applies."
+          body="Braces work well at any age, and the bite, not the birthday, decides which treatment fits. Each aligner system is designed for a specific stage of growth, so your age group decides which one applies."
         />
         <CompareTable
           head={['Treatment', 'Children', 'Teens', 'Adults', 'Typical length']}
@@ -495,7 +495,7 @@ export const AdultsPage: FC = () => (
             <p>
               That is why most of our adult patients choose <b>Invisalign® clear aligners</b>: they are clear,
               removable, and you eat and drink normally. Plenty choose braces instead, and that is a perfectly
-              reasonable decision — braces are driven by the bite rather than the appliance, and clear (ceramic)
+              reasonable decision. Braces work well for adults, and clear (ceramic)
               brackets are much less visible than metal.
             </p>
             <p>
@@ -775,7 +775,7 @@ export const BracesPage: FC = () => (
       imgAlt="Braces on a model of teeth in the Roark Orthodontics treatment room"
       crumbs={[{ name: 'Home', href: '/' }, { name: 'Treatments', href: '/treatments' }, { name: 'Braces' }]}
       h1="Braces in Franklin, TN — Metal & Clear, Every Age"
-      sub="A proven, reliable option driven by the bite rather than the patient's birthday. Metal or tooth-colored ceramic, and a perfectly reasonable choice at any age."
+      sub="A proven, reliable option, chosen by the bite rather than the age. Metal or tooth-colored ceramic, and a perfectly reasonable choice at any age."
       eager
     />
     <FactStrip
