@@ -52,7 +52,7 @@ const CrossLinks: FC<{ links: { eyebrow: string; title: string; body: string; hr
 
 const CompareTable: FC<{ head: string[]; rows: string[][]; minWidth?: string }> = ({ head, rows, minWidth = '44rem' }) => (
   <div class="tw" style="margin-top:3rem;background:var(--white);border:1px solid var(--clay);border-radius:var(--r-md)">
-    <table class="article" style={'margin:0;min-width:' + minWidth}>
+    <table class="article" style={'margin:0;width:100%;min-width:' + minWidth}>
       <thead>
         <tr>
           {head.map((h) => (
