@@ -261,7 +261,7 @@ export const KidsPage: FC = () => (
       imgAlt="A mother and her daughter smiling together"
       crumbs={[{ name: 'Home', href: '/' }, { name: 'Kids & Teens' }]}
       h1="Braces & Invisalign First® for Kids in Franklin, TN"
-      sub="Early screening from age 7, braces for every age, and the stage-matched aligner systems. A complimentary exam tells you whether anything is needed yet — and often the answer is no."
+      sub="Children and teens often benefit from a first orthodontic check by age 7. We offer braces at every age and Invisalign First® and Invisalign Teen® for growing smiles. Your complimentary exam answers one question clearly: does your child need treatment now, or is it simply a good time to keep an eye on things?"
       eager
     />
 
