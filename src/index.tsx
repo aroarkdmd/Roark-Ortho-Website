@@ -306,9 +306,9 @@ app.get('/palatal-expander', (c) =>
     <Layout
       tag={tagFor(c)}
       seo={{
-        title: 'Palatal Expander for Children in Franklin, TN',
+        title: 'Palatal & Invisalign® Expanders for Children in Franklin, TN',
         description:
-          'A fixed palatal expander gently widens a narrow upper jaw in children, often the right answer for a crossbite while the growth center is still open. Franklin, TN.',
+          'Traditional rapid palatal expanders (RPE) and Invisalign® expanders for children in downtown Franklin, TN. Both widen a narrow upper jaw while growth can still be guided. Complimentary screening with a written plan.',
         canonical: '/palatal-expander',
         active: 'treatments',
         breadcrumb: [

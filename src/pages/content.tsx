@@ -971,15 +971,15 @@ export const ExpanderPage: FC = () => (
       img="gallery-3"
       imgAlt="A treatment bay at Roark Orthodontics in downtown Franklin"
       crumbs={[{ name: 'Home', href: '/' }, { name: 'Treatments', href: '/treatments' }, { name: 'Palatal Expander' }]}
-      h1="Palatal Expander for Children in Franklin, TN"
-      sub="A fixed appliance that gently widens a narrow upper jaw — often the right answer for a crossbite while the growth center is still open."
+      h1="Palatal & Invisalign® Expanders for Children in Franklin, TN"
+      sub="Traditional rapid palatal expanders (RPE) and Invisalign® expanders, both used to widen a narrow upper jaw while the growth center is still open. We offer both, and the right choice depends on your child."
       eager
     />
     <FactStrip
       items={[
         ['Best age range', '7–10 years', 'While the growth center of the upper jaw is still open.'],
-        ['How long', 'Weeks of turns', 'Then the appliance stays in place to hold the new width while bone fills in.'],
-        ['Turned at home', 'Twice a day', 'A small key, a quarter turn — we show you how before you start.'],
+        ['How long', 'Weeks of turns, then holding', 'Then the appliance stays in place while new bone fills in.'],
+        ['Turned at home', 'Typically once a day', 'For a traditional RPE, depending on the patient. We show you how before you start.'],
       ]}
     />
     <section class="sec sec--paper cv">
@@ -991,21 +991,20 @@ export const ExpanderPage: FC = () => (
               Widening the upper jaw while growth can still be guided
             </h2>
             <p>
-              A narrow upper jaw is not simply a cosmetic matter. When the upper arch is too narrow for the lower,
-              the upper teeth bite inside the lower ones — a crossbite — and the airway is often narrower than it
-              should be. A palatal expander applies gentle, controlled pressure across the roof of the mouth to
-              widen the arch.
+              A narrow upper jaw can affect more than appearance. When the upper arch is too narrow for the lower, the
+              upper teeth bite inside the lower ones (a crossbite), and the airway can be narrower than it should be.
+              A palatal expander applies gentle, controlled pressure to widen the upper arch.
             </p>
             <p>
-              It works because the suture between the two halves of the upper jaw has not yet fused. After growth
-              finishes, that same widening usually requires surgery, which is why timing matters.
+              Both types work because the suture between the two halves of the upper jaw has not yet fused. After
+              growth finishes, that same widening usually requires surgery, which is why timing matters.
             </p>
             <Ticks
               items={[
-                'A fixed appliance — nothing to remember to wear',
-                'Parents turn it at home, twice a day, with a small key',
+                'Two appliance types: traditional RPE and Invisalign® expander',
                 'Often used alongside Invisalign First® or braces',
                 'Holding period afterwards while new bone fills the gap',
+                'Fee quoted in writing at the complimentary screening',
               ]}
             />
             <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.75rem">
@@ -1025,6 +1024,25 @@ export const ExpanderPage: FC = () => (
         </div>
       </div>
     </section>
+    <section class="sec sec--cream cv" id="options">
+      <div class="wrap wrap-wide">
+        <SectionHead
+          eyebrow="Two types of expander"
+          title="A fixed appliance or a removable aligner, matched to your child"
+          body="We offer both a traditional rapid palatal expander (RPE) and an Invisalign® expander. Both widen the upper jaw while the growth center is open. The right choice depends on your child's bite, how much widening is needed and how the appliance will be used at home. We explain both at the complimentary screening."
+        />
+        <div style="margin-top:3rem">
+          <CompareTable
+            head={['', 'Traditional RPE', 'Invisalign® expander']}
+            rows={[
+              ['Appliance', 'Fixed, bonded to the upper back teeth', 'Removable, aligner-style appliance'],
+              ['At home', 'Turned with a key, typically once a day, depending on the patient', 'Worn as prescribed, and removed for meals and brushing'],
+            ]}
+            minWidth="36rem"
+          />
+        </div>
+      </div>
+    </section>
     <section class="sec sec--cream cv">
       <div class="wrap wrap-wide">
         <div class="split" style="align-items:start">
@@ -1034,10 +1052,10 @@ export const ExpanderPage: FC = () => (
               Ask about your child's arch
             </h2>
             <p>
-              Whether an expander is appropriate depends on the width of the arch, the way the back teeth meet, and
-              how much growth is left. A screening with photographs and a scan answers it.
+              Whether an expander is appropriate, and which type, depends on the width of the arch, the way the back
+              teeth meet, and how much growth is left. A screening with photographs and a scan answers it.
             </p>
-            <Ticks items={['Complimentary screening — no charge', 'A written plan with fees before you decide', 'Dr. Roark sees every patient herself']} />
+            <Ticks items={['Complimentary screening, with no charge', 'A written plan with fees before you decide', 'Dr. Roark sees every patient herself']} />
           </div>
           <div class="reveal">
             <ContactPanel id="expander-contact" location="expander_cost" title="Ask about expanders" lede="A question about your child's bite or timing? Send it here and we will reply by email." />
