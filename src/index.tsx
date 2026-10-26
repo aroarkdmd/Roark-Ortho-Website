@@ -264,7 +264,7 @@ app.get('/braces', (c) =>
     <Layout
       tag={tagFor(c)}
       seo={{
-        title: 'Braces in Franklin, TN | Metal & Clear Braces for Every Age',
+        title: 'Braces in Franklin, TN: Metal & Clear Options | Roark Orthodontics',
         description:
           'Traditional metal braces and tooth-colored clear braces for children, teenagers and adults in downtown Franklin, TN. One fee covering records, adjustments and retainers.',
         canonical: '/braces',

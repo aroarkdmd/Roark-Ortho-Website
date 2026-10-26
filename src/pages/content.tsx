@@ -786,29 +786,27 @@ export const BracesPage: FC = () => (
           <div class="reveal">
             <span class="eb">Braces</span>
             <h2 class="h-section" style="font-size:var(--fs-h3);margin-bottom:1.25rem">
-              Still the most predictable way to move teeth
+              Fixed braces that work at every stage
             </h2>
             <p>
               Braces are fixed to the teeth, so they work regardless of how many hours a day anyone remembers to wear
-              them. That is why they remain the recommendation for complicated bites, for impacted teeth, and for
-              anyone — child or adult — who would rather not manage a tray.
+              them. They are often used for complex bites, for impacted teeth, and by anyone who would rather not manage a tray.
             </p>
             <p>
               <b>Metal braces</b> use stainless brackets and a wire. <b>Clear (ceramic) braces</b> use tooth-colored
               brackets, which are much less visible — but they are still braces, and they are still visible up close.
-              We will not tell you otherwise.
             </p>
             <Ticks
               items={[
                 'Open to children, teenagers and adults alike',
                 'Adjustments every 6–8 weeks, in short visits',
-                'Clear brackets available for adults and teenagers',
+                'Clear (ceramic) brackets available for all ages',
                 'One fee covering records, appliances, adjustments and retainers',
               ]}
             />
             <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.75rem">
               <a class="btn btn--pri" href="/book?from=braces_hero" data-book="braces_hero">
-                <Icon name="calendar" size={11} /> Book a free exam
+                <Icon name="calendar" size={11} /> Book a complimentary exam
               </a>
               <a class="btn btn--out-ink" href={BIZ.phoneHref} data-phone="braces_hero">
                 <Icon name="phone" size={11} /> {BIZ.phoneDisplay}
