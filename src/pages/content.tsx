@@ -157,7 +157,7 @@ export const TreatmentsPage: FC = () => (
         <SectionHead
           eyebrow="Still deciding?"
           title="Start from who is being treated"
-          body="Each path lays out the options, the timeline and the cost for that age group."
+          body="Start with the age group that applies to you."
         />
         <div class="path" style="margin-top:3rem">
           <a class="path__card path__card--kids" href="/kids-braces">
