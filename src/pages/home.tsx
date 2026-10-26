@@ -263,7 +263,7 @@ export const HomePage: FC = () => (
             <Pic name="treatment-header" alt="Inside the practice" sizes="(max-width: 1000px) 50vw, 33vw" widths={[960]} w={960} h={720} />
           </figure>
           <figure>
-            <Pic name="family" alt="A mother and her daughter smiling together" sizes="(max-width: 1000px) 50vw, 33vw" widths={[480, 960]} w={960} h={640} />
+            <Pic name="itero-scan" alt="A digital iTero scan being taken at Roark Orthodontics" sizes="(max-width: 1000px) 50vw, 33vw" widths={[480, 960]} w={960} h={720} />
           </figure>
         </div>
       </div>

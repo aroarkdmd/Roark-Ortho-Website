@@ -49,6 +49,7 @@ export const PHOTO_WIDTHS: Record<string, number[]> = {
   'gallery-6': [480, 960],
   'gallery-7': [480, 683],
   invisalign: [480, 960],
+  'itero-scan': [480, 960],
   'treatment-header': [960],
 }
 
