@@ -317,7 +317,7 @@ export const Footer: FC = () => (
         </span>
         <span style="display:flex;gap:1.25rem;flex-wrap:wrap">
           <a href="/contact">Contact</a>
-          <a href="/contact#faq">Privacy</a>
+          <a href="/privacy">Privacy</a>
           <a href="/contact#faq">Accessibility</a>
           <a href="/sitemap.xml">Sitemap</a>
         </span>
@@ -355,7 +355,7 @@ export const ConsentBar: FC<{ copy: string }> = ({ copy }) => (
       <button class="btn btn--out-ink btn--sm" data-consent="deny">
         Decline
       </button>
-      <a class="btn btn--out-ink btn--sm" href="/contact#faq">
+      <a class="btn btn--out-ink btn--sm" href="/privacy">
         Privacy
       </a>
     </div>

@@ -91,10 +91,40 @@ Deferred / outstanding:
   (`/api/booking`) and the contact form are already correct.
 - ⚠ `GTM_ID` is unset, so **no tag loads**. Set it (`npx wrangler pages secret put GTM_ID
   --project-name roark-orthodontics`) and add a GTM Custom Event trigger on `appointment_booked`.
-- ⚠ **No privacy policy or HIPAA Notice of Privacy Practices page.** The footer "Privacy" link
-  points at `/contact#faq`. A practice collecting names, emails and phone numbers needs both, and
-  this is independent of the cookie-consent question. Needs the practice's own reviewed text.
-- ⚠ `/api/submissions` is an unauthenticated admin read. It is not linked from the site, but it
-  returns every stored submission to anyone who requests it. Needs auth or removal before launch.
+- ⚠ **No HIPAA Notice of Privacy Practices.** `/privacy` covers the *website* only (forms, storage,
+  ads measurement) and deliberately says so — it is not a substitute for the clinical notice, which
+  needs the practice's own reviewed text.
+- ⚠ The footer **"Accessibility"** link still points at `/contact#faq`, which has nothing about
+  accessibility. Needs either a real page or repointing.
+- ✅ `/api/submissions` is no longer an open admin read. It requires a bearer `ADMIN_TOKEN` and
+  **fails closed with a 404 when the secret is unset** (verified: unauthenticated GET returns 404).
+  Set it with `npx wrangler pages secret put ADMIN_TOKEN --project-name roark-orthodontics` before
+  you need to read submissions.
+
+## Privacy page (`/privacy`)
+
+`src/pages/privacy.tsx`, rendered at `/privacy`. It describes **only what the code actually does**,
+and was written against the running implementation rather than from a template:
+
+| Claim on the page | Where it comes from |
+|---|---|
+| Contact form fields, stored in our database | `POST /api/contact` → D1 `submissions` |
+| Booking fields incl. date of birth, insurance | `POST /api/booking`, `public/static/booking.js` payload |
+| Scheduler request fields | `POST /api/scheduler` |
+| `roark-booking-v1` local storage draft | `public/static/booking.js` `STORE` |
+| `roark-consent-v1` consent choice | `public/static/tagging.js` `CONSENT_KEY` |
+| `roark-conv-fired` session flag | `public/static/tagging.js` `CONV_KEY` |
+| "Sets no cookies of its own" | no `document.cookie` anywhere in `src/` or `public/static/` |
+| "Fonts served from our own server" | `/static/fonts/*.woff2`, no Google Fonts request |
+| "Map loads only when tapped" | `initMaps()` in `public/static/app.js` swaps a facade for an iframe |
+| "No patient data in the conversion" | `roarkBookingConversion()` payload: ref, value, currency only |
+| EEA/UK/CH consent prompt | `consentRequired()` + `request.cf.country` in `src/lib/tagging.ts` |
+
+**If any of those change, this page must change with it.** The section 6 storage table and section
+10 processor table are the two that go stale fastest.
+
+Consent can be revisited via `?consent=1` on any URL, which clears the stored choice and re-shows
+the bar — that is documented to visitors in section 13.
+
 
 Assets: logos, 4 woff2 fonts and 17 WebP photos copied from the handoff bundle.

@@ -1383,3 +1383,26 @@ slotmark { display: none; }
 :root { --hdr-anchor: 6rem; }
 @media (max-width: 1000px) { :root { --hdr-anchor: 5rem; } }
 [id] { scroll-margin-top: calc(var(--hdr-anchor) + var(--sp-4)); }
+
+/* ── INLINE CODE IN PROSE ────────────────────────────────────────────────
+   Used by the privacy policy to name storage keys (roark-booking-v1 and
+   friends). Those names are literal identifiers, so they must not be
+   re-flowed or confused with prose — hence a monospace face at a size that
+   still sits on the Lora baseline. Colour is deliberately the body ink, not
+   an accent: this is a reference, not a link. */
+.article code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: .875em;
+  color: var(--navy-600);
+  background: var(--cream);
+  border: 1px solid var(--clay);
+  border-radius: 3px;
+  padding: .1em .35em;
+  white-space: nowrap;
+}
+/* A whole address (roarkortho.com/?consent=1) is 25 monospace characters —
+   fine at 360px, tight at 320px. Let it break there rather than push the
+   paragraph wider than the screen. */
+@media (max-width: 430px) {
+  .article code { white-space: normal; overflow-wrap: anywhere; }
+}

@@ -6,6 +6,7 @@ import { HomePage } from './pages/home'
 import { SurgicalOrthoPage } from './pages/surgical'
 import { ContactPage } from './pages/contact'
 import { BookPage } from './pages/book'
+import { PrivacyPage } from './pages/privacy'
 import {
   TreatmentsPage,
   KidsPage,
@@ -113,6 +114,23 @@ app.get('/contact', (c) =>
       }}
     >
       <ContactPage />
+    </Layout>,
+  ),
+)
+
+app.get('/privacy', (c) =>
+  c.html(
+    <Layout
+      tag={tagFor(c)}
+      seo={{
+        title: 'Privacy Policy | Roark Orthodontics, Franklin TN',
+        description:
+          'What the Roark Orthodontics website collects, why, and how to have it removed. No cookies of our own, optional Google Ads measurement, and a clear line between this policy and our HIPAA Notice of Privacy Practices.',
+        canonical: '/privacy',
+        breadcrumb: [{ name: 'Home', href: '/' }, { name: 'Privacy' }],
+      }}
+    >
+      <PrivacyPage />
     </Layout>,
   ),
 )
