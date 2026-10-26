@@ -278,7 +278,9 @@
 }
 
 /* Narrow screens: let the calendar scroll inside its own box rather than
-   pushing the page sideways. */
+   pushing the page sideways. margin:0 auto centres the table — a table with an
+   auto width is shrink-to-fit, and auto side margins centre that box (the same
+   trick as `table { margin: 0 auto }`). */
 #waveInquiryForm .calendar-container {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -286,7 +288,7 @@
 
 #waveInquiryForm .calendar-table {
   width: auto;
-  margin: 0;
+  margin: 0 auto;
   border-collapse: separate;
   border-spacing: .2rem;
   font-size: 1rem;
@@ -402,6 +404,17 @@
   border-top: 1px solid var(--w-line);
 }
 
+/* Wave's .show rule parks the panel beside the calendar at a fixed 173px with a
+   20px left offset — the two-up layout it expects. We stack it under the
+   calendar instead, so the fixed width and offset have to go, and centring it
+   keeps it aligned with the calendar above. */
+#waveInquiryForm .available-appointments-container.show {
+  width: 100%;
+  max-width: 21rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 #waveInquiryForm .available-appointments-container.hide {
   margin: 0;
   width: auto;
@@ -421,7 +434,7 @@
   font-weight: 600;
   letter-spacing: .08em;
   text-transform: uppercase;
-  text-align: left;
+  text-align: center;
   color: var(--w-mute);
 }
 
@@ -429,6 +442,17 @@
   padding: .2rem 0;
   border: none;
   background: transparent;
+}
+
+/* Wave lays the chosen time and the Confirm button out side by side
+   (display:flex; justify-content:space-between) in a 173px column, which is why
+   Confirm ends up crammed next to the time. Stacking them gives Confirm the full
+   width underneath. */
+#waveInquiryForm .available-appointments-table .selected-appointment-container {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  justify-content: flex-start;
 }
 
 #waveInquiryForm .available-time-button,
@@ -481,7 +505,7 @@
   justify-content: center;
   width: 100%;
   min-width: 0;
-  margin: .45rem 0 0;
+  margin: 0;
   padding: .7rem .9rem;
   font-family: 'Lora', Georgia, serif;
   font-size: .8125rem;
