@@ -3,20 +3,26 @@ import { BIZ } from '../lib/site-data'
 
 /* ── PRIVACY POLICY ────────────────────────────────────────────────────────
    Scope note, because it matters legally: this page describes the WEBSITE
-   only — the forms, the booking flow and the advertising measurement. It is
+   only — the forms, the appointment scheduler and the advertising measurement. It is
    deliberately NOT a HIPAA Notice of Privacy Practices. How the practice uses
    and discloses protected health information is a separate document that the
    practice already gives patients; inventing that text here would be wrong,
    so section 2 points to it instead.
 
    Every factual claim below is checked against the code that actually runs:
-     · /api/contact, /api/booking, /api/scheduler  → D1 `submissions`
-     · localStorage roark-booking-v1   (public/static/booking.js)
+     · /api/contact, /api/scheduler            → D1 `submissions`
+     · /book  → WaveOrtho, browser-to-central.waveortho.com (NOT our database)
      · localStorage roark-consent-v1   (public/static/tagging.js)
      · sessionStorage roark-conv-fired (public/static/tagging.js)
      · no document.cookie anywhere in src/ or public/static
      · fonts self-hosted from /static/fonts — no Google Fonts request
      · the Google map is a facade; no iframe until the visitor taps it
+
+   NOTE ON THE BOOKING FLOW. /book used to be a form of our own that posted to
+   /api/booking and was saved in our D1 database. It is now the practice's real
+   WaveOrtho scheduler, mounted from Wave's JavaScript library: the patient's
+   booking details are sent straight from their browser to WaveOrtho and never
+   reach this website. Any sentence here that claims otherwise is a bug.
 
    If any of that changes, this page has to change with it.            */
 export const PrivacyPage: FC = () => (
@@ -150,7 +156,7 @@ export const PrivacyPage: FC = () => (
           <h2 id="what-this-covers">3. What this policy covers</h2>
           <p>
             It covers everything that happens on this website: the pages you read, the three forms you can fill in,
-            the appointment booking flow, and the advertising measurement described in section 7.
+            the appointment scheduler, and the advertising measurement described in section 7.
           </p>
           <p>It does not cover:</p>
           <ul>
@@ -189,27 +195,29 @@ export const PrivacyPage: FC = () => (
             add. It records which page you used it from.
           </p>
 
-          <h3>The full booking flow</h3>
+          <h3>The appointment scheduler</h3>
           <p>
-            <a href="/book">The booking flow</a> is the longest form, because we are trying to get the
-            administrative work out of your first visit. It asks for:
+            <a href="/book">The scheduler</a> is the longest form, because we are trying to get the administrative
+            work out of your first visit. It asks for your first and last name, email address and phone number, a date
+            of birth for the patient, how you heard about the practice, and any notes you want us to read before you
+            arrive.
           </p>
-          <ul>
-            <li>Your first and last name, email address and phone number.</li>
-            <li>
-              <b>A date of birth</b> — for you, if you are booking for yourself, or for each child you are booking
-              for. We use it to match the right patient to the right appointment.
-            </li>
-            <li>Whether you have dental insurance, and the name of the insurer if you do.</li>
-            <li>How you heard about the practice.</li>
-            <li>Any notes you want us to read before you arrive.</li>
-            <li>Whether you are happy for us to text you about the appointment.</li>
-          </ul>
           <p>
-            Appointment scheduling works much better with a date of birth than without one — it is how we avoid
-            booking two children under the same name, and how we check that a treatment plan matches the patient.
-            If you would rather not type it, leave it blank and call the office instead; we will take it over the
-            phone.
+            <b>This one is different from the other two.</b> The scheduler is provided by WaveOrtho, the system that
+            holds our appointment book. When you press submit, your details go <b>directly from your browser to
+            WaveOrtho</b> and are written straight into our practice schedule. They do not pass through, and are not
+            stored by, this website. WaveOrtho is named in section 10 along with the other companies involved.
+          </p>
+          <p>
+            A date of birth is what lets the scheduler offer the right kind of examination and keep two patients with
+            the same name apart. It is also the one field here that is genuinely sensitive, so it is worth saying
+            plainly: it is sent to WaveOrtho over an encrypted connection and is covered by WaveOrtho&rsquo;s own
+            agreement with the practice. If you would rather not type it, leave it out and call the office instead.
+          </p>
+          <p>
+            The scheduler also shows which appointment times are free. To do that it asks WaveOrtho for the
+            practice&rsquo;s current availability for the dates on screen. That request contains no information about
+            you — it is the same request any visitor makes simply by opening the page.
           </p>
 
           <h2 id="automatic">5. What is collected automatically</h2>
@@ -236,7 +244,7 @@ export const PrivacyPage: FC = () => (
           <h2 id="storage">6. Cookies and storage on your device</h2>
           <p>
             This site sets <b>no cookies of its own</b>. It does use your browser&rsquo;s local and session storage
-            for four small, specific jobs. These never leave your device and are never readable by anyone except
+            for three small, specific jobs. These never leave your device and are never readable by anyone except
             this site.
           </p>
           <div class="tw">
@@ -250,17 +258,6 @@ export const PrivacyPage: FC = () => (
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Local storage</td>
-                  <td>
-                    <code>roark-booking-v1</code>
-                  </td>
-                  <td>
-                    Your answers in the booking flow, so that refreshing the page — or a phone call interrupting you —
-                    does not lose what you have already typed. It is deleted when the booking is confirmed.
-                  </td>
-                  <td>Until you finish, or clear your browser</td>
-                </tr>
                 <tr>
                   <td>Local storage</td>
                   <td>
@@ -295,9 +292,9 @@ export const PrivacyPage: FC = () => (
             </table>
           </div>
           <p>
-            You can clear any of this at any time from your browser&rsquo;s settings. Clearing local storage while
-            part-way through a booking means the form will start empty next time; nothing is sent anywhere until you
-            press the confirm button.
+            You can clear any of this at any time from your browser&rsquo;s settings. Clearing it while part-way
+            through a form means the form will start empty next time; nothing is sent anywhere until you press the
+            submit button.
           </p>
 
           <h2 id="ads">7. Google Ads and your consent</h2>
@@ -409,6 +406,17 @@ export const PrivacyPage: FC = () => (
                   </td>
                   <td>United States</td>
                 </tr>
+                <tr>
+                  <td>
+                    <b>WaveOrtho</b>
+                  </td>
+                  <td>
+                    Provides the appointment scheduler on <a href="/book">the booking page</a> and holds the
+                    practice&rsquo;s appointment book. The details you enter there are submitted directly to WaveOrtho
+                    from your browser (section 4), not to us.
+                  </td>
+                  <td>United States</td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -446,8 +454,13 @@ export const PrivacyPage: FC = () => (
           <ul>
             <li>The whole site is served over HTTPS, so what you type is encrypted in transit.</li>
             <li>
-              Submissions are held in a database that is not publicly readable. Access requires a credential that is
-              held by the practice, not by the website&rsquo;s visitors.
+              Enquiries sent through the contact form and the scheduler panel are held in a database that is not
+              publicly readable. Access requires a credential that is held by the practice, not by the website&rsquo;s
+              visitors.
+            </li>
+            <li>
+              Appointments booked through <a href="/book">the scheduler</a> are held by WaveOrtho in the practice&rsquo;s
+              appointment system, which the practice reaches through its own account.
             </li>
             <li>Access to enquiry records is limited to the people in the practice who need it to do their jobs.</li>
           </ul>

@@ -21,14 +21,67 @@ not shipped: the design is reimplemented as a server-rendered Hono app on Cloudf
 | `/invisalign-first`, `/braces`, `/invisalign`, `/palatal-expander` | Treatment detail |
 | `/financing` | Cost, insurance, 0% plans |
 | `/areas-we-serve`, `/blog`, `/blog/:slug` | Geo page + Smile Journal |
-| `/book` | 4-step booking flow with summary rail and confirmation |
+| `/book` | **Live WaveOrtho exam scheduler** (see below) |
+
+## Booking page (`/book`) — WaveOrtho scheduler
+
+`/book` runs the practice's **real** appointment book, not a mock. The WaveOrtho Inquiry Form &
+Exam Scheduler (v8.0.8) is mounted through **their JavaScript library**, not their iframe — the
+iframe was rejected because everything inside it is a separate document and cannot be restyled.
+
+Files:
+
+| File | Role |
+|---|---|
+| `src/pages/book-wave.tsx` | The page; carries the mount element and attribute config |
+| `public/static/wave/wave-inquiry-form.min.js` | Vendored library (331,076 B) |
+| `public/static/wave/wave-core.min.css` | Wave's own CSS, Bootstrap stripped (9,676 B) |
+| `public/static/wave-roark.css` | The Roark skin — re-tints Wave's class names |
+| `public/static/wave-roark.js` | Mount runtime + conversion gating |
+
+**Location.** The Wave account holds Franklin and Hermitage. Online scheduling is Franklin-only, so
+`data-hide-locations="true"` + `data-default-location="Franklin"` hide the picker and lock the
+default. Hermitage remains a valid option value in the hidden `<select>` but is unreachable — the
+patient never sees it and the hidden select is pre-set to Franklin's UUID.
+
+`data-default-location` matches on the location **name**, not its UUID (`e.name === value` in the
+source). Passing the UUID silently matches nothing and, because the picker is hidden, the scheduler
+does not render at all.
+
+**Render timing.** `data-wait="true"` stops the library auto-rendering on a 5s timer. `wave-roark.js`
+then assigns `onFormSubmission` and calls `createForm()` itself, because a handler attached *after*
+render is never invoked. Verified: with `data-wait` and no manual call the container stays empty;
+without `data-wait` it self-renders after ~5s.
+
+**Conversion gating.** Wave calls `onFormSubmission` with `{}` on success and sets
+`appointmentMessage` for **both** a real booking and "please call me instead". Only the call-me case
+uses the fixed string `Our office will call you to schedule an appointment`; a real booking uses a
+time-derived message. The runtime additionally tracks whether a slot was actually picked (capture-
+phase click listener on `.available-time-button` / `.confirm-button`, which survives Wave's
+re-renders). A conversion needs **both** success and a picked slot, so call-me requests are counted
+as `appointment_requested`, not `appointment_booked`.
+
+**Styling.** Wave ships CSS, but `wave-ortho-inquiry-form.min.css` (165 KB) bundles Bootstrap 5 from
+byte 9,676 onward, including 17 global `body{}` and 28 `.row{}` rules that would repaint the whole
+site. Only bytes 0–9,675 (Wave's own structural rules) are shipped. The standalone
+`-exam-scheduler.min.css` was a strict subset of that range and is omitted. The skin then overrides
+colour/type/spacing under an `#waveInquiryForm` prefix so it outranks Wave's class selectors without
+`!important` — the one exception is the duplicate `<h1>`, which Wave writes `display:inherit` onto
+inline and therefore needs `!important` to hide.
+
+**Network.** The library calls `https://central.waveortho.com/wave-central/api/v4/*` directly from
+the browser. That origin returns `Access-Control-Allow-Origin: *`, so this works from our domain and
+needs no proxy. Nothing is proxied through Cloudflare, and no PHI passes through our own API.
 
 ## API
 - `POST /api/contact` — contact panel (`name`, `email`, `phone`, `message`, `source`, `page`)
-- `POST /api/scheduler` — new-patient-exam request panel
-- `POST /api/booking` — booking flow confirmation (`ref`, `who`, `date`, `time`, `contact`, `patients`, `insurance`, …)
+- `POST /api/scheduler` — *legacy* new-patient-exam request panel (the old mock scheduler)
+- `POST /api/booking` — *legacy* mock booking flow confirmation
 - `GET /api/submissions` — admin read of stored submissions (not linked from the site)
 - `GET /health`
+
+`/api/scheduler` and `/api/booking` belong to the previous mock booking UI. **`/book` no longer
+calls either** — it is served by Wave. `src/pages/book.tsx` is still on disk but is no longer routed.
 
 All three write to D1 table `submissions` (schema auto-created on first write).
 Validation rules and error copy mirror the design exactly.
@@ -86,11 +139,14 @@ Without D1 the deploy fails on the binding, and form storage is unavailable.
 `roark-orthodontics-production` via `wrangler d1 execute --remote` (test row since deleted).
 
 Deferred / outstanding:
-- ⏸ **Scheduler panel** (`POST /api/scheduler`) — still reports success on a storage failure and
-  its client handler does not yet reject `stored:false`. Deferred by request; the booking flow
-  (`/api/booking`) and the contact form are already correct.
+- ✅ **Booking is real.** `/book` now runs the practice's actual WaveOrtho appointment book instead of
+  the previous mock. The mock's two defects (decorative slot availability computed from a hash, and a
+  "welcome email is on its way" message with no email library behind it) are no longer reachable from
+  the UI. `/api/booking` and `/api/scheduler` remain in the codebase, unfixed, and unrouted — delete
+  them once you are happy with Wave.
 - ⚠ `GTM_ID` is unset, so **no tag loads**. Set it (`npx wrangler pages secret put GTM_ID
   --project-name roark-orthodontics`) and add a GTM Custom Event trigger on `appointment_booked`.
+  Until then the conversion fires into `dataLayer` and goes nowhere.
 - ⚠ **No HIPAA Notice of Privacy Practices.** `/privacy` covers the *website* only (forms, storage,
   ads measurement) and deliberately says so — it is not a substitute for the clinical notice, which
   needs the practice's own reviewed text.
@@ -109,8 +165,7 @@ and was written against the running implementation rather than from a template:
 | Claim on the page | Where it comes from |
 |---|---|
 | Contact form fields, stored in our database | `POST /api/contact` → D1 `submissions` |
-| Booking fields incl. date of birth, insurance | `POST /api/booking`, `public/static/booking.js` payload |
-| Scheduler request fields | `POST /api/scheduler` |
+| Booking fields incl. date of birth, insurance | **WaveOrtho** — submitted browser-to-`central.waveortho.com`, never to us |
 | `roark-booking-v1` local storage draft | `public/static/booking.js` `STORE` |
 | `roark-consent-v1` consent choice | `public/static/tagging.js` `CONSENT_KEY` |
 | `roark-conv-fired` session flag | `public/static/tagging.js` `CONV_KEY` |

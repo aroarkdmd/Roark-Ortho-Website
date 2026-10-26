@@ -10,8 +10,17 @@ import { Logo } from '../components/chrome'
    quicker, but an iframe cannot be restyled — everything inside it is a
    separate document — and keeping the Roark design is the requirement.
 
-   Because the library ships no CSS of its own (verified: it never injects a
-   stylesheet), the entire appearance is ours, in /static/wave-roark.css.
+   Wave DOES ship CSS, and the stylesheet is loaded in front of ours — see the
+   `styles` array on the /book route in src/index.tsx:
+     /static/wave/wave-core.min.css   Wave's structural rules, Bootstrap removed
+     /static/wave-roark.css           our skin, layered on top of those rules
+
+   Only the first 9,676 bytes of Wave's published stylesheet are shipped. From
+   byte 9,676 onward it is Bootstrap 5, including 17 global `body{}` rules and
+   28 `.row{}` rules that would repaint this entire site if loaded. Wave's own
+   selectors are all scoped, so that prefix is safe to use; the Bootstrap tail
+   is not. The separate `-exam-scheduler.min.css` was a strict subset of the
+   part we already ship, so it is deliberately omitted rather than duplicated.
 
    ── Location ─────────────────────────────────────────────────────────────
    The Wave account has two locations, Franklin and Hermitage. Online
