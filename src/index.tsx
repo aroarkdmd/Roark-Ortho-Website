@@ -221,9 +221,9 @@ app.get('/adults', (c) =>
     <Layout
       tag={tagFor(c)}
       seo={{
-        title: 'Invisalign® & Braces for Adults in Franklin, TN',
+        title: 'Adult Orthodontics: Braces & Invisalign® in Franklin, TN | Roark Orthodontics',
         description:
-          'Adult orthodontics in downtown Franklin, TN: Invisalign® clear aligners, braces and surgical orthodontics. One fee for every appliance, 0% interest plans with a down payment at the start.',
+          'Adult orthodontics in downtown Franklin, TN: braces, Invisalign® clear aligners and surgical orthodontics. One fee for every appliance, 0% interest plans with a down payment at the start.',
         canonical: '/adults',
         active: 'adults',
         breadcrumb: [{ name: 'Home', href: '/' }, { name: 'Adults' }],

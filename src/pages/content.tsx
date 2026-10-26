@@ -467,8 +467,8 @@ export const AdultsPage: FC = () => (
       img="invisalign"
       imgAlt="A clear Invisalign® aligner held up to the light"
       crumbs={[{ name: 'Home', href: '/' }, { name: 'Adults' }]}
-      h1="Invisalign® Clear Aligners for Adults in Franklin, TN"
-      sub="Clear, removable and more aesthetic at work — or braces, if you would rather not manage trays. One fee whichever you choose, and a written price before you commit."
+      h1="Orthodontics for Adults in Franklin, TN: Braces & Invisalign®"
+      sub="Braces, or clear, removable Invisalign® aligners that suit work and everyday life. One fee whichever you choose, and a written price before you commit."
       eager
     />
 
