@@ -492,9 +492,9 @@ export const AdultsPage: FC = () => (
               Teeth move at any age. What changes is how treatment fits around work, photographs, meetings and everyday life.
             </p>
             <p>
-              Clear aligners are the more aesthetic choice at work and in photographs, and they are removable, so you
-              can eat and drink normally. Braces have their own advantages: they work regardless of how much you wear
-              them, and clear (ceramic) brackets are much less visible than metal.
+              Clear aligners and braces both straighten teeth and correct the bite, so the right choice comes down to
+              your lifestyle. Clear aligners are removable, so you can eat and drink normally, while braces stay in
+              place throughout treatment. Clear (ceramic) brackets are much less visible than metal.
             </p>
             <p>
               A small number of adult cases need more than tooth movement. Where the jaw itself is the issue, we plan
