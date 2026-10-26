@@ -75,7 +75,7 @@ const TEAM: Person[] = [
   {
     name: 'Nicole Zielinski',
     role: 'Registered Dental Assistant',
-    short: 'Franklin born and raised, and the calm voice beside you in the chair.',
+    short: 'Franklin-raised, and the calm, friendly face beside you in the chair.',
     photo: 'team-nicole',
     widths: [480, 960],
     w: 960,
