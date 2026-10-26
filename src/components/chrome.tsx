@@ -215,7 +215,7 @@ const MapFacade: FC<{ height?: string }> = ({ height }) => {
   return (
     <div class="mapfacade" id="mapfacade" style={height ? 'height:' + height : undefined} data-src={src}>
       <Icon name="pin" size={30} />
-      <b>212 East Main Street</b>
+      <b>212 E Main St, Ste 100</b>
       <span>Click to load the Google Map · downtown Franklin, TN</span>
       <span class="speednote">map loads on demand — keeps the page fast</span>
     </div>

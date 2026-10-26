@@ -214,14 +214,14 @@ export const HOME_FAQ: Faq[] = [
   },
   {
     q: 'Where exactly is the office, and is there parking?',
-    a: 'We are at 212 East Main Street, Suite 100, Franklin, TN 37064 — in the heart of historic downtown Franklin. There is free parking right in front of our office, down to Sweet Haven — please do not park in the spaces marked reserved on the other side of our building. There is also free parking on Main Street, and the 2nd Street parking garage directly across the street is free too.',
+    a: 'We are at 212 E Main St, Ste 100, Franklin, TN 37064 — in the heart of historic downtown Franklin. There is free parking right in front of our office, down to Sweet Haven — please do not park in the spaces marked reserved on the other side of our building. There is also free parking on Main Street, and the 2nd Street parking garage directly across the street is free too.',
   },
 ]
 
 export const CONTACT_FAQ: Faq[] = [
   {
     q: 'How do I contact Roark Orthodontics?',
-    a: 'Call or text (615) 814-4884, email hello@roarkortho.com, or use the form on this page. We are at 212 East Main Street, Suite 100, Franklin, TN 37064 — on the north side of East Main Street in historic downtown Franklin. The fastest way to get a time booked is the online scheduler.',
+    a: 'Call or text (615) 814-4884, email hello@roarkortho.com, or use the form on this page. We are at 212 E Main St, Ste 100, Franklin, TN 37064 — on the north side of East Main Street in historic downtown Franklin. The fastest way to get a time booked is the online scheduler.',
   },
   {
     q: 'Where do I park, and how do I find the entrance?',

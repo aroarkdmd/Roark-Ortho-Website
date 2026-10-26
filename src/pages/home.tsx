@@ -385,7 +385,7 @@ export const HomePage: FC = () => (
           <div class="reveal">
             <div class="mapfacade" id="mapfacade-home" data-src={'https://www.google.com/maps?q=' + encodeURIComponent(BIZ.name + ' ' + BIZ.street + ', ' + BIZ.city + ', ' + BIZ.region) + '&output=embed'} style="height:24rem">
               <Icon name="pin" size={30} />
-              <b>212 East Main Street</b>
+              <b>212 E Main St, Ste 100</b>
               <span>Click to load the Google Map · downtown Franklin, TN</span>
             </div>
             <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.25rem">

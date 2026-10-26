@@ -130,7 +130,7 @@ export const ContactPage: FC = () => (
               style="height:24rem"
             >
               <Icon name="pin" size={30} />
-              <b>212 East Main Street</b>
+              <b>212 E Main St, Ste 100</b>
               <span>Click to load the Google Map · downtown Franklin, TN</span>
             </div>
           </div>

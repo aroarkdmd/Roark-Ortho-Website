@@ -352,7 +352,7 @@ export const KidsPage: FC = () => (
               ]}
             />
             <p style="margin-top:1.5rem">
-              Our office is at 212 East Main Street in historic downtown Franklin, with free parking in front of
+              Our office is at 212 E Main St, Ste 100 in historic downtown Franklin, with free parking in front of
               the office and in the 2nd Street garage across the street. Open Monday to Wednesday, 7:30am to 4:00pm.
             </p>
             <a class="btn btn--pri" href="/book?from=kids_visit" data-book="kids_visit" style="margin-top:1.5rem">
@@ -1269,7 +1269,7 @@ export const AreasPage: FC = () => (
               style="height:28rem"
             >
               <Icon name="pin" size={30} />
-              <b>212 East Main Street</b>
+              <b>212 E Main St, Ste 100</b>
               <span>Click to load the Google Map · downtown Franklin, TN</span>
             </div>
           </div>
