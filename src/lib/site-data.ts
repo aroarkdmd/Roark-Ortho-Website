@@ -139,7 +139,7 @@ export const TREATMENTS: Treatment[] = [
     href: '/braces',
     img: 'braces-girl',
     blurb:
-      'Traditional metal braces and tooth-colored clear (ceramic) braces. A proven, reliable option — and a perfectly reasonable choice at any age.',
+      'Traditional metal braces and tooth-colored clear (ceramic) braces. A proven, reliable option.',
   },
   {
     id: 'surgical',

@@ -770,7 +770,7 @@ export const BracesPage: FC = () => (
       imgAlt="Braces on a model of teeth in the Roark Orthodontics treatment room"
       crumbs={[{ name: 'Home', href: '/' }, { name: 'Treatments', href: '/treatments' }, { name: 'Braces' }]}
       h1="Braces in Franklin, TN — Metal & Clear, Every Age"
-      sub="A proven, reliable option, chosen by the bite rather than the age. Metal or tooth-colored ceramic, and a perfectly reasonable choice at any age."
+      sub="A proven, reliable option, chosen by the bite rather than the age. Metal or tooth-colored ceramic."
       eager
     />
     <FactStrip

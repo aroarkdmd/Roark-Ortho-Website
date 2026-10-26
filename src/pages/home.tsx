@@ -139,11 +139,11 @@ export const HomePage: FC = () => (
         <div class="grid-3" style="margin-top:3.5rem">
           {[
             {
-              img: 'braces',
-              alt: 'Metal braces on a model of teeth',
+              img: 'braces-girl',
+              alt: 'A young girl with braces smiling in a mirror',
               eyebrow: 'Children, teens & adults',
               title: 'Braces',
-              body: 'Traditional metal braces and tooth-colored clear braces — a proven, reliable option and a perfectly reasonable choice at any age. Plenty of adults choose them too.',
+              body: 'Traditional metal braces and tooth-colored clear braces — a proven, reliable option. Plenty of adults choose them too.',
               href: '/braces',
               link: 'Metal & clear braces for every age',
             },
