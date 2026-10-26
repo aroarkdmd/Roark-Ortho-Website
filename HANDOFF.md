@@ -66,7 +66,7 @@ row written to REMOTE D1 (verified id 4, then deleted; table back to 0 rows)
    `/about/` are routed; `#meet-the-team` anchor preserved. See §16.
 4. **`sitemap.xml` + `robots.txt`** — generated from a route table, all 18 URLs verified 200.
    See §15. Also fixed the footer "Sitemap" link, which pointed at a 404.
-5. **Smile Journal moved to footer only** (practice request) — SEO-neutral, and it fixed a real
+5. **Franklin Orthodontics Blog (formerly "Smile Journal") moved to footer only** (practice request) — SEO-neutral, and it fixed a real
    header overflow between the 1000px collapse point and ~1070px.
 
 ### THE ONE BLOCKING TASK
@@ -483,3 +483,4 @@ build. It resolved only when the user uploaded the real vendor files.
 **Lesson for next session: when integrating a third-party library, ask for the vendor bundle they
 were given (or the install docs from their vendor portal) before reverse-engineering anything.**
 One request would have saved the entire detour.
+tire detour.
