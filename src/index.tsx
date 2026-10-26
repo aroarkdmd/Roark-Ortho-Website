@@ -285,7 +285,7 @@ app.get('/invisalign', (c) =>
       seo={{
         title: 'Invisalign® Clear Aligners in Franklin, TN',
         description:
-          'Invisalign® clear aligners for adults, Invisalign Teen® for teenagers and Invisalign First® for children in downtown Franklin, TN. Clear, removable, and the more aesthetic option.',
+          'Invisalign® clear aligners for adults, Invisalign Teen® for teenagers and Invisalign First® for children in downtown Franklin, TN. Clear, removable and discreet, with one fee for every appliance.',
         canonical: '/invisalign',
         active: 'treatments',
         breadcrumb: [
