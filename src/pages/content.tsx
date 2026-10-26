@@ -441,7 +441,7 @@ const ADULT_FAQ: Faq[] = [
   },
   {
     q: 'Will anyone notice I am wearing braces?',
-    a: 'Both options have their own level of visibility. Clear aligners are clear and removable. Clear (ceramic) braces use tooth-colored brackets, so they are much less visible than metal, though they are still visible up close. We will be honest with you about what to expect from either one.',
+    a: 'Clear aligners are the more aesthetic option, since they are clear and removable. Clear (ceramic) braces use tooth-colored brackets, so they are much less visible than metal, though they are still visible up close. We will be honest with you about what to expect from either one.',
   },
   {
     q: 'Can adults use Invisalign®?',
@@ -492,9 +492,9 @@ export const AdultsPage: FC = () => (
               Teeth move at any age. What changes is how treatment fits around work, photographs, meetings and everyday life.
             </p>
             <p>
-              Clear aligners and braces both straighten teeth and correct the bite, so the right choice comes down to
-              your lifestyle. Clear aligners are removable, so you can eat and drink normally, while braces stay in
-              place throughout treatment. Clear (ceramic) brackets are much less visible than metal.
+              Clear aligners are the more aesthetic choice at work and in photographs, and they are removable, so you
+              can eat and drink normally. Braces have their own advantages: they work regardless of how much you wear
+              them, and clear (ceramic) brackets are much less visible than metal.
             </p>
             <p>
               A small number of adult cases need more than tooth movement. Where the jaw itself is the issue, we plan
@@ -523,12 +523,12 @@ export const AdultsPage: FC = () => (
         <SectionHead
           eyebrow="How we decide"
           title="Aligners or braces — the honest comparison"
-          body="Both options straighten teeth and correct the bite. The differences come down to comfort, daily routine and how well each suits your lifestyle."
+          body="Both straighten teeth and correct the bite. Each has its own strengths, and the right choice depends on your lifestyle."
         />
         <CompareTable
           head={['Consideration', 'Invisalign®', 'Braces']}
           rows={[
-            ['Visibility', 'Clear; still visible up close', 'Metal is visible; clear brackets much less so'],
+            ['Visibility', 'Clear; the more aesthetic option', 'Metal is visible; clear brackets much less so'],
             ['Removable', 'Yes — out to eat and to brush', 'No'],
             ['Eating', 'Trays out for meals', 'Avoid hard, sticky foods'],
             ['Cleaning teeth', 'Normal brushing and flossing', 'Extra care around brackets'],
