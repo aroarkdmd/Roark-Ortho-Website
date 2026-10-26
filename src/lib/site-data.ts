@@ -89,15 +89,10 @@ export const NAV: NavItem[] = [
 ]
 
 export const FOOTER_TREATMENTS = [
-  { label: 'Invisalign® Clear Aligners (all ages)', href: '/invisalign' },
-  { label: 'Orthodontics for Adults', href: '/adults' },
-  { label: 'Invisalign Teen®', href: '/kids-braces#options' },
-  { label: 'Invisalign First® for Kids', href: '/invisalign-first' },
-  { label: 'Braces — Metal & Clear (all ages)', href: '/braces' },
-  { label: 'Braces for Kids & Teens', href: '/kids-braces' },
-  { label: 'Surgical Orthodontics', href: '/surgical-orthodontics' },
+  { label: 'Braces', href: '/braces' },
+  { label: 'Invisalign®', href: '/invisalign' },
   { label: 'Palatal Expander', href: '/palatal-expander' },
-  { label: 'Treatment Costs', href: '/financing#cost' },
+  { label: 'Surgical Orthodontics', href: '/surgical-orthodontics' },
 ]
 
 /* Footer "Patients" column. This is where the Franklin Orthodontics Blog now lives — it is
@@ -108,14 +103,10 @@ export const FOOTER_TREATMENTS = [
    The blog is also linked in-page from the homepage and the treatment pages. */
 export const FOOTER_PATIENTS = [
   { label: 'About the Practice', href: '/about' },
-  { label: 'Meet the Team', href: '/about#meet-the-team' },
   { label: 'Your First Visit', href: '/#patients' },
-  { label: 'Insurance & Financing', href: '/financing#insurance' },
-  { label: 'Book Online', href: '/book' },
+  { label: 'Financing', href: '/financing' },
   { label: 'Contact the Office', href: '/contact' },
   { label: 'Franklin Orthodontics Blog', href: '/blog' },
-  { label: 'Areas We Serve', href: '/areas-we-serve' },
-  { label: 'FAQs', href: '/#faq' },
 ]
 
 /* ── TREATMENTS ────────────────────────────────────────────────────────────

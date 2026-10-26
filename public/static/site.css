@@ -827,7 +827,7 @@ img { display: block; }
 .ftr { background: var(--roark-pink); color: var(--white); padding: var(--sp-10) 0 var(--sp-5); }
 .ftr a { color: var(--white); text-decoration: none; }
 .ftr a:hover { color: var(--rose-200); }
-.ftr__grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.5fr; gap: var(--sp-8); }
+.ftr__grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: var(--sp-8); }
 .ftr__logo { display: block; margin-bottom: var(--sp-5); }
 .ftr h5 { font-family: var(--font-body); font-size: var(--fs-eyebrow); font-weight: var(--fw-semi);
           letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--white);

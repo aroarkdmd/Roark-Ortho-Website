@@ -1,5 +1,5 @@
 import type { FC } from 'hono/jsx'
-import { BIZ, HOURS, NAV, FOOTER_TREATMENTS, FOOTER_PATIENTS, SERVICE_AREAS } from '../lib/site-data'
+import { BIZ, NAV, FOOTER_TREATMENTS, FOOTER_PATIENTS } from '../lib/site-data'
 import { Icon } from './icons'
 
 /* ── LOGO ──────────────────────────────────────────────────────────────────
@@ -209,19 +209,6 @@ export const MobileNav: FC<{ active?: string }> = ({ active }) => (
 )
 
 /* ── FOOTER ──────────────────────────────────────────────────────────────── */
-const MapFacade: FC<{ height?: string }> = ({ height }) => {
-  const q = encodeURIComponent(BIZ.name + ' ' + BIZ.street + ', ' + BIZ.city + ', ' + BIZ.region)
-  const src = 'https://www.google.com/maps?q=' + q + '&output=embed'
-  return (
-    <div class="mapfacade" id="mapfacade" style={height ? 'height:' + height : undefined} data-src={src}>
-      <Icon name="pin" size={30} />
-      <b>212 E Main St, Ste 100</b>
-      <span>Click to load the Google Map · downtown Franklin, TN</span>
-      <span class="speednote">map loads on demand — keeps the page fast</span>
-    </div>
-  )
-}
-
 export const Footer: FC = () => (
   <footer class="ftr" id="area">
     <div class="wrap wrap-wide">
@@ -230,11 +217,7 @@ export const Footer: FC = () => (
           <span class="ftr__logo">
             <Logo variant="rose" width="10rem" />
           </span>
-          <p>
-            Board certified orthodontist in historic downtown Franklin. Braces for every age, Invisalign® for
-            adults, Invisalign Teen® for teenagers and Invisalign First® for children — proudly serving Franklin
-            and the surrounding Williamson County communities.
-          </p>
+          <p>Board certified orthodontist in historic downtown Franklin, TN.</p>
           <div class="nap">
             <b>{BIZ.name}</b>
             <address>
@@ -248,6 +231,7 @@ export const Footer: FC = () => (
               {BIZ.phoneDisplay}
             </a>
             <a href={'mailto:' + BIZ.email}>{BIZ.email}</a>
+            <span>{BIZ.hours}</span>
           </div>
           <div class="ftr__social">
             <a href={BIZ.instagram} target="_blank" rel="noopener" aria-label="Roark Orthodontics on Instagram">
@@ -279,46 +263,12 @@ export const Footer: FC = () => (
               </li>
             ))}
           </ul>
-          <h5 style="margin-top:1.75rem">Hours</h5>
-          <ul class="hours" style="color:rgba(255,255,255,.92)">
-            {HOURS.slice(0, 3).map((h) => (
-              <li style="border-bottom-color:rgba(255,255,255,.25)">
-                <b style="color:#fff">{h.day}</b>
-                <span>7:30am–4:00pm</span>
-              </li>
-            ))}
-            <li class="closed" style="border-bottom:0;color:rgba(255,255,255,.7)">
-              <b style="color:rgba(255,255,255,.85)">Thu–Sun</b>
-              <span>Closed</span>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h5>Find the office</h5>
-          <MapFacade height="11rem" />
-          <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap">
-            <a class="btn btn--out btn--sm" href={BIZ.gbp} target="_blank" rel="noopener">
-              <Icon name="directions" size={11} /> Get Directions
-            </a>
+          <div style="margin-top:1.5rem">
             <a class="btn btn--out btn--sm" href="/book?from=footer" data-book="footer">
               <Icon name="calendar" size={11} /> Book Online
             </a>
           </div>
         </div>
-      </div>
-
-      <div class="prox">
-        <h5>Areas we serve</h5>
-        <div class="prox__cities">
-          {SERVICE_AREAS.map((a) => (
-            <a href="/areas-we-serve">{a}</a>
-          ))}
-        </div>
-        <p>
-          The office is on East Main Street in downtown Franklin, an easy drive from Cool Springs, Westhaven,
-          Berry Farms, Brentwood, Nolensville, Thompson&rsquo;s Station and Spring Hill.
-        </p>
       </div>
 
       <div class="ftr__base">
@@ -329,7 +279,6 @@ export const Footer: FC = () => (
         <span style="display:flex;gap:1.25rem;flex-wrap:wrap">
           <a href="/contact">Contact</a>
           <a href="/privacy">Privacy</a>
-          <a href="/contact#faq">Accessibility</a>
           <a href="/sitemap.xml">Sitemap</a>
         </span>
       </div>
