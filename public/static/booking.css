@@ -264,3 +264,41 @@ body { background: var(--paper); padding-bottom: 0; }
    Matches the ring used across the main site. */
 :focus-visible { outline: 2px solid var(--navy-600); outline-offset: 2px; border-radius: var(--r-sm); }
 .bk-top :focus-visible, .bk-prog :focus-visible { outline-color: var(--white); box-shadow: 0 0 0 4px rgba(199,164,161,.65); }
+
+/* ── WAVE SCHEDULER PAGE ─────────────────────────────────────────────────
+   Layout for the page that wraps the WaveOrtho form. The form itself is
+   skinned in /static/wave-roark.css, which is loaded only on /book. */
+
+.bk-intro {
+  padding: calc(var(--header-h) + var(--sp-7)) 0 var(--sp-6);
+  background: var(--cream);
+  border-bottom: 1px solid var(--clay);
+}
+
+.bk-formsec {
+  padding: var(--sp-7) 0 var(--sp-9);
+  background: var(--paper);
+}
+
+.bk-helpsec {
+  padding: 0 0 var(--sp-10);
+  background: var(--paper);
+}
+
+/* Shown only if the Wave library fails to load — the patient must never be
+   left with a blank card where the scheduler should be. */
+.bk-wavefail {
+  margin: 0;
+  padding: var(--sp-5) var(--sp-6);
+  background: var(--rose-050);
+  border-left: 3px solid var(--roark-pink);
+  border-radius: var(--r-xs);
+  color: var(--ink-800);
+  font-size: var(--fs-body-sm);
+  line-height: 1.55;
+}
+
+@media (max-width: 640px) {
+  .bk-intro { padding: calc(var(--header-h) + var(--sp-5)) 0 var(--sp-5); }
+  .bk-formsec { padding: var(--sp-5) 0 var(--sp-7); }
+}

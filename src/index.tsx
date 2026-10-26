@@ -6,6 +6,7 @@ import { HomePage } from './pages/home'
 import { SurgicalOrthoPage } from './pages/surgical'
 import { ContactPage } from './pages/contact'
 import { BookPage } from './pages/book'
+import { BookWavePage } from './pages/book-wave'
 import { PrivacyPage } from './pages/privacy'
 import {
   TreatmentsPage,
@@ -443,9 +444,18 @@ app.get('/book', (c) =>
         description:
           'Book your complimentary new patient exam with Dr. Roark in downtown Franklin, TN. About 45 minutes, including photographs, an x-ray and a digital scan. No charge.',
         canonical: '/book',
+        // Wave assets are needed only here — they would be dead weight on every
+        // other page, so they are opted in rather than added to the shared shell.
+        //
+        // Order matters: wave-core.min.css carries Wave's structural rules
+        // (table layout, .hide toggles, scheduler flex container). wave-roark.css
+        // re-skins those rules. It is Wave's own CSS with the bundled Bootstrap 5
+        // stripped out — the full file has 17 global body{} and 28 .row{} rules
+        // that would repaint the whole site.
+        styles: ['/static/wave/wave-core.min.css', '/static/wave-roark.css'],
       }}
     >
-      <BookPage from={c.req.query('from') || 'book'} />
+      <BookWavePage from={c.req.query('from') || 'book'} />
     </BookingLayout>,
   ),
 )

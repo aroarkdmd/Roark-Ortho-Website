@@ -24,6 +24,9 @@ export type Seo = {
   preloadImage?: string
   plain?: boolean
   transparentHeader?: boolean
+  /* Extra stylesheets for a single page. The booking page uses this to pull in
+     the Wave skin without shipping it on every other page. */
+  styles?: string[]
 }
 
 const ORIGIN = 'https://roarkortho.com'
@@ -211,6 +214,9 @@ export const BookingLayout: FC<{ seo: Seo; tag?: TagConfig; children: Child }> =
         />
         <link rel="stylesheet" href="/static/site.css" />
         <link rel="stylesheet" href="/static/booking.css" />
+        {(seo.styles || []).map((href) => (
+          <link rel="stylesheet" href={href} />
+        ))}
       </head>
       <body>
         <a class="skip" href="#main">
