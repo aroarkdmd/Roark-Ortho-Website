@@ -71,8 +71,8 @@ const Card: FC<{ title: string; body: string; pad?: string }> = ({ title, body, 
 export const SurgicalOrthoPage: FC = () => (
   <main id="main">
     <SiloBanner
-      img="gallery-3"
-      imgAlt="A treatment bay at Roark Orthodontics in downtown Franklin"
+      img="surgical-scan"
+      imgAlt="A jaw scan on a computer screen, used to plan surgical orthodontics"
       crumbs={[
         { name: 'Home', href: '/' },
         { name: 'Treatments', href: '/treatments' },
@@ -134,8 +134,8 @@ export const SurgicalOrthoPage: FC = () => (
           <div class="split__media reveal">
             <div class="frame-rose">
               <Pic
-                name="gallery-3"
-                alt="Inside the Roark Orthodontics office"
+                name="surgical-scan"
+                alt="A jaw scan on a computer screen, used to plan surgical orthodontics"
                 sizes="(max-width: 1000px) 100vw, 50vw"
                 widths={[480, 960]}
                 w={960}

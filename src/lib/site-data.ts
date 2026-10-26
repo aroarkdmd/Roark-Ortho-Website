@@ -146,7 +146,7 @@ export const TREATMENTS: Treatment[] = [
     name: 'Surgical Orthodontics',
     audience: 'Teens & adults',
     href: '/surgical-orthodontics',
-    img: 'gallery-7',
+    img: 'surgical-scan',
     blurb:
       'For jaw discrepancies that moving teeth alone cannot correct. Dr. Roark plans and coordinates treatment together with your oral and maxillofacial surgeon, in both phases either side of surgery.',
   },
