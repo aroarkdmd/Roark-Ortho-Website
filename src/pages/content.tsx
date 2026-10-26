@@ -156,7 +156,7 @@ export const TreatmentsPage: FC = () => (
       <div class="wrap wrap-wide">
         <SectionHead
           eyebrow="Still deciding?"
-          title="Start from who is being treated"
+          title="Who is being treated?"
           body="Start with the age group that applies to you."
         />
         <div class="path" style="margin-top:3rem">
