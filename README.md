@@ -92,6 +92,39 @@ Two deliberate omissions, and why: **`/book` is not in the sitemap** (it sends
 `noindex`), and **`/book` is not disallowed in robots.txt** — a crawler must be able to fetch the
 page to read the noindex, and blocking it would hide the directive.
 
+## Google Ads landing pages (`/lp/*`)
+
+| URL | Purpose | `from` / cta_location prefix |
+|---|---|---|
+| `/lp/invisalign-franklin` | Invisalign® search ads | `lp_invisalign_` |
+| `/lp/braces-franklin` | Braces search ads | `lp_braces_` |
+
+Code: `src/pages/landing.tsx` (content), `LandingLayout` in `src/layout.tsx` (shell),
+routes in `src/index.tsx`, CSS section 10 at the end of `public/static/site.css` (all scoped
+to `body.lpbody`, so no other page is affected).
+
+- **noindex, twice:** `<meta name="robots" content="noindex,follow">` plus an
+  `X-Robots-Tag: noindex, follow` header. Self-referencing canonical. Not in the sitemap.
+  The organic pages (`/invisalign`, `/braces`) own search; these exist for paid traffic only.
+- **Minimal header:** logo (deliberately not a link), phone, Book. No navigation. Slim footer
+  with address, hours, phone and the Privacy link (Google Ads requires one).
+- **Booking button in the hero**, above the fold from a 320px phone up (verified at 320, 375,
+  390 and 1280px). Under 400px the button moves directly below the headline.
+- **Click IDs carried to /book:** on these pages only, `app.js` copies `gclid`, `gbraid`,
+  `wbraid` and `utm_*` from the landing URL onto every `/book` link (never overwriting), so the
+  conversion on `/book` can be credited to the ad click.
+- Section order: hero → trust strip → treatment explainer + comparison table → Dr. Roark →
+  cost & insurance (+ contact form) → first visit → FAQ → final CTA.
+- **Content rules:** every fact is already published on the organic pages. No reviews, star
+  ratings or before/after photos until patients have given written permission; add them
+  directly under the trust strip when they exist.
+- Pink buttons carry navy text on these pages (white on `--roark-pink` is 2.3:1, below WCAG AA).
+- Lighthouse mobile (local, lab): performance 100, accessibility 100, LCP 1.8–1.9s, CLS 0.
+  The SEO category scores low **by design**, because the pages are noindexed.
+
+Old WordPress ad URLs `/invisalign-franklin/` and `/braces-franklin/` 301 here. **Still update
+the Final URLs in Google Ads**; the redirect is a safety net.
+
 ## Redirects from the old WordPress site
 
 `src/lib/redirects.ts`, called **only** from `app.notFound()` in `src/index.tsx`, so a redirect
@@ -111,21 +144,20 @@ GET/HEAD only; `/api/*` and `/static/*` never redirect.
 | `/thank-you/` | `/contact` | 301 |
 | `/appointment-scheduled/` | `/book` | 301 |
 | `/contact/`, `/blog/`, `/braces/` etc. | same path, no slash | 301 |
-| `/invisalign-franklin/` (Ads) | `/invisalign` | **302, temporary** |
-| `/braces-franklin/` (Ads) | `/braces` | **302, temporary** |
+| `/invisalign-franklin/` (Ads) | `/lp/invisalign-franklin` | 301 |
+| `/braces-franklin/` (Ads) | `/lp/braces-franklin` | 301 |
 | `/first-visit/` | `/#patients` | **302, temporary** |
 | `/gallery/` | `/#gallery` | **302, temporary** |
 | `/product-recommendations/` | `/invisalign` | **302, temporary** |
 
-The 302s point at stand-in pages. When the real page ships (`/lp/invisalign-franklin`,
-`/lp/braces-franklin`, `/first-visit`, a gallery), change that entry to the new URL **and** to
-`301`. Building a real page at an old path (e.g. `/first-visit`) wins automatically.
+The 302s point at stand-in pages. When the real page ships (`/first-visit`, a gallery),
+change that entry to the new URL **and** to `301`. Building a real page at an old path (e.g. `/first-visit`) wins automatically.
 
 301s are sent with `Cache-Control: public, max-age=86400` (one day), 302s with `no-store`.
 
 Verify against any host with:
 ```bash
-scripts/check-redirects.sh https://roark-orthodontics.pages.dev   # 69 checks
+scripts/check-redirects.sh https://roark-orthodontics.pages.dev   # 83 checks (redirects + landing pages)
 ```
 
 ## Contact-form delivery
@@ -190,7 +222,9 @@ Without D1 the deploy fails on the binding, and form storage is unavailable.
 ## Status
 
 ✅ Builds clean, all routes 200 in production.
-✅ **Old WordPress URLs redirect** (deployed 2026-10-27, all 69 checks pass on production).
+✅ **Old WordPress URLs redirect** (deployed 2026-10-27).
+✅ **Google Ads landing pages live** at `/lp/invisalign-franklin` and `/lp/braces-franklin`
+(deployed 2026-10-27; all 83 checks in `scripts/check-redirects.sh` pass on production).
 ✅ **Contact form verified end to end against the production database** — a test POST to
 `/api/contact` returned `{ok:true,received:true}` and the corresponding row was read back from
 `roark-orthodontics-production` via `wrangler d1 execute --remote` (test row since deleted).

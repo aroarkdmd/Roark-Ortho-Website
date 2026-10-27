@@ -8,17 +8,24 @@ Project dir: `/home/user/webapp`
 
 ---
 
-## 00. LATEST (2026-10-27) — redirects deployed
+## 00. LATEST (2026-10-27) — Ads landing pages + redirects deployed
+
+- **Google Ads landing pages are LIVE** (commit `4b20be6`): `/lp/invisalign-franklin`,
+  `/lp/braces-franklin`. noindex (meta + X-Robots-Tag), not in sitemap, header = logo/phone/Book.
+  Details: README "Google Ads landing pages". Old ad URLs now 301 to them.
+- The user still has to change the **Final URLs in Google Ads** to the `/lp/` pages.
+- After a production deploy, the `roark-orthodontics.pages.dev` alias took ~1 minute to serve
+  the new build (the `<hash>.roark-orthodontics.pages.dev` URL was correct immediately). If the
+  check script fails right after deploying, wait a minute and re-run before debugging.
 
 - **Legacy WordPress redirects are LIVE in production** (commit `028c004`). Table and rules:
   README "Redirects from the old WordPress site"; code: `src/lib/redirects.ts`.
-  Verify with `scripts/check-redirects.sh <host>` (69 checks, all passing on production).
+  Verify with `scripts/check-redirects.sh <host>` (83 checks, all passing on production).
 - They run only inside `app.notFound()`. Do not move them into middleware: that would let a
   redirect shadow a real page.
-- **Five entries are temporary 302s** pointing at stand-ins. Change each to its real URL and
-  `301` when the page exists: `/invisalign-franklin` → `/lp/invisalign-franklin`,
-  `/braces-franklin` → `/lp/braces-franklin`, `/first-visit`, `/gallery`,
-  `/product-recommendations`.
+- **Three entries are still temporary 302s** pointing at stand-ins: `/first-visit`,
+  `/gallery`, `/product-recommendations`. Change each to its real URL and `301` when the page
+  exists. (The two Ads URLs were switched to 301 → `/lp/*` on 2026-10-27.)
 - roarkortho.com is **still on WordPress**. Nothing in this repo affects it until the domain is
   pointed at Cloudflare. Do **not** add these redirects in WordPress (it would redirect the
   live Ads landing pages away).
