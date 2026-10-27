@@ -616,6 +616,14 @@ img { display: block; }
 .hero h1 em { font-style: italic; color: var(--rose-400); }
 .hero p { font-size: var(--fs-lead); color: rgba(255,255,255,.9); max-width: 32rem; }
 .hero__cta { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-top: var(--sp-7); }
+/* A hero button must never run past the screen edge. .btn is nowrap
+   sitewide, so on a narrow phone a long label pushed the button wider than
+   the viewport and it was clipped. Here it may wrap and never exceeds the
+   column. */
+.hero__cta .btn { max-width: 100%; }
+@media (max-width: 640px) {
+  .hero__cta .btn { white-space: normal; text-align: center; }
+}
 
 .pbanner {
   position: relative; min-height: 26rem; display: flex; align-items: flex-end;

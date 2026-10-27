@@ -67,7 +67,7 @@ app.get('/', (c) =>
     <Layout
       tag={tagFor(c)}
       seo={{
-        title: 'Roark Orthodontics | Braces & Invisalign in Franklin, TN',
+        title: 'Orthodontist in Franklin, TN | Braces & Invisalign | Roark Orthodontics',
         description:
           'Board certified orthodontist in downtown Franklin, TN. Braces for kids and teens, Invisalign® for adults and teens, Invisalign First® for children. Complimentary exam, written prices, 0% plans with a down payment at the start.',
         canonical: '/',

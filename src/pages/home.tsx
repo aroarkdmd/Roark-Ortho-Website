@@ -105,7 +105,7 @@ export const HomePage: FC = () => (
           </p>
           <div class="hero__cta">
             <a class="btn btn--rose" href="/book?from=home_hero" data-book="home_hero">
-              <Icon name="calendar" size={12} /> Book a Complimentary Consultation
+              <Icon name="calendar" size={12} /> Book a Free Exam
             </a>
             <a class="btn btn--out" href={BIZ.phoneHref} data-phone="home_hero">
               <Icon name="phone" size={11} /> {BIZ.phoneDisplay}
@@ -203,8 +203,8 @@ export const HomePage: FC = () => (
             </p>
             <p>
               She is board certified by the American Board of Orthodontics, and she lives in Brentwood with her
-              husband, Dr. Brian George, and their two daughters. She is proud to serve the Franklin community and
-              We look forward to caring for your family.
+              husband, Dr. Brian George, and their two daughters. She is proud to serve the Franklin community, and
+              looks forward to caring for your family.
             </p>
             <div class="creds creds--founder">
               <div class="cred">
