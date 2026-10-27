@@ -1,10 +1,33 @@
 # HANDOFF — Roark Orthodontics Website
 
-Last updated: 2026-10-26
+Last updated: 2026-10-27
 Repo: https://github.com/aroarkdmd/Roark-Ortho-Website (branch `main`, public)
 Live: https://roark-orthodontics.pages.dev
 Project dir: `/home/user/webapp`
-**Last commit: `d5d4361`** — read §0 before doing anything.
+**Read §00 first, then §0.**
+
+---
+
+## 00. LATEST (2026-10-27) — redirects deployed
+
+- **Legacy WordPress redirects are LIVE in production** (commit `028c004`). Table and rules:
+  README "Redirects from the old WordPress site"; code: `src/lib/redirects.ts`.
+  Verify with `scripts/check-redirects.sh <host>` (70 checks, all passing on production).
+- They run only inside `app.notFound()`. Do not move them into middleware: that would let a
+  redirect shadow a real page.
+- **Five entries are temporary 302s** pointing at stand-ins. Change each to its real URL and
+  `301` when the page exists: `/invisalign-franklin` → `/lp/invisalign-franklin`,
+  `/braces-franklin` → `/lp/braces-franklin`, `/first-visit`, `/gallery`,
+  `/product-recommendations`.
+- roarkortho.com is **still on WordPress**. Nothing in this repo affects it until the domain is
+  pointed at Cloudflare. Do **not** add these redirects in WordPress (it would redirect the
+  live Ads landing pages away).
+- GitHub `origin/main` is ~80 commits behind local `main`. Cloudflare's GitHub-triggered builds
+  fail (no build command → `dist` missing); production is deployed from the sandbox with
+  `wrangler pages deploy`. Push before setting a build command in the dashboard.
+- Secrets set on the project: `RESEND_API_KEY` only. Still unset: `MAIL_FROM` (so mail goes from
+  `onboarding@resend.dev`, which Resend only delivers to the account owner), `GTM_ID`,
+  `ADMIN_TOKEN`. §0 below predates the Resend key being set.
 
 Read this first. It is written so a fresh session can start work without re-deriving
 anything that cost time to establish.

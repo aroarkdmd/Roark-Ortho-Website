@@ -92,6 +92,42 @@ Two deliberate omissions, and why: **`/book` is not in the sitemap** (it sends
 `noindex`), and **`/book` is not disallowed in robots.txt** — a crawler must be able to fetch the
 page to read the noindex, and blocking it would hide the directive.
 
+## Redirects from the old WordPress site
+
+`src/lib/redirects.ts`, called **only** from `app.notFound()` in `src/index.tsx`, so a redirect
+can never override a page that exists. Covers all 17 WordPress pages (taken from its REST API on
+2026-10-27), plus trailing-slash and letter-case variants of every current page. The query
+string is always kept, so `gclid`, `gbraid` and `utm_*` survive for Google Ads attribution.
+GET/HEAD only; `/api/*` and `/static/*` never redirect.
+
+| Old URL | New URL | Type |
+|---|---|---|
+| `/treatment-options/` | `/treatments` | 301 |
+| `/treatment-options/braces/` | `/braces` | 301 |
+| `/treatment-options/invisalign/` | `/invisalign` | 301 |
+| `/treatment-options/palatal-expander/` | `/palatal-expander` | 301 |
+| `/financing-and-insurance/` | `/financing` | 301 |
+| `/book-now/` | `/book` | 301 |
+| `/thank-you/` | `/contact` | 301 |
+| `/appointment-scheduled/` | `/book` | 301 |
+| `/contact/`, `/blog/`, `/braces/` etc. | same path, no slash | 301 |
+| `/invisalign-franklin/` (Ads) | `/invisalign` | **302, temporary** |
+| `/braces-franklin/` (Ads) | `/braces` | **302, temporary** |
+| `/first-visit/` | `/#patients` | **302, temporary** |
+| `/gallery/` | `/#gallery` | **302, temporary** |
+| `/product-recommendations/` | `/invisalign` | **302, temporary** |
+
+The 302s point at stand-in pages. When the real page ships (`/lp/invisalign-franklin`,
+`/lp/braces-franklin`, `/first-visit`, a gallery), change that entry to the new URL **and** to
+`301`. Building a real page at an old path (e.g. `/first-visit`) wins automatically.
+
+301s are sent with `Cache-Control: public, max-age=86400` (one day), 302s with `no-store`.
+
+Verify against any host with:
+```bash
+scripts/check-redirects.sh https://roark-orthodontics.pages.dev   # 70 checks
+```
+
 ## Contact-form delivery
 
 `/api/contact` writes the row to D1 **first**, then emails it to `info@roarkortho.com` and
@@ -136,8 +172,17 @@ Live on the practice's own Cloudflare account:
 
 ```bash
 npm run build
-npx wrangler pages deploy dist --project-name roark-orthodontics
+# test first on a preview link (does not touch production):
+npx wrangler pages deploy dist --project-name roark-orthodontics --branch preview
+scripts/check-redirects.sh https://preview.roark-orthodontics.pages.dev
+# then production:
+npx wrangler pages deploy dist --project-name roark-orthodontics --branch main
 ```
+
+⚠ The project is also connected to GitHub, and those automatic builds fail (no build command
+is set, so `dist` is missing). Production is unaffected because deploys go up from the sandbox.
+Before setting a build command in the dashboard, push the latest code to GitHub, or Cloudflare
+will publish the older GitHub version.
 
 The API token needs **Account · Cloudflare Pages · Edit** *and* **Account · D1 · Edit**.
 Without D1 the deploy fails on the binding, and form storage is unavailable.
@@ -145,6 +190,7 @@ Without D1 the deploy fails on the binding, and form storage is unavailable.
 ## Status
 
 ✅ Builds clean, all routes 200 in production.
+✅ **Old WordPress URLs redirect** (deployed 2026-10-27, all 70 checks pass on production).
 ✅ **Contact form verified end to end against the production database** — a test POST to
 `/api/contact` returned `{ok:true,received:true}` and the corresponding row was read back from
 `roark-orthodontics-production` via `wrangler d1 execute --remote` (test row since deleted).
