@@ -125,7 +125,7 @@ The 302s point at stand-in pages. When the real page ships (`/lp/invisalign-fran
 
 Verify against any host with:
 ```bash
-scripts/check-redirects.sh https://roark-orthodontics.pages.dev   # 70 checks
+scripts/check-redirects.sh https://roark-orthodontics.pages.dev   # 69 checks
 ```
 
 ## Contact-form delivery
@@ -190,7 +190,7 @@ Without D1 the deploy fails on the binding, and form storage is unavailable.
 ## Status
 
 ✅ Builds clean, all routes 200 in production.
-✅ **Old WordPress URLs redirect** (deployed 2026-10-27, all 70 checks pass on production).
+✅ **Old WordPress URLs redirect** (deployed 2026-10-27, all 69 checks pass on production).
 ✅ **Contact form verified end to end against the production database** — a test POST to
 `/api/contact` returned `{ok:true,received:true}` and the corresponding row was read back from
 `roark-orthodontics-production` via `wrangler d1 execute --remote` (test row since deleted).

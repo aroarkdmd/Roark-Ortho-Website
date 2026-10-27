@@ -12,7 +12,7 @@ Project dir: `/home/user/webapp`
 
 - **Legacy WordPress redirects are LIVE in production** (commit `028c004`). Table and rules:
   README "Redirects from the old WordPress site"; code: `src/lib/redirects.ts`.
-  Verify with `scripts/check-redirects.sh <host>` (70 checks, all passing on production).
+  Verify with `scripts/check-redirects.sh <host>` (69 checks, all passing on production).
 - They run only inside `app.notFound()`. Do not move them into middleware: that would let a
   redirect shadow a real page.
 - **Five entries are temporary 302s** pointing at stand-ins. Change each to its real URL and
