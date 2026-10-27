@@ -182,6 +182,10 @@ export const ContactPanel: FC<{
           <div>
             <h3 class="wave__formtitle">{title || 'Contact Us'}</h3>
             <p class="wave__lede">{lede || 'Send any question here and we will reply by email.'}</p>
+            <p class="form__privacy" data-privacy-note>
+              For your privacy, please do not include any sensitive information. To discuss protected health details,
+              please give us a call.
+            </p>
           </div>
 
           <div class="field" data-field="name">

@@ -1291,6 +1291,11 @@ slotmark { display: none; }
 .field--err input, .field--err textarea { border-color: var(--c-error); }
 .field--err .field__hint { color: var(--c-error); }
 .form__note { font-size: var(--fs-eyebrow); color: var(--ink-600); line-height: 1.5; }
+.form__privacy {
+  margin: 0; padding: var(--sp-3) var(--sp-4);
+  font-size: var(--fs-eyebrow); line-height: 1.5; color: var(--navy-600);
+  background: var(--cream-100, transparent); border-left: 3px solid var(--navy-600);
+}
 
 /* The "would you rather pick a time?" line. Sits between the submit button
    and the small print: the panel takes a message, the scheduler takes a
