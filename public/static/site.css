@@ -938,6 +938,8 @@ img { display: block; }
                     font-weight: var(--fw-medium); color: var(--navy-600);
                     margin: 0 0 .4rem; }
 .lp__trustgrid p { font-size: var(--fs-caption); margin: 0; }
+.lp__trustgrid h2 { font-family: var(--font-display); font-size: var(--fs-h5);
+                    font-weight: var(--fw-medium); color: var(--navy-600); margin: 0 0 .4rem; }
 .lp__trustic { width: 2.4rem; height: 2.4rem; border-radius: 50%;
                background: var(--rose-100); color: var(--rose-800);
                display: flex; align-items: center; justify-content: center;
@@ -1551,4 +1553,97 @@ slotmark { display: none; }
    paragraph wider than the screen. */
 @media (max-width: 430px) {
   .article code { white-space: normal; overflow-wrap: anywhere; }
+}
+
+/* ── 10. GOOGLE ADS LANDING PAGES (/lp/*) ─────────────────────────────── */
+/* Builds on section 9 (.lphdr / .lp__*). Everything here is scoped to
+   .lpbody, the class only LandingLayout puts on <body>, so no other page
+   can be affected by these rules. */
+.lpbody .lphdr { position: sticky; top: 0; z-index: 60; padding: var(--sp-3) 0; }
+.lpbody .lphdr__in { flex-wrap: nowrap; }
+.lphdr__logo { display: block; flex: none; }
+.lphdr__logo .logo-img { width: 9rem !important; } /* beats the Logo component's inline width */
+.lpbody .lphdr__tell { flex-wrap: nowrap; gap: var(--sp-4); }
+.lphdr__phone { white-space: nowrap; }
+
+.lpbody .lp__hero { padding: var(--sp-9) 0 var(--sp-10); }
+.lpbody .lp__grid { align-items: center; }
+.lp__eb { color: var(--rose-400); }
+.lp__cta { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin: 0 0 var(--sp-6); }
+.lp__cta .btn--out { border-color: rgba(255,255,255,.55); }
+.lp__media { position: relative; margin: 0; } /* <figure> has a default 40px side margin */
+.lp__media img { width: 100%; height: auto; display: block; border-radius: var(--r-md);
+                 aspect-ratio: 4 / 3; object-fit: cover; box-shadow: var(--shadow-lg); }
+.lp__media figcaption { position: absolute; left: var(--sp-4); right: var(--sp-4); bottom: var(--sp-4);
+                        background: rgba(255,255,255,.96); color: var(--navy-600);
+                        border-radius: var(--r-xs); padding: var(--sp-3) var(--sp-4);
+                        font-size: var(--fs-caption); box-shadow: var(--shadow-md); }
+.lp__media figcaption b { display: block; font-family: var(--font-display); font-weight: var(--fw-medium);
+                          font-size: var(--fs-h5); margin-bottom: .15rem; }
+
+.lpbody .lphdr .btn--sm { padding: .65rem 1.15rem; }
+.lp__step h3 { font-family: var(--font-display); font-size: var(--fs-h5); font-weight: var(--fw-medium);
+               color: var(--navy-600); margin: 0 0 .4rem; }
+.lp__step p { font-size: var(--fs-body-sm); color: var(--ink-700); margin: 0; }
+/* Readable brand pink: white on --roark-pink is 2.3:1, below the 4.5:1
+   minimum for text. On these pages the pink buttons keep the brand colour
+   but carry dark navy text (6.6:1). Scoped to .lpbody; the rest of the site
+   is unchanged. */
+.lpbody .btn--rose { color: var(--navy-800); }
+.lpbody .btn--rose:hover { background: var(--rose-500); color: var(--navy-800); }
+/* .lphdr__tell a (section 9) colours every header link navy, which is more
+   specific than .btn--pri and made the Book label navy on navy. */
+.lpbody .lphdr__tell a.btn--pri, .lpbody .lphdr__tell a.btn--pri:hover { color: var(--white); }
+.lp__text { display: flex; flex-direction: column; }
+.lp__doc img { border-radius: var(--r-md); aspect-ratio: 3 / 4; object-fit: cover; width: 100%; height: auto; }
+
+.lpftr { background: var(--navy-800); color: rgba(255,255,255,.85); padding: var(--sp-6) 0;
+         font-size: var(--fs-caption); }
+.lpftr__in { display: flex; flex-wrap: wrap; gap: var(--sp-2) var(--sp-6); align-items: center; }
+.lpftr a { color: var(--white); }
+.lpftr b { color: var(--white); font-weight: var(--fw-semi); }
+.lpftr__base { margin: var(--sp-4) 0 0; font-size: var(--fs-eyebrow); color: rgba(255,255,255,.65);
+               letter-spacing: .02em; }
+
+@media (max-width: 1000px) {
+  .lpbody .lp__hero { padding: var(--sp-7) 0 var(--sp-8); }
+  .lp__doc img { aspect-ratio: 4 / 3; }
+}
+@media (max-width: 640px) {
+  .lpbody .lp__hero { padding: var(--sp-6) 0 var(--sp-7); }
+  .lpbody .lp h1 { font-size: 2.05rem; line-height: 1.15; margin-bottom: var(--sp-3); }
+  .lpbody .lp__sub { font-size: 1.05rem; margin-bottom: var(--sp-5); }
+  .lp__cta { margin-bottom: var(--sp-5); }
+  /* Buttons must fit on a 320px screen: hero buttons take the full width,
+     and every button on the page may wrap rather than run off the edge. */
+  .lp__cta .btn { width: 100%; }
+  .lpbody main .btn { white-space: normal; text-align: center; }
+  .lpbody .lp__promise { gap: var(--sp-2) var(--sp-5); margin-bottom: var(--sp-5); }
+  /* On a phone the price card sits under the photo instead of covering it. */
+  .lp__media figcaption { position: static; margin-top: var(--sp-3); box-shadow: none; }
+  .lp__media img { aspect-ratio: 16 / 10; }
+  .lpftr__in { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+  .lphdr__logo .logo-img { width: 7.5rem !important; }
+  .lpbody .lphdr .btn--sm { padding: .6rem .95rem; }
+  /* Number hidden, icon kept as a 44px tap target; the call button in the
+     hero and the sticky bar both show the full number. */
+  .lphdr__num { display: none; }
+  .lphdr__phone { width: 2.75rem; height: 2.75rem; justify-content: center;
+                  border: 1px solid var(--clay); border-radius: 50%; }
+}
+@media (max-width: 400px) {
+  /* Small phones: the booking button moves up to sit straight under the
+     headline, so it is on screen without scrolling; the supporting
+     sentence follows it. */
+  .lp__text .lp__cta { order: 3; margin-bottom: var(--sp-4); }
+  .lp__text .lp__sub { order: 4; }
+  .lp__text .lp__promise { order: 5; }
+  .lp__text .lp__trust { order: 6; }
+  .lpbody .lp h1 { font-size: 1.75rem; }
+  .lpbody .lp__eb { margin-bottom: var(--sp-2); }
+  /* The small comparison tables fit without sideways scrolling. */
+  .lpbody .tw { margin-top: var(--sp-5) !important; }
+  .lpbody .tw .article th, .lpbody .tw .article td { padding: .55rem .5rem; font-size: .8rem; }
 }

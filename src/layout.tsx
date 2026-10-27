@@ -1,6 +1,7 @@
 import type { FC, Child } from 'hono/jsx'
 import { BIZ, HOURS } from './lib/site-data'
-import { Header, MobileNav, Footer, StickyCTA, ConsentBar } from './components/chrome'
+import { Header, MobileNav, Footer, StickyCTA, ConsentBar, Logo } from './components/chrome'
+import { Icon } from './components/icons'
 import { CONSENT_COPY } from './lib/site-data'
 
 /* Resolved per request by the Worker (see tagFor in index.tsx): the container
@@ -180,6 +181,136 @@ export const Layout: FC<{ seo: Seo; tag?: TagConfig; children: Child }> = ({ seo
         {children}
         <Footer />
         <StickyCTA />
+        <ConsentBar copy={CONSENT_COPY} />
+        <script src="/static/tagging.js" defer></script>
+        <script src="/static/app.js" defer></script>
+      </body>
+    </html>
+  )
+}
+
+/* ── GOOGLE ADS LANDING SHELL ──────────────────────────────────────────────
+   Used only by /lp/* pages. One job: get the ad visitor into the scheduler or
+   onto the phone. So, compared with Layout:
+     · noindex,follow (also sent as an X-Robots-Tag header by the route). The
+       organic service pages (/invisalign, /braces) own search; these pages
+       exist for paid traffic and must never compete with them.
+     · Self-referencing canonical. Canonical + noindex pointing at a different
+       URL sends Google contradictory signals, so it points at itself.
+     · Header is logo, phone and Book only. No navigation, no burger, no top
+       bar. The logo is deliberately NOT a link — it is the most common way an
+       ad visitor wanders off a landing page.
+     · Slim footer: address, hours, phone and the privacy link (Google Ads
+       requires a reachable privacy policy). No treatment or social links.
+     · Its own sticky mobile bar, tagged with the page's own cta_location so
+       Ads traffic is distinguishable from the site's sticky bar in analytics.
+     · data-carry-params on <body>: app.js copies gclid / gbraid / wbraid /
+       utm_* from the landing URL onto every Book link, so the click IDs reach
+       /book, where the conversion fires.
+   Same tag/consent contract and the same app.js as the rest of the site. */
+export const LandingLayout: FC<{ seo: Seo; tag?: TagConfig; slug: string; children: Child }> = ({
+  seo,
+  tag,
+  slug,
+  children,
+}) => {
+  const tagConfig: TagConfig = tag || { gtmId: null, consentRequired: false, path: seo.canonical }
+
+  return (
+    <html lang="en-US">
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{seo.title}</title>
+        <meta name="description" content={seo.description} />
+        <meta name="robots" content="noindex,follow" />
+        <link rel="canonical" href={ORIGIN + seo.canonical} />
+        <meta name="theme-color" content="#003d69" />
+        <link rel="preload" href="/static/fonts/playfair-display-latin.woff2" as="font" type="font/woff2" crossorigin />
+        <link rel="preload" href="/static/fonts/lora-latin.woff2" as="font" type="font/woff2" crossorigin />
+        {seo.preloadImage && (
+          <link
+            rel="preload"
+            as="image"
+            href={seo.preloadImage + '-480.webp'}
+            imagesrcset={seo.preloadImage + '-480.webp 480w, ' + seo.preloadImage + '-960.webp 960w'}
+            imagesizes="(max-width: 1000px) 100vw, 50vw"
+            fetchpriority="high"
+          />
+        )}
+        <link rel="icon" href="/static/logos/tooth-mark.png" />
+        <link rel="apple-touch-icon" href="/static/logos/roark-logo.png" />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([localBusiness()]) }} />
+        <script
+          id="tag-config"
+          type="application/json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(tagConfig) }}
+        />
+        <link rel="stylesheet" href="/static/site.css" />
+      </head>
+      <body class="lpbody" data-carry-params="true">
+        <a class="skip" href="#main">
+          Skip to content
+        </a>
+        <header class="lphdr" id="lp-header">
+          <div class="wrap wrap-wide">
+            <div class="lphdr__in">
+              <span class="lphdr__logo">
+                <Logo variant="paper" width="10rem" />
+              </span>
+              <div class="lphdr__tell">
+                <a
+                  class="lphdr__phone"
+                  href={BIZ.phoneHref}
+                  data-phone={slug + '_header'}
+                  aria-label={'Call ' + BIZ.phoneDisplay}
+                >
+                  <Icon name="phone" size={13} />
+                  <span class="lphdr__num">{BIZ.phoneDisplay}</span>
+                </a>
+                <a
+                  class="btn btn--pri btn--sm"
+                  href={'/book?from=' + slug + '_header'}
+                  data-book={slug + '_header'}
+                >
+                  Book
+                </a>
+              </div>
+            </div>
+          </div>
+        </header>
+        {children}
+        <footer class="lpftr">
+          <div class="wrap wrap-wide">
+            <div class="lpftr__in">
+              <span>
+                <b>{BIZ.name}</b> · {BIZ.street}, {BIZ.city}, {BIZ.region} {BIZ.postal}
+              </span>
+              <span>{BIZ.hours}</span>
+              <a href={BIZ.phoneHref} data-phone={slug + '_footer'}>
+                {BIZ.phoneDisplay}
+              </a>
+              <a href="/privacy">Privacy</a>
+            </div>
+            <p class="lpftr__base">
+              © 2026 {BIZ.legalName} · {BIZ.doctor}, {BIZ.doctorRole}. Individual results vary; your treatment plan
+              is set at your exam.
+            </p>
+          </div>
+        </footer>
+        <div class="sticky" role="region" aria-label="Book a consultation">
+          <a class="btn btn--rose" href={'/book?from=' + slug + '_sticky'} data-book={slug + '_sticky'}>
+            <Icon name="calendar" size={12} /> See exam times
+          </a>
+          <a
+            class="sticky__call"
+            href={BIZ.phoneHref}
+            data-phone={slug + '_sticky'}
+            aria-label={'Call ' + BIZ.phoneDisplay}
+          >
+            <Icon name="phone" size={14} />
+          </a>
+        </div>
         <ConsentBar copy={CONSENT_COPY} />
         <script src="/static/tagging.js" defer></script>
         <script src="/static/app.js" defer></script>

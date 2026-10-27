@@ -51,11 +51,11 @@ export const LEGACY_REDIRECTS: Record<string, RedirectRule> = {
   '/thank-you': { to: '/contact', status: 301 },
   '/appointment-scheduled': { to: '/book', status: 301 },
 
-  /* Google Ads landing pages (noindex on WordPress). TEMPORARY: point at the
-     organic service pages until /lp/invisalign-franklin and
-     /lp/braces-franklin are built, then switch to those with a 301. */
-  '/invisalign-franklin': { to: '/invisalign', status: 302 },
-  '/braces-franklin': { to: '/braces', status: 302 },
+  /* Google Ads landing pages (noindex on WordPress) → their replacements,
+     also noindex. Update the Final URLs in Google Ads as well; the redirect
+     is a safety net, not the plan. */
+  '/invisalign-franklin': { to: '/lp/invisalign-franklin', status: 301 },
+  '/braces-franklin': { to: '/lp/braces-franklin', status: 301 },
 
   /* TEMPORARY until a dedicated page exists. */
   '/first-visit': { to: '/#patients', status: 302 }, // → /first-visit page

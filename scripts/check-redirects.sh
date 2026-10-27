@@ -28,8 +28,8 @@ done <<'LIST'
 /book-now|301|/book
 /thank-you|301|/contact
 /appointment-scheduled|301|/book
-/invisalign-franklin|302|/invisalign
-/braces-franklin|302|/braces
+/invisalign-franklin|301|/lp/invisalign-franklin
+/braces-franklin|301|/lp/braces-franklin
 /first-visit|302|/#patients
 /gallery|302|/#gallery
 /product-recommendations|302|/invisalign
@@ -41,8 +41,8 @@ check "/blog/"    301 "/blog"
 check "/"         200 ""
 
 echo "== Ad tracking codes survive the redirect"
-check "/invisalign-franklin/?gclid=TEST123&utm_source=google&utm_medium=cpc" 302 "/invisalign?gclid=TEST123&utm_source=google&utm_medium=cpc"
-check "/braces-franklin/?gclid=TEST123" 302 "/braces?gclid=TEST123"
+check "/invisalign-franklin/?gclid=TEST123&utm_source=google&utm_medium=cpc" 301 "/lp/invisalign-franklin?gclid=TEST123&utm_source=google&utm_medium=cpc"
+check "/braces-franklin/?gclid=TEST123" 301 "/lp/braces-franklin?gclid=TEST123"
 check "/treatment-options/invisalign/?gbraid=ABC&utm_campaign=x" 301 "/invisalign?gbraid=ABC&utm_campaign=x"
 check "/first-visit/?gclid=TEST123" 302 "/?gclid=TEST123#patients"
 
@@ -68,13 +68,30 @@ check "/api/nothing"         404 ""
 check "/blog/not-a-post"     404 ""
 
 echo "== Form posts are never redirected"
-code=$(curl -s -o /dev/null -w '%{http_code}' -X POST "$B/invisalign-franklin/")
-[[ "$code" == "404" ]] && ok "POST /invisalign-franklin/ -> 404" || bad "POST /invisalign-franklin/ -> $code"
+code=$(curl -s -o /dev/null -w '%{http_code}' -X POST "$B/treatment-options/braces/")
+[[ "$code" == "404" ]] && ok "POST /treatment-options/braces/ -> 404" || bad "POST /treatment-options/braces/ -> $code"
+
+echo "== Google Ads landing pages"
+check "/lp/invisalign-franklin" 200 ""
+check "/lp/braces-franklin"     200 ""
+check "/lp/invisalign-franklin/" 301 "/lp/invisalign-franklin"
+check "/lp/braces-franklin/?gclid=T1" 301 "/lp/braces-franklin?gclid=T1"
+check "/lp/nothing" 404 ""
+for p in /lp/invisalign-franklin /lp/braces-franklin; do
+  hdr=$(curl -sI "$B$p" | tr -d '\r' | grep -i '^x-robots-tag')
+  [[ "$hdr" == *noindex* ]] && ok "$p X-Robots-Tag: noindex" || bad "$p missing X-Robots-Tag noindex ($hdr)"
+  body=$(curl -s "$B$p")
+  [[ "$body" == *'<meta name="robots" content="noindex,follow"/>'* ]] && ok "$p meta robots noindex" || bad "$p missing meta robots noindex"
+  [[ "$body" == *'data-book="lp_'*'_hero"'* ]] && ok "$p booking button in hero" || bad "$p no hero booking button"
+  [[ "$body" != *'class="nav"'* ]] && ok "$p no site navigation" || bad "$p contains site navigation"
+done
+n=$(curl -s "$B/sitemap.xml" | grep -c "/lp/")
+[[ "$n" == "0" ]] && ok "sitemap has no /lp/ URLs" || bad "sitemap lists $n /lp/ URLs"
 
 echo "== Cache headers"
 h=$(curl -sI "$B/treatment-options/braces/" | tr -d '\r' | grep -i '^cache-control' )
 [[ "$h" == *"max-age=86400"* ]] && ok "301 cached 1 day ($h)" || bad "301 cache header: $h"
-h=$(curl -sI "$B/invisalign-franklin/" | tr -d '\r' | grep -i '^cache-control' )
+h=$(curl -sI "$B/gallery/" | tr -d '\r' | grep -i '^cache-control' )
 [[ "$h" == *"no-store"* ]] && ok "302 not cached ($h)" || bad "302 cache header: $h"
 
 echo

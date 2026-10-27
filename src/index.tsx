@@ -1,7 +1,8 @@
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import { serveStatic } from 'hono/cloudflare-workers'
-import { Layout, BookingLayout, type Seo } from './layout'
+import { Layout, BookingLayout, LandingLayout, type Seo } from './layout'
+import { LpInvisalignPage, LpBracesPage } from './pages/landing'
 import { HomePage } from './pages/home'
 import { SurgicalOrthoPage } from './pages/surgical'
 import { ContactPage } from './pages/contact'
@@ -501,6 +502,53 @@ app.get('/book', (c) =>
     >
       <BookWavePage from={c.req.query('from') || 'book'} />
     </BookingLayout>,
+  ),
+)
+
+/* ── GOOGLE ADS LANDING PAGES ──────────────────────────────────────────────
+   noindex twice over: the <meta name="robots"> in LandingLayout and an
+   X-Robots-Tag header here, so the directive holds even if the markup changes.
+   Not listed in src/lib/seo.ts PAGES, so never in the sitemap. They ARE in
+   KNOWN_PATHS, so /lp/braces-franklin/ tidies to /lp/braces-franklin. */
+const LP_HEADERS = { 'X-Robots-Tag': 'noindex, follow' }
+
+app.get('/lp/invisalign-franklin', (c) =>
+  c.html(
+    <LandingLayout
+      tag={tagFor(c)}
+      slug="lp_invisalign"
+      seo={{
+        title: 'Invisalign® in Franklin, TN | Board-Certified Orthodontist | Roark Orthodontics',
+        description:
+          'Invisalign® with a board-certified orthodontist in downtown Franklin, TN. Free exam with a digital iTero scan and a written price. Aligners cost the same as braces here.',
+        canonical: '/lp/invisalign-franklin',
+        preloadImage: '/static/photos/invisalign-smile',
+      }}
+    >
+      <LpInvisalignPage />
+    </LandingLayout>,
+    200,
+    LP_HEADERS,
+  ),
+)
+
+app.get('/lp/braces-franklin', (c) =>
+  c.html(
+    <LandingLayout
+      tag={tagFor(c)}
+      slug="lp_braces"
+      seo={{
+        title: 'Braces in Franklin, TN | Kids, Teens & Adults | Roark Orthodontics',
+        description:
+          'Metal and clear braces for kids, teens and adults in downtown Franklin, TN, with a board-certified orthodontist. Free exam, written fee, 0% interest plans.',
+        canonical: '/lp/braces-franklin',
+        preloadImage: '/static/photos/braces-girl',
+      }}
+    >
+      <LpBracesPage />
+    </LandingLayout>,
+    200,
+    LP_HEADERS,
   ),
 )
 

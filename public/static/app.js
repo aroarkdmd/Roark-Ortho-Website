@@ -20,11 +20,38 @@
     var out = {};
     try {
       var q = new URLSearchParams(window.location.search);
-      ['gclid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(function (k) {
+      CARRY_KEYS.forEach(function (k) {
         if (q.get(k)) out[k] = q.get(k);
       });
     } catch (e) {}
     return out;
+  }
+
+  /* Ad click IDs and campaign tags. gbraid / wbraid are Google's iOS
+     replacements for gclid, so they are carried the same way. */
+  var CARRY_KEYS = ['gclid', 'gbraid', 'wbraid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+
+  /* ── CLICK-ID CARRY (Google Ads landing pages only) ───────────────────────
+     An ad click lands on /lp/...?gclid=X. The conversion fires on /book, a
+     different URL, so without this the click ID would be dropped at the
+     first internal click and the booking could not be credited to the ad.
+     Only pages whose <body> has data-carry-params (LandingLayout) do this;
+     only links to /book are rewritten; an existing parameter is never
+     overwritten. No patient data is involved, only the ad's own tags. */
+  function initCarryParams() {
+    if (!document.body || !document.body.hasAttribute('data-carry-params')) return;
+    var carry = urlParams();
+    var keys = Object.keys(carry);
+    if (!keys.length) return;
+    document.querySelectorAll('a[href^="/book"]').forEach(function (a) {
+      try {
+        var u = new URL(a.getAttribute('href'), window.location.origin);
+        keys.forEach(function (k) {
+          if (!u.searchParams.has(k)) u.searchParams.set(k, carry[k]);
+        });
+        a.setAttribute('href', u.pathname + u.search + u.hash);
+      } catch (e) {}
+    });
   }
 
   function track(event, params) {
@@ -346,6 +373,7 @@
   }
 
   function boot() {
+    initCarryParams();
     initHeader();
     initReveal();
     initMaps();

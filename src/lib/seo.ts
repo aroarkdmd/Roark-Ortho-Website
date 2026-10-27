@@ -63,6 +63,9 @@ export const KNOWN_PATHS: ReadonlySet<string> = new Set([
   ...PAGES.map((p) => p.path),
   ...POSTS.map((p) => p.href),
   '/book',
+  /* Google Ads landing pages: real pages, noindexed, never in the sitemap. */
+  '/lp/invisalign-franklin',
+  '/lp/braces-franklin',
 ])
 
 /* XML text escaping. Only &, < and > can appear in our URLs, but escape all
