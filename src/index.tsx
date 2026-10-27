@@ -24,7 +24,8 @@ import {
 } from './pages/content'
 import { BIZ, HOME_FAQ, SURG_FAQ, CONTACT_FAQ, FIRST_FAQ, POSTS } from './lib/site-data'
 import { sendEnquiry } from './lib/mail'
-import { buildSitemap, buildRobots } from './lib/seo'
+import { buildSitemap, buildRobots, KNOWN_PATHS } from './lib/seo'
+import { resolveRedirect } from './lib/redirects'
 import { consentRequired, resolveGtmId } from './lib/tagging'
 import type { TagConfig } from './layout'
 
@@ -689,8 +690,22 @@ app.get('/robots.txt', (c) =>
   }),
 )
 
-app.notFound((c) =>
-  c.html(
+/* Old WordPress URLs, trailing slashes and letter case are redirected HERE,
+   inside the 404 handler, so a redirect can only ever fire for a URL that has
+   no page. See src/lib/redirects.ts for the table and the 301/302 rules. */
+app.notFound((c) => {
+  const url = new URL(c.req.url)
+  const hop = resolveRedirect(c.req.method, url.pathname, url.search, KNOWN_PATHS)
+  if (hop) {
+    return new Response(null, {
+      status: hop.status,
+      headers: {
+        Location: hop.to,
+        'Cache-Control': hop.status === 301 ? 'public, max-age=86400' : 'no-store',
+      },
+    })
+  }
+  return c.html(
     <Layout
       tag={tagFor(c)}
       seo={{
@@ -721,7 +736,7 @@ app.notFound((c) =>
       </main>
     </Layout>,
     404,
-  ),
-)
+  )
+})
 
 export default app

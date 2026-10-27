@@ -55,6 +55,16 @@ const PAGES: Entry[] = [
   { path: '/privacy', priority: '0.3', changefreq: 'yearly' },
 ]
 
+/* Every real, servable page path. Used by the redirect resolver
+   (src/lib/redirects.ts) for trailing-slash and letter-case tidy-ups, so
+   /braces/ → /braces only when /braces is a page that actually exists.
+   /book is included: it is a real page, merely noindexed. */
+export const KNOWN_PATHS: ReadonlySet<string> = new Set([
+  ...PAGES.map((p) => p.path),
+  ...POSTS.map((p) => p.href),
+  '/book',
+])
+
 /* XML text escaping. Only &, < and > can appear in our URLs, but escape all
    five so a future path with a quote cannot produce invalid XML. */
 function esc(s: string): string {
