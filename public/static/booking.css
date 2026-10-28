@@ -302,3 +302,15 @@ body { background: var(--paper); padding-bottom: 0; }
   .bk-intro { padding: calc(var(--header-h) + var(--sp-5)) 0 var(--sp-5); }
   .bk-formsec { padding: var(--sp-5) 0 var(--sp-7); }
 }
+
+/* ── Header on phones ─────────────────────────────────────────────────────
+   Logo, "Back to the site" and the phone number wrapped onto two lines below
+   about 480px. The logo already links home, so the text link is dropped on
+   narrow screens and the phone number stays on one line. */
+.bk-top a.bk-link { white-space: nowrap; }
+.bk-top__right { flex: none; }
+
+@media (max-width: 480px) {
+  .bk-top a.bk-link--site { display: none; }
+  .bk-top__right { gap: var(--sp-4); }
+}

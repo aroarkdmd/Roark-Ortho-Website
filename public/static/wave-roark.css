@@ -700,3 +700,133 @@
     padding: .9rem 1.25rem;
   }
 }
+
+/* ============================================================================
+   RESPONSIVE SCHEDULER LAYOUT
+   Stacked on phones and tablets: calendar, then times in a two-column grid.
+   Side by side from 900px: calendar on the left, times on the right with a
+   divider. These rules come last so they win over the earlier width rules.
+   ========================================================================= */
+
+/* Description aligns with the title. Wave centres it by default, which left
+   it visually indented from the heading. */
+#waveInquiryForm .wave-appointment-scheduler-description {
+  text-align: left;
+}
+
+/* Column container: stacked by default. */
+#waveInquiryForm #wave-appointment-scheduler-container {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 1.25rem;
+  align-items: start;
+}
+
+/* Calendar fills the available width and stays centred, up to a sensible max. */
+#waveInquiryForm .calendar-container {
+  width: 100%;
+  min-width: 0;
+}
+
+#waveInquiryForm .calendar-table {
+  width: 100%;
+  max-width: 24rem;
+  margin: 0 auto;
+}
+
+#waveInquiryForm .calendar-table td.date-cell,
+#waveInquiryForm .calendar-table .day-of-week {
+  width: auto;
+}
+
+#waveInquiryForm .calendar-table .appointment-button {
+  display: block;
+  width: 2.5rem;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  margin: 0 auto;
+}
+
+/* Times: the Wave table body becomes a two-column grid. Each row is flattened
+   with display:contents so its cells become grid items directly. */
+#waveInquiryForm .available-appointments-container.show {
+  width: 100%;
+  max-width: 24rem;
+  margin: 0 auto;
+}
+
+#waveInquiryForm .available-appointments-container.hide {
+  display: none;
+}
+
+#waveInquiryForm .available-appointments-table thead {
+  display: none;
+}
+
+#waveInquiryForm .available-appointments-table tbody {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .6rem;
+}
+
+#waveInquiryForm .available-appointments-table tbody tr {
+  display: contents;
+}
+
+#waveInquiryForm .available-appointments-table tbody td {
+  display: block;
+  padding: 0;
+  min-width: 0;
+}
+
+#waveInquiryForm .available-time-button,
+#waveInquiryForm .unavailable-time-button,
+#waveInquiryForm .selected-time {
+  border-radius: 999px;
+  padding: .8rem .5rem;
+  white-space: nowrap;
+}
+
+#waveInquiryForm .roark-confirm-slot .confirm-button {
+  border-radius: 999px;
+}
+
+/* Side by side from 900px. */
+@media (min-width: 900px) {
+  #waveInquiryForm #wave-appointment-scheduler-container {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: 2.5rem;
+  }
+
+  #waveInquiryForm .available-appointments-container.show,
+  #waveInquiryForm .available-appointments-container.hide {
+    display: block;
+    max-width: none;
+    margin: 0;
+    padding: 0 0 0 2.5rem;
+    border-top: 0;
+    border-left: 1px solid var(--w-line);
+  }
+
+  #waveInquiryForm .available-appointments-container.hide {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  #waveInquiryForm .calendar-table {
+    margin: 0;
+  }
+}
+
+/* Keep the calendar and times aligned under the title on very narrow phones. */
+@media (max-width: 360px) {
+  #waveInquiryForm .calendar-table .appointment-button {
+    width: 2.2rem;
+    height: 2.2rem;
+    line-height: 2.2rem;
+  }
+
+  #waveInquiryForm .available-appointments-table tbody {
+    gap: .45rem;
+  }
+}
