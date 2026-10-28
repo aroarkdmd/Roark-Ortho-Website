@@ -55,6 +55,25 @@
   });
 
   /* ── container ─────────────────────────────────────────────────────────── */
+  /* ── Google Ads tag ────────────────────────────────────────────────────────
+     The base Google tag (gtag.js) for the Ads account, loaded on every page
+     through this same consent-aware runtime. It is injected only after the
+     Consent Mode defaults above, so EEA/UK/CH visitors are not tracked
+     before they choose. */
+  var ADS_ID = 'AW-16734663665';
+  /* Conversion label for the contact-form conversion action. Leave empty
+     until the action is created in Google Ads; until then the form still
+     pushes a dataLayer event but sends no Ads conversion. */
+  var ADS_CONTACT_LABEL = '';
+
+  var adsScript = document.createElement('script');
+  adsScript.async = true;
+  adsScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + ADS_ID;
+  document.head.appendChild(adsScript);
+  gtag('js', new Date());
+  gtag('config', ADS_ID);
+
+  /* ── container ─────────────────────────────────────────────────────────── */
   if (GTM_ID) {
     window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
     var s = document.createElement('script');
