@@ -54,7 +54,6 @@
     security_storage: 'granted',
   });
 
-  /* ── container ─────────────────────────────────────────────────────────── */
   /* ── Google Ads tag ────────────────────────────────────────────────────────
      The base Google tag (gtag.js) for the Ads account, loaded on every page
      through this same consent-aware runtime. It is injected only after the
@@ -136,5 +135,35 @@
       page_path: cfg.path || window.location.pathname,
       page_title: document.title,
     });
+    adsConversion(ADS_BOOKING_LABEL, { booking_ref: ref || '' });
   };
+
+  /* ── the contact-form conversion ─────────────────────────────────────────
+     Called by public/static/app.js only after the server confirms the
+     message was stored, never on a failed send. Carries no patient data. */
+  window.roarkContactConversion = function (source) {
+    window.dataLayer.push({
+      event: 'contact_form_conversion',
+      cta_location: source || '',
+      page_path: cfg.path || window.location.pathname,
+    });
+    adsConversion(ADS_CONTACT_LABEL);
+  };
+
+  /* ── the phone-call conversion ───────────────────────────────────────────
+     Any tap on a tel: link counts as a call. On a phone this opens the
+     dialer; on desktop it is recorded as call intent. Capture phase, so it
+     still runs if another handler stops propagation. Carries no patient
+     data. */
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    var a = t && t.closest ? t.closest('a[href^="tel:"]') : null;
+    if (!a) return;
+    window.dataLayer.push({
+      event: 'call_click',
+      cta_location: a.getAttribute('data-phone') || '',
+      page_path: window.location.pathname,
+    });
+    adsConversion(ADS_CALL_LABEL);
+  }, true);
 })();
