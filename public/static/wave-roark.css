@@ -791,33 +791,6 @@
   border-radius: 999px;
 }
 
-/* Side by side from 900px. */
-@media (min-width: 900px) {
-  #waveInquiryForm #wave-appointment-scheduler-container {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    column-gap: 2.5rem;
-  }
-
-  #waveInquiryForm .available-appointments-container.show,
-  #waveInquiryForm .available-appointments-container.hide {
-    display: block;
-    max-width: none;
-    margin: 0;
-    padding: 0 0 0 2.5rem;
-    border-top: 0;
-    border-left: 1px solid var(--w-line);
-  }
-
-  #waveInquiryForm .available-appointments-container.hide {
-    opacity: 0;
-    visibility: hidden;
-  }
-
-  #waveInquiryForm .calendar-table {
-    margin: 0;
-  }
-}
-
 /* Keep the calendar and times aligned under the title on very narrow phones. */
 @media (max-width: 360px) {
   #waveInquiryForm .calendar-table .appointment-button {
